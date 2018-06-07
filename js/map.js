@@ -13,7 +13,7 @@ var OFFER_CHECKS = ['12:00', '13:00', '14:00'];
 
 var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg]', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 // Функция, возвращающая рандомное число в диапзоне между переданными min и max.
 var getRandomNumber = function (min, max) {
@@ -40,4 +40,12 @@ var getOfferType = function (array) {
 // var getOfferFeatures = function (array) {};
 
 // Функция, возвращающая рандомно перемешанный массив той же длины (для фото).
-// var getMixedArray = function () {};
+var getMixedArray = function (array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+};
