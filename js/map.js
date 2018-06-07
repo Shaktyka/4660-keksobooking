@@ -15,9 +15,9 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg]', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-// Функция, возвращающая рандомное число между переданными min и max.
+// Функция, возвращающая рандомное число в диапзоне между переданными min и max.
 var getRandomNumber = function (min, max) {
-  var randomNumber = Math.floor(Math.random() * (max - min) + min);
+  var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber;
 };
 
@@ -25,7 +25,7 @@ var getRandomNumber = function (min, max) {
 // var getAvatarLink = function (array) {};
 
 // Функция для выбора заголовка (1) объявления из переданного массива. Значения не должны повторяться.
-// var getOfferTitle = function () {};
+// var getOfferTitle = function (array) {};
 
 // Функция, возвращающая координаты адреса в виде 'x, y'.
 // var getOfferAddress = function () {};
