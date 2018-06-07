@@ -16,7 +16,10 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg]', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 // Функция, возвращающая рандомное число между переданными min и max.
-// var getRandomNumber = function (min, max) {};
+var getRandomNumber = function (min, max) {
+  var randomNumber = Math.floor(Math.random() * (max - min) + min);
+  return randomNumber;
+};
 
 // Функция, возвращающая адрес ссылки аватара автора.
 // var getAvatarLink = function (array) {};
