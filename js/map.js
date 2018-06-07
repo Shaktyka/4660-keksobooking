@@ -27,8 +27,11 @@ var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg]', 'http
 // Функция, возвращающая координаты адреса в виде 'x, y'.
 // var getOfferAddress = function () {};
 
-// Функция, возвращающая тип жилья: 1 рандомный из переданного массива.
-// var getOfferType = function (array) {};
+// Функция, возвращающая тип жилья: один рандомный из переданного массива.
+var getOfferType = function (array) {
+  var randomElement = Math.floor(Math.random() * array.length);
+  return array[randomElement];
+};
 
 // Функция, возвращающая массив строк случайной длины из переданного массива.
 // var getOfferFeatures = function (array) {};
