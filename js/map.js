@@ -3,8 +3,6 @@
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
-var AUTHOR_AVATARS = [01, 02, 03, 04, 05, 06, 07, 08];
-
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
 var OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
@@ -26,12 +24,13 @@ var getRandomNumber = function (min, max) {
 
 // Функция для выбора заголовка (1) объявления из переданного массива. Значения не должны повторяться.
 // var getOfferTitle = function (array) {};
+// Может использ-ся функция getRandomElement
 
 // Функция, возвращающая координаты адреса в виде 'x, y'.
 // var getOfferAddress = function () {};
 
-// Функция, возвращающая тип жилья: один рандомный из переданного массива.
-var getOfferType = function (array) {
+// Функция, возвращающая один рандомный элемент из переданного массива.
+var getRandomElement = function (array) {
   var randomElement = Math.floor(Math.random() * array.length);
   return array[randomElement];
 };
