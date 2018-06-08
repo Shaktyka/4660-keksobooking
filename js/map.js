@@ -47,7 +47,20 @@ var getRandomElement = function (array) {
 };
 
 // Функция, возвращающая массив строк случайной длины из переданного массива.
-// var getOfferFeatures = function (array) {};
+var getVariativeLengthArray = function (array) {
+  var newArray = [];
+  // Перемешиваем переданный массив
+  var draftArray = getMixedArray(array);
+  // Определяем длину массива
+  var arrayLength = draftArray.length;
+  // Генерируем случайное число от 1 до длины массива
+  var num = getRandomNumber(1, arrayLength);
+  // Записываем в новый массив выбранное из перемешанного мссива число элементов
+  for (var i = 0; i < num; i++) {
+    newArray.push(draftArray[i]);
+  }
+  return newArray;
+};
 
 // Функция, возвращающая рандомно перемешанный массив той же длины (для фото).
 var getMixedArray = function (array) {
