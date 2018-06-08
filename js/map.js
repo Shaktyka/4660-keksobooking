@@ -19,8 +19,7 @@ var getRandomNumber = function (min, max) {
   return randomNumber;
 };
 
-// Функция, возвращающая адрес ссылки аватара автора. Функция пока ЧЕРНОВАЯ.
-// Значения не должны повторяться
+// Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться. Функция пока ЧЕРНОВАЯ.
 var getAvatarLink = function (num) {
   if (num < 10) {
     var index = '0' + num;
@@ -34,8 +33,8 @@ var getAvatarLink = function (num) {
 
 // Функция, возвращающая координаты адреса в виде 'x, y'.
 var getCoordinates = function () {
-  var locationX = getRandomNumber(100, 999); 
-  var locationY = getRandomNumber(100, 999);
+  var locationX = getRandomNumber(100,999); 
+  var locationY = getRandomNumber(100,999);
   var coordinates = locationX + ', ' + locationY;
   return coordinates;
 };
@@ -72,3 +71,20 @@ var getMixedArray = function (array) {
   }
   return array;
 };
+
+// Функция для сбора массива объектов объявлений
+var getAdsArray = function (amount) {
+  var adsArray = [];
+  for (var i = 0; i < amount; i++) {
+    var ad = {
+      'author': {
+        'avatar': getAvatarLink(i+1)
+      }
+    }
+    adsArray.push(ad);
+  }
+  
+  console.log(adsArray);
+  return adsArray;
+};
+getAdsArray(8);
