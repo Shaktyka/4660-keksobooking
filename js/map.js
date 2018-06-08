@@ -33,8 +33,8 @@ var getAvatarLink = function (num) {
 
 // Функция, возвращающая координаты адреса в виде 'x, y'.
 var getCoordinates = function () {
-  var locationX = getRandomNumber(100,999); 
-  var locationY = getRandomNumber(100,999);
+  var locationX = getRandomNumber(100, 999);
+  var locationY = getRandomNumber(100, 999);
   var coordinates = locationX + ', ' + locationY;
   return coordinates;
 };
@@ -78,12 +78,28 @@ var getAdsArray = function (amount) {
   for (var i = 0; i < amount; i++) {
     var ad = {
       'author': {
-        'avatar': getAvatarLink(i+1)
+        'avatar': getAvatarLink(i + 1)
+      },
+      'offer': {
+        'title': getRandomElement(OFFER_TITLES),
+        'address': getCoordinates(),
+        'price': getRandomNumber(1000, 1000000),
+        'type': getRandomElement(OFFER_TYPES),
+        'rooms': getRandomNumber(1, 5),
+        'guests': getRandomNumber(1, 8),
+        'checkin': getRandomElement(OFFER_CHECKS),
+        'checkout': getRandomElement(OFFER_CHECKS),
+        'features': getVariativeLengthArray(OFFER_FEATURES),
+        'description': '',
+        'photos': getMixedArray(OFFER_PHOTOS)
+      },
+      'location': {
+        'x': getRandomNumber(300, 900),
+        'y': getRandomNumber(130, 630)
       }
-    }
+    };
     adsArray.push(ad);
   }
-  
   console.log(adsArray);
   return adsArray;
 };
