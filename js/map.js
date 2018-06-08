@@ -13,21 +13,32 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-// Функция, возвращающая рандомное число в диапзоне между переданными min и max.
+// Функция, возвращающая рандомное число в диапазоне между переданными min и max.
 var getRandomNumber = function (min, max) {
   var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber;
 };
 
-// Функция, возвращающая адрес ссылки аватара автора.
-// var getAvatarLink = function (array) {};
-
-// Функция для выбора заголовка (1) объявления из переданного массива. Значения не должны повторяться.
-// var getOfferTitle = function (array) {};
-// Может использ-ся функция getRandomElement
+// Функция, возвращающая адрес ссылки аватара автора. Функция пока ЧЕРНОВАЯ.
+// Значения не должны повторяться
+var getAvatarLink = function (num) {
+  if (num < 10) {
+    var index = '0' + num;
+  } else {
+    index = num;
+  }
+  var linkPath = 'img/avatars/user';
+  var linkExtension = '.png';
+  return linkPath + index + linkExtension;
+};
 
 // Функция, возвращающая координаты адреса в виде 'x, y'.
-// var getOfferAddress = function () {};
+var getCoordinates = function () {
+  var locationX = getRandomNumber(100, 999); 
+  var locationY = getRandomNumber(100, 999);
+  var coordinates = locationX + ', ' + locationY;
+  return coordinates;
+};
 
 // Функция, возвращающая один рандомный элемент из переданного массива.
 var getRandomElement = function (array) {
