@@ -100,7 +100,29 @@ var getAdsArray = function (amount) {
     };
     adsArray.push(ad);
   }
-  console.log(adsArray);
   return adsArray;
 };
-getAdsArray(8);
+
+// Находим блок, куда поместим все новые метки
+var similarListPins = map.querySelector('.map__pins');
+
+// Находим шаблон, который будем использовать для генерации меток
+var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
+
+// Генерация метки на основе шаблона
+var renderPin = function (pin) {
+  var pinElement = similarPinTemplate.cloneNode(true);
+  pinElement.style.left = pin.location.x + 'px';
+  pinElement.style.top = pin.location.y + 'px';
+  pinElement.querySelector('img').src = pin.author.avatar;
+  pinElement.querySelector('img').alt = pin.offer.title;
+  return pinElement;
+};
+
+// Отрисовка меток и добавление в целевой блок
+var fragment = document.createDocumentFragment();
+var pins = getAdsArray(8);
+for (var i = 0; i < pins.length; i++) {
+  fragment.appendChild(renderPin(pins[i]));
+}
+similarListPins.appendChild(fragment);
