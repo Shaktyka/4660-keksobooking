@@ -126,3 +126,22 @@ for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
 similarListPins.appendChild(fragment);
+
+// Находим шаблон для генерации объявлений
+var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
+
+// Генерация объявления на основе шаблона
+var renderAd = function (advertisement) {
+  var cardElement = similarAdTemplate.cloneNode(true);
+  cardElement.querySelector('img').src = advertisement.author.avatar;
+  cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
+  cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
+  cardElement.querySelector('.popup__text--price').textContent = advertisement.offer.price + '&#x20bd;<span>/ночь</span>';
+  cardElement.querySelector('.popup__type').textContent = advertisement.offer.type;
+  cardElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
+  cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
+  // cardElement.querySelector('.popup__features').textContent = ;
+  cardElement.querySelector('.popup__features').textContent = advertisement.offer.description;
+  // вывести список фото
+  return cardElement;
+};
