@@ -74,8 +74,7 @@ var getMixedArray = function (array) {
 
 // Функция, выдающая 1-й элемент массива поочерёдно
 var getSeriatimElement = function (array) {
-  var copyArray = array;
-  var title = copyArray.shift();
+  var title = array.shift();
   return title;
 };
 
@@ -153,3 +152,6 @@ var renderAd = function (advertisement) {
   // вывести список фото
   return cardElement;
 };
+
+// Отрисовка объявлений и добавление их в целевой блок
+
