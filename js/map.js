@@ -72,6 +72,13 @@ var getMixedArray = function (array) {
   return array;
 };
 
+// Функция, выдающая 1-й элемент массива поочерёдно
+var getSeriatimElement = function (array) {
+  var copyArray = array;
+  var title = copyArray.shift();
+  return title;
+};
+
 // Функция для сбора массива объектов объявлений
 var getAdsArray = function (amount) {
   var adsArray = [];
@@ -81,7 +88,7 @@ var getAdsArray = function (amount) {
         'avatar': getAvatarLink(i + 1)
       },
       'offer': {
-        'title': getRandomElement(OFFER_TITLES),
+        'title': getSeriatimElement(OFFER_TITLES),
         'address': getCoordinates(),
         'price': getRandomNumber(1000, 1000000),
         'type': getRandomElement(OFFER_TYPES),
@@ -100,6 +107,7 @@ var getAdsArray = function (amount) {
     };
     adsArray.push(ad);
   }
+  // console.log(adsArray);
   return adsArray;
 };
 
