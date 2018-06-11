@@ -150,6 +150,26 @@ var getAdsArray = function (amount) {
   return adsArray;
 };
 
+// Создаём ещё 2 элемента для блока с фотографиями жилья и вставляем их.
+var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
+
+var photoElement = photoContainer.innerHTML;
+
+photoContainer.insertAdjacentHTML('afterbegin', photoElement);
+photoContainer.insertAdjacentHTML('afterbegin', photoElement);
+
+// Теперь как-то надо назначить ссылки из перемешанного массива фоток в scr тега img.
+
+// getMixedArray(OFFER_PHOTOS)
+var bindImagesWithLinks = function (photos) {
+  var images = photoContainer.children;
+  for (var i = 0; i < images.length; i++) {
+    var imgSrc = images[i].src;
+    imgSrc = photos[i];
+  }
+  return imgSrc;
+};
+
 // Находим блок, куда поместим все новые метки
 var similarListPins = map.querySelector('.map__pins');
 
@@ -190,18 +210,10 @@ var renderAd = function (advertisement) {
   // Вывести список фич
   cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
   cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
-  // вывести список фото
-  // cardElement.querySelector(.popup__photos)
+  // Привязать ссылки на фото из массива ссылок к тегам img
+  // cardElement.querySelector(.popup__photos) ???
   return cardElement;
 };
-
-// Создаём ещё 2 элемента для блока с фотографиями жилья и вставляем их.
-var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
-
-var photoElement = '<img src="" class="popup__photo" width="45" height="40" alt="Фотография жилья">';
-
-photoContainer.insertAdjacentHTML('afterbegin', photoElement);
-photoContainer.insertAdjacentHTML('afterbegin', photoElement);
 
 // Отрисовка объявлений и добавление их в целевой блок
 
