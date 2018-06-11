@@ -119,8 +119,8 @@ var similarPinTemplate = document.querySelector('template').content.querySelecto
 // Генерация метки на основе шаблона
 var renderPin = function (pin) {
   var pinElement = similarPinTemplate.cloneNode(true);
-  pinElement.style.left = pin.location.x + 'px';
-  pinElement.style.top = pin.location.y + 'px';
+  pinElement.style.left = pin.location.x + 25 + 'px';
+  pinElement.style.top = pin.location.y + 70 + 'px';
   pinElement.querySelector('img').src = pin.author.avatar;
   pinElement.querySelector('img').alt = pin.offer.title;
   return pinElement;
@@ -143,6 +143,7 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('img').src = advertisement.author.avatar;
   cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
+  // Разобраться с выводом цены
   cardElement.querySelector('.popup__text--price').textContent = advertisement.offer.price + '&#x20bd;<span>/ночь</span>';
   cardElement.querySelector('.popup__type').textContent = advertisement.offer.type;
   cardElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
@@ -154,4 +155,10 @@ var renderAd = function (advertisement) {
 };
 
 // Отрисовка объявлений и добавление их в целевой блок
-
+var fragment = document.createDocumentFragment();
+var cards = pins;
+for (var i = 0; i < cards.length; i++) {
+  fragment.appendChild(renderAd(cards[i]));
+}
+map.appendChild(fragment);
+// в блок .map перед блоком.map__filters-container
