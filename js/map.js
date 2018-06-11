@@ -224,10 +224,12 @@ photoContainer.appendChild(secondPhoto);
 photoContainer.appendChild(thirdPhoto);
 
 // Отрисовка объявлений и добавление их в целевой блок
-var fragment = document.createDocumentFragment();
+
+var cardsLocation = map.querySelector('.map__filters-container');
+
+var cardFragment = document.createDocumentFragment();
 var cards = pins;
-for (var i = 0; i < cards.length; i++) {
-  fragment.appendChild(renderAd(cards[i]));
+for (var j = 0; j < cards.length; j++) {
+  cardFragment.appendChild(renderAd(cards[j]));
 }
-map.appendChild(fragment);
-// в блок .map перед блоком.map__filters-container
+cardsLocation.insertAdjacentHTML('beforebegin', cardFragment);
