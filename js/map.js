@@ -96,6 +96,27 @@ var convertType = function (type) {
   }
 };
 
+// Функция для сборки списка фичей
+var getListFeatures = function (rawList) {
+  var parsedList = '';
+  for (var i = 0; i < rawList.length; i++) {
+    if (rawList[i] === 'wifi') {
+      parsedList += '<li class="popup__feature popup__feature--wifi">wifi</li>';
+    } else if (rawList[i] === 'dishwasher') {
+        parsedList += '<li class="popup__feature popup__feature--wifi">dishwasher</li>';
+    } else if (rawList[i] === 'parking') {
+      parsedList += '<li class="popup__feature popup__feature--wifi">parking</li>';
+    } else if (rawList[i] === 'washer') {
+      parsedList += '<li class="popup__feature popup__feature--wifi">washer</li>';
+    } else if (rawList[i] === 'elevator') {
+      parsedList += '<li class="popup__feature popup__feature--wifi">elevator</li>';
+    } else if (rawList[i] === 'conditioner') {
+      parsedList += '<li class="popup__feature popup__feature--wifi">conditioner</li>';
+    }
+  }
+  return parsedList;
+};
+
 // Функция для сбора массива объектов объявлений
 var getAdsArray = function (amount) {
   var adsArray = [];
@@ -113,7 +134,7 @@ var getAdsArray = function (amount) {
         'guests': getRandomNumber(1, 8),
         'checkin': getRandomElement(OFFER_CHECKS),
         'checkout': getRandomElement(OFFER_CHECKS),
-        'features': getVariativeLengthArray(OFFER_FEATURES),
+        'features': getListFeatures(getVariativeLengthArray(OFFER_FEATURES)),
         'description': '',
         'photos': getMixedArray(OFFER_PHOTOS)
       },
@@ -162,11 +183,11 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
   cardElement.querySelector('.popup__text--price').innerHTML = advertisement.offer.price + '&#x20bd;<span>/ночь</span>';
-  // Разобраться с выводом типа жилья
   cardElement.querySelector('.popup__type').textContent = advertisement.offer.type;
   cardElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
   cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
-  // cardElement.querySelector('.popup__features').textContent = ;
+  // Вывести список фич
+  cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
   cardElement.querySelector('.popup__features').textContent = advertisement.offer.description;
   // вывести список фото
   return cardElement;
