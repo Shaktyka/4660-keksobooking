@@ -195,33 +195,13 @@ var renderAd = function (advertisement) {
   return cardElement;
 };
 
-// Создаём ещё 2 элемента для блока с фотографиями жилья
+// Создаём ещё 2 элемента для блока с фотографиями жилья и вставляем их.
 var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
-// Создаём первое фото
-var firstPhoto = document.createElement('img');
-firstPhoto.src = '';
-firstPhoto.className = 'popup__photo';
-firstPhoto.width = '45';
-firstPhoto.height = '40';
-firstPhoto.alt = 'Фотография жилья';
-// Создаём второе фото
-var secondPhoto = document.createElement('img');
-secondPhoto.src = '';
-secondPhoto.className = 'popup__photo';
-secondPhoto.width = '45';
-secondPhoto.height = '40';
-secondPhoto.alt = 'Фотография жилья';
-// Создаём третье фото
-var thirdPhoto = document.createElement('img');
-secondPhoto.src = '';
-secondPhoto.className = 'popup__photo';
-secondPhoto.width = '45';
-secondPhoto.height = '40';
-secondPhoto.alt = 'Фотография жилья';
-// Помещаем созданные элементы в див, где они должны находиться
-photoContainer.appendChild(firstPhoto);
-photoContainer.appendChild(secondPhoto);
-photoContainer.appendChild(thirdPhoto);
+
+var photoElement = '<img src="" class="popup__photo" width="45" height="40" alt="Фотография жилья">';
+
+photoContainer.insertAdjacentHTML('afterbegin', photoElement);
+photoContainer.insertAdjacentHTML('afterbegin', photoElement);
 
 // Отрисовка объявлений и добавление их в целевой блок
 
