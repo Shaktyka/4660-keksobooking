@@ -78,6 +78,24 @@ var getSeriatimElement = function (array) {
   return title;
 };
 
+// Функция для конвертации англоязычного типа жилья в русскоязычный
+var convertType = function (type) {
+  switch (type) {
+  case 'palace':
+    return 'Дворец';
+    break;
+  case 'flat':
+    return 'Квартира';
+    break;
+  case 'house':
+    return 'Дом';
+    break;
+  case 'bungalo':
+    return 'Бунгало';
+    break;
+  }
+};
+
 // Функция для сбора массива объектов объявлений
 var getAdsArray = function (amount) {
   var adsArray = [];
@@ -90,7 +108,7 @@ var getAdsArray = function (amount) {
         'title': getSeriatimElement(OFFER_TITLES),
         'address': getCoordinates(),
         'price': getRandomNumber(1000, 1000000),
-        'type': getRandomElement(OFFER_TYPES),
+        'type': convertType(getRandomElement(OFFER_TYPES)),
         'rooms': getRandomNumber(1, 5),
         'guests': getRandomNumber(1, 8),
         'checkin': getRandomElement(OFFER_CHECKS),
