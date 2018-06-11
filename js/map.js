@@ -80,20 +80,21 @@ var getSeriatimElement = function (array) {
 
 // Функция для конвертации англоязычного типа жилья в русскоязычный
 var convertType = function (type) {
+  var typeValue = '';
   switch (type) {
-  case 'palace':
-    return 'Дворец';
-    break;
-  case 'flat':
-    return 'Квартира';
-    break;
-  case 'house':
-    return 'Дом';
-    break;
-  case 'bungalo':
-    return 'Бунгало';
-    break;
+    case 'palace':
+      typeValue = 'Дворец';
+      break;
+    case 'flat':
+      typeValue = 'Квартира';
+      break;
+    case 'house':
+      typeValue = 'Дом';
+      break;
+    case 'bungalo':
+      typeValue = 'Бунгало';
   }
+  return typeValue;
 };
 
 // Функция для сборки списка фичей
@@ -103,7 +104,7 @@ var getListFeatures = function (rawList) {
     if (rawList[i] === 'wifi') {
       parsedList += '<li class="popup__feature popup__feature--wifi">wifi</li>';
     } else if (rawList[i] === 'dishwasher') {
-        parsedList += '<li class="popup__feature popup__feature--wifi">dishwasher</li>';
+      parsedList += '<li class="popup__feature popup__feature--wifi">dishwasher</li>';
     } else if (rawList[i] === 'parking') {
       parsedList += '<li class="popup__feature popup__feature--wifi">parking</li>';
     } else if (rawList[i] === 'washer') {
