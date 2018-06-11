@@ -104,15 +104,15 @@ var getListFeatures = function (rawList) {
     if (rawList[i] === 'wifi') {
       parsedList += '<li class="popup__feature popup__feature--wifi">wifi</li>';
     } else if (rawList[i] === 'dishwasher') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">dishwasher</li>';
+      parsedList += '<li class="popup__feature popup__feature--dishwasher">dishwasher</li>';
     } else if (rawList[i] === 'parking') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">parking</li>';
+      parsedList += '<li class="popup__feature popup__feature--parking">parking</li>';
     } else if (rawList[i] === 'washer') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">washer</li>';
+      parsedList += '<li class="popup__feature popup__feature--washer">washer</li>';
     } else if (rawList[i] === 'elevator') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">elevator</li>';
+      parsedList += '<li class="popup__feature popup__feature--elevator">elevator</li>';
     } else if (rawList[i] === 'conditioner') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">conditioner</li>';
+      parsedList += '<li class="popup__feature popup__feature--conditioner">conditioner</li>';
     }
   }
   return parsedList;
@@ -189,10 +189,39 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
   // Вывести список фич
   cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
-  cardElement.querySelector('.popup__features').textContent = advertisement.offer.description;
+  cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
   // вывести список фото
+  // cardElement.querySelector(.popup__photos)
   return cardElement;
 };
+
+// Создаём ещё 2 элемента для блока с фотографиями жилья
+var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
+// Создаём первое фото
+var firstPhoto = document.createElement('img');
+firstPhoto.src = '';
+firstPhoto.className = 'popup__photo';
+firstPhoto.width = '45';
+firstPhoto.height = '40';
+firstPhoto.alt = 'Фотография жилья';
+// Создаём второе фото
+var secondPhoto = document.createElement('img');
+secondPhoto.src = '';
+secondPhoto.className = 'popup__photo';
+secondPhoto.width = '45';
+secondPhoto.height = '40';
+secondPhoto.alt = 'Фотография жилья';
+// Создаём третье фото
+var thirdPhoto = document.createElement('img');
+secondPhoto.src = '';
+secondPhoto.className = 'popup__photo';
+secondPhoto.width = '45';
+secondPhoto.height = '40';
+secondPhoto.alt = 'Фотография жилья';
+// Помещаем созданные элементы в див, где они должны находиться
+photoContainer.appendChild(firstPhoto);
+photoContainer.appendChild(secondPhoto);
+photoContainer.appendChild(thirdPhoto);
 
 // Отрисовка объявлений и добавление их в целевой блок
 var fragment = document.createDocumentFragment();
