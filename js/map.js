@@ -225,11 +225,13 @@ photoContainer.appendChild(thirdPhoto);
 
 // Отрисовка объявлений и добавление их в целевой блок
 
-var cardsLocation = map.querySelector('.map__filters-container');
+var cardsBeforeElement = map.querySelector('.map__filters-container');
+
+var cardsParentElement = cardsBeforeElement.parentNode;
 
 var cardFragment = document.createDocumentFragment();
 var cards = pins;
 for (var j = 0; j < cards.length; j++) {
   cardFragment.appendChild(renderAd(cards[j]));
 }
-cardsLocation.insertAdjacentHTML('beforebegin', cardFragment);
+cardsParentElement.insertBefore(cardFragment, cardsBeforeElement);
