@@ -165,22 +165,18 @@ var getAdsArray = function (amount) {
 // Создаём ещё 2 элемента для блока с фотографиями жилья и вставляем их.
 var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
 
-var photoElement = photoContainer.innerHTML;
+// Находим шаблон изображения
+var photoTemplateElement = photoContainer.querySelector('.popup__photo');
 
-// photoContainer.appendChild(photoElement);
-// photoContainer.appendChild(photoElement);
+//photoContainer.appendChild(photoTemplateElement);
+//photoContainer.appendChild(photoTemplateElement);
 
-// Теперь как-то надо назначить ссылки из перемешанного массива фоток в scr тега img. А потом всё это как-то использовать в генерации объявления.
-
-// getMixedArray(OFFER_PHOTOS)
-var bindImagesWithLinks = function (photos) {
-  var images = photoContainer.children;
-  for (var i = 0; i < images.length; i++) {
-    var imgSrc = images[i].src;
-    imgSrc = photos[i];
-  }
-  return imgSrc;
+var renderPhoto = function () {
+  var photoElement = photoTemplateElement.cloneNode(true);
+  return photoElement;
 };
+
+
 
 // Находим блок, куда поместим все новые метки
 var similarListPins = map.querySelector('.map__pins');
@@ -219,7 +215,6 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('.popup__type').textContent = advertisement.offer.type;
   cardElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
   cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
-  // Вывести список фич
   cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
   cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
   // Привязать ссылки на фото из массива ссылок к тегам img
