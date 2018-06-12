@@ -19,7 +19,7 @@ var getRandomNumber = function (min, max) {
   return randomNumber;
 };
 
-// Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться. Функция пока ЧЕРНОВАЯ.
+// Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться.
 var getAvatarLink = function (num) {
   if (num < 10) {
     var index = '0' + num;
@@ -29,14 +29,6 @@ var getAvatarLink = function (num) {
   var linkPath = 'img/avatars/user';
   var linkExtension = '.png';
   return linkPath + index + linkExtension;
-};
-
-// Функция, возвращающая координаты адреса в виде 'x, y'.
-var getCoordinates = function () {
-  var locationX = getRandomNumber(100, 999);
-  var locationY = getRandomNumber(100, 999);
-  var coordinates = locationX + ', ' + locationY;
-  return coordinates;
 };
 
 // Функция, возвращающая один рандомный элемент из переданного массива.
@@ -76,7 +68,7 @@ var getMixedArray = function (array) {
 var mixPhotos = function (array) {
   var finalArray = [];
   var helpArray = [[0, 1, 2], [2, 1, 0], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0]];
-  var index = getRandomNumber(0, 5); 
+  var index = getRandomNumber(0, 5);
   var middleArray = helpArray[index];
   for (var i = 0; i < 3; i++) {
     finalArray[i] = array[middleArray[i]];
@@ -140,7 +132,6 @@ var getAdsArray = function (amount) {
       },
       'offer': {
         'title': getSeriatimElement(OFFER_TITLES),
-        'address': getCoordinates(),
         'price': getRandomNumber(1000, 1000000),
         'type': convertType(getRandomElement(OFFER_TYPES)),
         'rooms': getRandomNumber(1, 5),
@@ -156,27 +147,25 @@ var getAdsArray = function (amount) {
         'y': getRandomNumber(130, 630)
       }
     };
+    ad.offer.address = ad.location.x + ', ' + ad.location.y;
     adsArray.push(ad);
   }
   // console.log(adsArray);
   return adsArray;
 };
 
-// Создаём ещё 2 элемента для блока с фотографиями жилья и вставляем их.
-var photoContainer = document.querySelector('template').content.querySelector('.popup__photos');
-
 // Находим шаблон изображения
-var photoTemplateElement = photoContainer.querySelector('.popup__photo');
 
-//photoContainer.appendChild(photoTemplateElement);
-//photoContainer.appendChild(photoTemplateElement);
-
-var renderPhoto = function () {
-  var photoElement = photoTemplateElement.cloneNode(true);
-  return photoElement;
+var renderPhotos = function (photos, cardElement) {
+  var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
+  var photoContainer = cardElement.querySelector('.popup__photos');
+  photoContainer.innerHTML = '';
+  for (var i = 0; i < photos.length; i++) {
+    var photoElement = photoTemplateElement.cloneNode(true);
+    photoElement.src = photos[i];
+    photoContainer.appendChild(photoElement);
+  }
 };
-
-
 
 // Находим блок, куда поместим все новые метки
 var similarListPins = map.querySelector('.map__pins');
@@ -187,8 +176,8 @@ var similarPinTemplate = document.querySelector('template').content.querySelecto
 // Генерация метки на основе шаблона
 var renderPin = function (pin) {
   var pinElement = similarPinTemplate.cloneNode(true);
-  pinElement.style.left = pin.location.x + 25 + 'px';
-  pinElement.style.top = pin.location.y + 70 + 'px';
+  pinElement.style.left = pin.location.x - 25 + 'px';
+  pinElement.style.top = pin.location.y - 70 + 'px';
   pinElement.querySelector('img').src = pin.author.avatar;
   pinElement.querySelector('img').alt = pin.offer.title;
   return pinElement;
@@ -217,8 +206,7 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
   cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
   cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
-  // Привязать ссылки на фото из массива ссылок к тегам img
-  // cardElement.querySelector(.popup__photos) ???
+  renderPhotos(advertisement.offer.photos, cardElement);
   return cardElement;
 };
 
@@ -228,9 +216,4 @@ var cardsBeforeElement = map.querySelector('.map__filters-container');
 
 var cardsParentElement = cardsBeforeElement.parentNode;
 
-var cardFragment = document.createDocumentFragment();
-var cards = pins;
-for (var j = 0; j < cards.length; j++) {
-  cardFragment.appendChild(renderAd(cards[j]));
-}
-cardsParentElement.insertBefore(cardFragment, cardsBeforeElement);
+cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
