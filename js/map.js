@@ -72,6 +72,18 @@ var getMixedArray = function (array) {
   return array;
 };
 
+// Работающий вариант функции для перемешивания фоток
+var mixPhotos = function (array) {
+  var finalArray = [];
+  var helpArray = [[0, 1, 2], [2, 1, 0], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0]];
+  var index = getRandomNumber(0, 5); 
+  var middleArray = helpArray[index];
+  for (var i = 0; i < 3; i++) {
+    finalArray[i] = array[middleArray[i]];
+  }
+  return finalArray;
+};
+
 // Функция, выдающая 1-й элемент массива поочерёдно
 var getSeriatimElement = function (array) {
   var title = array.shift();
@@ -137,7 +149,7 @@ var getAdsArray = function (amount) {
         'checkout': getRandomElement(OFFER_CHECKS),
         'features': getListFeatures(getVariativeLengthArray(OFFER_FEATURES)),
         'description': '',
-        'photos': getMixedArray(OFFER_PHOTOS)
+        'photos': mixPhotos(OFFER_PHOTOS)
       },
       'location': {
         'x': getRandomNumber(300, 900),
@@ -155,10 +167,10 @@ var photoContainer = document.querySelector('template').content.querySelector('.
 
 var photoElement = photoContainer.innerHTML;
 
-photoContainer.insertAdjacentHTML('afterbegin', photoElement);
-photoContainer.insertAdjacentHTML('afterbegin', photoElement);
+// photoContainer.appendChild(photoElement);
+// photoContainer.appendChild(photoElement);
 
-// Теперь как-то надо назначить ссылки из перемешанного массива фоток в scr тега img.
+// Теперь как-то надо назначить ссылки из перемешанного массива фоток в scr тега img. А потом всё это как-то использовать в генерации объявления.
 
 // getMixedArray(OFFER_PHOTOS)
 var bindImagesWithLinks = function (photos) {
