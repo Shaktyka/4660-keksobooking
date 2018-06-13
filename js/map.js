@@ -1,7 +1,6 @@
 'use strict';
 
 var map = document.querySelector('.map');
-// map.classList.remove('map--faded');
 
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
@@ -150,7 +149,6 @@ var getAdsArray = function (amount) {
     ad.offer.address = ad.location.x + ', ' + ad.location.y;
     adsArray.push(ad);
   }
-  // console.log(adsArray);
   return adsArray;
 };
 
@@ -189,7 +187,7 @@ var pins = getAdsArray(8);
 for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
-similarListPins.appendChild(fragment);
+// similarListPins.appendChild(fragment);
 
 // Находим шаблон для генерации объявлений
 var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
@@ -216,4 +214,34 @@ var cardsBeforeElement = map.querySelector('.map__filters-container');
 
 var cardsParentElement = cardsBeforeElement.parentNode;
 
-cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+// cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+
+// Находим дефолтную метку на карте 
+var pinMain = map.querySelector('.map__pin--main');
+
+// Находим форму на странице
+var form = document.querySelector('.ad-form');
+
+// Находим все элементы fieldset
+var fieldsetList = form.querySelectorAll('fieldset');
+
+// Эмулируем перетаскивание дефолтной метки
+// Активация страницы
+
+// var buttonMouseupHandler = function () {
+//   разблокируем карту
+//   map.classList.remove('map--faded');
+//   разблокируем форму
+//   form.classList.remove('ad-form--disabled');
+//   разблокируем филдсеты
+//   Вариант 1:
+//   fieldsetList.disabled = false;
+//   Вариант 2:
+//   fieldsetList.forEach(function (item) {
+//   item.disabled = false;
+//   });
+//   разблокировать генерацию массива меток и объявлений - ???
+//   заполнение поле адреса
+// };
+
+//  pinMain.addEventListener('mouseup', buttonMouseupHandler);
