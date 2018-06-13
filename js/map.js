@@ -214,10 +214,32 @@ var cardsBeforeElement = map.querySelector('.map__filters-container');
 
 var cardsParentElement = cardsBeforeElement.parentNode;
 
-// место для кода добавления карточек объявлений
+// Место для кода добавления карточек объявлений
 
 // Находим дефолтную метку на карте
 var pinMain = map.querySelector('.map__pin--main');
+
+// Размеры и положение дефолтной метки
+
+var MAIN_PIN_WIDTH = 60;
+var MAIN_PIN_HEIGTH = 80;
+var MAIN_PIN_DEF_LEFT = 570;
+var MAIN_PIN_DEF_TOP = 375;
+
+// Rоординаты дефолтной метки по её центру
+
+var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
+
+// Координаты дефолтной метки по указателю
+
+pinMain.style.left = mainPinLeftCentered + 'px';
+pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
+
+// Координаты дефолтной метки по центру
+
+pinMain.style.left = mainPinLeftCentered + 'px';
+pinMain.style.top = mainPinTopCentered + 'px';
 
 // Находим форму на странице
 var form = document.querySelector('.ad-form');
