@@ -216,7 +216,7 @@ var cardsParentElement = cardsBeforeElement.parentNode;
 
 // место для кода добавления карточек объявлений
 
-// Находим дефолтную метку на карте 
+// Находим дефолтную метку на карте
 var pinMain = map.querySelector('.map__pin--main');
 
 // Находим форму на странице
@@ -229,18 +229,15 @@ var fieldsetList = form.querySelectorAll('fieldset');
 // Активация страницы
 
 var buttonMouseupHandler = function () {
-// разблокируем карту
+  // разблокируем карту
   map.classList.remove('map--faded');
-// разблокируем форму
+  // разблокируем форму
   form.classList.remove('ad-form--disabled');
-// разблокируем филдсеты
-// Вариант 1:
-  fieldsetList.disabled = false;
-// Вариант 2:
-//  fieldsetList.forEach(function (item) {
-//  item.disabled = false;
-//  });
-// Разблокировать генерацию массива меток и объявлений
+  // разблокируем филдсеты
+  fieldsetList.forEach(function (item) {
+    item.disabled = false;
+  });
+  // разблокируем генерацию массива меток и объявлений
   similarListPins.appendChild(fragment);
   cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
 // заполнение поле адреса
