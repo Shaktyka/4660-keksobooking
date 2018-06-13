@@ -187,7 +187,7 @@ var pins = getAdsArray(8);
 for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
-// similarListPins.appendChild(fragment);
+// место для кода добавления фрагмента с метками в контейнер
 
 // Находим шаблон для генерации объявлений
 var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
@@ -214,7 +214,7 @@ var cardsBeforeElement = map.querySelector('.map__filters-container');
 
 var cardsParentElement = cardsBeforeElement.parentNode;
 
-// cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+// место для кода добавления карточек объявлений
 
 // Находим дефолтную метку на карте 
 var pinMain = map.querySelector('.map__pin--main');
@@ -228,20 +228,22 @@ var fieldsetList = form.querySelectorAll('fieldset');
 // Эмулируем перетаскивание дефолтной метки
 // Активация страницы
 
-// var buttonMouseupHandler = function () {
-//   разблокируем карту
-//   map.classList.remove('map--faded');
-//   разблокируем форму
-//   form.classList.remove('ad-form--disabled');
-//   разблокируем филдсеты
-//   Вариант 1:
-//   fieldsetList.disabled = false;
-//   Вариант 2:
-//   fieldsetList.forEach(function (item) {
-//   item.disabled = false;
-//   });
-//   разблокировать генерацию массива меток и объявлений - ???
-//   заполнение поле адреса
-// };
+var buttonMouseupHandler = function () {
+// разблокируем карту
+  map.classList.remove('map--faded');
+// разблокируем форму
+  form.classList.remove('ad-form--disabled');
+// разблокируем филдсеты
+// Вариант 1:
+  fieldsetList.disabled = false;
+// Вариант 2:
+//  fieldsetList.forEach(function (item) {
+//  item.disabled = false;
+//  });
+// Разблокировать генерацию массива меток и объявлений
+  similarListPins.appendChild(fragment);
+  cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+// заполнение поле адреса
+};
 
-//  pinMain.addEventListener('mouseup', buttonMouseupHandler);
+pinMain.addEventListener('mouseup', buttonMouseupHandler);
