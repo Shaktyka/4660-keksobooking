@@ -2,6 +2,9 @@
 
 var map = document.querySelector('.map');
 
+// Находим форму на странице
+var form = document.querySelector('.ad-form');
+
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
 var OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
@@ -226,23 +229,24 @@ var MAIN_PIN_HEIGTH = 80;
 var MAIN_PIN_DEF_LEFT = 570;
 var MAIN_PIN_DEF_TOP = 375;
 
-// Rоординаты дефолтной метки по её центру
+// Координаты дефолтной метки по её центру
 
 var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
 var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
 
 // Координаты дефолтной метки по указателю
 
-pinMain.style.left = mainPinLeftCentered + 'px';
-pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
+var mainPinLeftPointed = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinTopPointed = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH;
 
-// Координаты дефолтной метки по центру
+// Прописываем координаты дефолтной метки по центру
 
 pinMain.style.left = mainPinLeftCentered + 'px';
 pinMain.style.top = mainPinTopCentered + 'px';
 
-// Находим форму на странице
-var form = document.querySelector('.ad-form');
+// Прописываем координаты в поле Адрес при неактивной странице
+var addressInput = document.getElementById('address');
+addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
 
 // Находим все элементы fieldset
 var fieldsetList = form.querySelectorAll('fieldset');
@@ -262,6 +266,11 @@ var buttonMouseupHandler = function () {
   // разблокируем генерацию массива меток и объявлений
   similarListPins.appendChild(fragment);
   cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+  // координаты дефолтной метки по указателю
+  pinMain.style.left = mainPinLeftCentered + 'px';
+  pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
+  // прописываем координаты дефолтной метки в поле адреса по указателю
+  addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
 // заполнение поле адреса
 };
 
