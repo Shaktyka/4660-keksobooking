@@ -198,6 +198,7 @@ var similarAdTemplate = document.querySelector('template').content.querySelector
 // Генерация объявления на основе шаблона
 var renderAd = function (advertisement) {
   var cardElement = similarAdTemplate.cloneNode(true);
+  cardElement.classList.add('hidden');
   cardElement.querySelector('img').src = advertisement.author.avatar;
   cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
@@ -213,12 +214,14 @@ var renderAd = function (advertisement) {
 
 // Отрисовка объявлений и добавление их в целевой блок
 
-var cardsBeforeElement = map.querySelector('.map__filters-container');
+var createCards = function () {
+  var cardsBeforeElement = map.querySelector('.map__filters-container');
 
-var cardsParentElement = cardsBeforeElement.parentNode;
+  var cardsParentElement = cardsBeforeElement.parentNode;
 
-// Место для кода добавления карточек объявлений
-// cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+  // Добавление карточек объявлений
+  cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+};
 
 // Находим дефолтную метку на карте
 var pinMain = map.querySelector('.map__pin--main');
@@ -266,6 +269,7 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   similarListPins.appendChild(fragment);
+  createCards();
   // координаты дефолтной метки по указателю
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
@@ -274,3 +278,17 @@ var buttonMouseupHandler = function () {
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
+
+// Находим список всех меток
+var buttonsList = document.querySelectorAll('.map__pin');
+
+// Функция обработки клика по pin
+var pinClickHandler = function (evt) {
+  evt.preventDefault();
+  evt.target.classList.remove('hidden');
+};
+
+// В цикле навешиваем всем пинам прослушку на клик
+for (var b = 0; b < buttonsList.length; b++) {
+  buttonsList[i].addEventListener('click', pinClickHandler);
+}
