@@ -155,6 +155,12 @@ var getAdsArray = function (amount) {
   return adsArray;
 };
 
+// Функция обработки клика по pin
+var pinClickHandler = function (evt) {
+  evt.preventDefault();
+  createCards();
+};
+
 // Находим шаблон изображения
 
 var renderPhotos = function (photos, cardElement) {
@@ -199,7 +205,6 @@ var similarAdTemplate = document.querySelector('template').content.querySelector
 // Генерация объявления на основе шаблона
 var renderAd = function (advertisement) {
   var cardElement = similarAdTemplate.cloneNode(true);
-  cardElement.classList.add('hidden');
   cardElement.querySelector('img').src = advertisement.author.avatar;
   cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
@@ -270,7 +275,6 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   similarListPins.appendChild(fragment);
-  createCards();
   // координаты дефолтной метки по указателю
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
@@ -279,9 +283,3 @@ var buttonMouseupHandler = function () {
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
-
-// Функция обработки клика по pin
-var pinClickHandler = function (evt) {
-  evt.preventDefault();
-  evt.target.classList.remove('hidden');
-};
