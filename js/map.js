@@ -275,20 +275,17 @@ var buttonMouseupHandler = function () {
   pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
   addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
+  // Находим список всех меток
+  var buttonsList = document.querySelectorAll('.map__pin');
+  // В цикле навешиваем всем пинам прослушку на клик
+  for (var b = 0; b < buttonsList.length; b++) {
+    buttonsList[b].addEventListener('click', pinClickHandler);
+  }
+  // Функция обработки клика по pin
+  var pinClickHandler = function (evt) {
+    evt.preventDefault();
+    evt.target.classList.toggle('hidden');
+  };
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
-
-// Находим список всех меток
-var buttonsList = document.querySelectorAll('.map__pin');
-
-// Функция обработки клика по pin
-var pinClickHandler = function (evt) {
-  evt.preventDefault();
-  evt.target.classList.remove('hidden');
-};
-
-// В цикле навешиваем всем пинам прослушку на клик
-for (var b = 0; b < buttonsList.length; b++) {
-  buttonsList[i].addEventListener('click', pinClickHandler);
-}
