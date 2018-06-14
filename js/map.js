@@ -218,6 +218,7 @@ var cardsBeforeElement = map.querySelector('.map__filters-container');
 var cardsParentElement = cardsBeforeElement.parentNode;
 
 // Место для кода добавления карточек объявлений
+// cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
 
 // Находим дефолтную метку на карте
 var pinMain = map.querySelector('.map__pin--main');
@@ -265,13 +266,11 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   similarListPins.appendChild(fragment);
-  cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
   // координаты дефолтной метки по указателю
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
   addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
-// заполнение поле адреса
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
