@@ -15,6 +15,26 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
+// Находим дефолтную метку на карте
+var pinMain = map.querySelector('.map__pin--main');
+
+// Размеры и положение дефолтной метки
+
+var MAIN_PIN_WIDTH = 60;
+var MAIN_PIN_HEIGTH = 80;
+var MAIN_PIN_DEF_LEFT = 570;
+var MAIN_PIN_DEF_TOP = 375;
+
+// Координаты дефолтной метки по её центру
+
+var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
+
+// Координаты дефолтной метки по указателю
+
+var mainPinLeftPointed = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinTopPointed = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH;
+
 // Функция, возвращающая рандомное число в диапазоне между переданными min и max.
 var getRandomNumber = function (min, max) {
   var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -67,16 +87,11 @@ var getMixedArray = function (array) {
 };
 
 // Работающий вариант функции для перемешивания фоток
-var mixPhotos = function (array) {
-  var finalArray = [];
-  var helpArray = [[0, 1, 2], [2, 1, 0], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0]];
-  var index = getRandomNumber(0, 5);
-  var middleArray = helpArray[index];
-  for (var i = 0; i < 3; i++) {
-    finalArray[i] = array[middleArray[i]];
-  }
-  return finalArray;
-};
+// var mixPhotos = function (array) {
+//  array.sort(function () {
+//    return Math.random() - 0.5;
+//  });
+// };
 
 // Функция, выдающая 1-й элемент массива поочерёдно
 var getSeriatimElement = function (array) {
@@ -142,7 +157,9 @@ var getAdsArray = function (amount) {
         'checkout': getRandomElement(OFFER_CHECKS),
         'features': getListFeatures(getVariativeLengthArray(OFFER_FEATURES)),
         'description': '',
-        'photos': mixPhotos(OFFER_PHOTOS)
+        'photos': OFFER_PHOTOS.sort(function () {
+          return Math.random() - 0.5;
+        })
       },
       'location': {
         'x': getRandomNumber(300, 900),
@@ -235,26 +252,6 @@ var createCard = function (pin) {
   // Добавление карточек объявлений
   cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
 };
-
-// Находим дефолтную метку на карте
-var pinMain = map.querySelector('.map__pin--main');
-
-// Размеры и положение дефолтной метки
-
-var MAIN_PIN_WIDTH = 60;
-var MAIN_PIN_HEIGTH = 80;
-var MAIN_PIN_DEF_LEFT = 570;
-var MAIN_PIN_DEF_TOP = 375;
-
-// Координаты дефолтной метки по её центру
-
-var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
-
-// Координаты дефолтной метки по указателю
-
-var mainPinLeftPointed = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopPointed = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH;
 
 // Прописываем координаты дефолтной метки по центру
 
