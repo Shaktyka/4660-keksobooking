@@ -211,6 +211,11 @@ var renderAd = function (advertisement) {
   cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
   cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
   renderPhotos(advertisement.offer.photos, cardElement);
+  var closeButton = cardElement.querySelector('.popup__close');
+  closeButton.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    cardElement.classList.add('hidden');
+  });
   return cardElement;
 };
 
