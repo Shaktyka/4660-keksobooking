@@ -155,12 +155,6 @@ var getAdsArray = function (amount) {
   return adsArray;
 };
 
-// Функция обработки клика по pin
-var pinClickHandler = function (evt) {
-  evt.preventDefault();
-  createCards(1);
-};
-
 // Находим шаблон изображения
 
 var renderPhotos = function (photos, cardElement) {
@@ -187,7 +181,10 @@ var renderPin = function (pin) {
   pinElement.style.top = pin.location.y - 70 + 'px';
   pinElement.querySelector('img').src = pin.author.avatar;
   pinElement.querySelector('img').alt = pin.offer.title;
-  pinElement.addEventListener('click', pinClickHandler);
+  pinElement.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    createCard(pin);
+  });
   return pinElement;
 };
 
@@ -219,13 +216,13 @@ var renderAd = function (advertisement) {
 
 // Отрисовка объявлений и добавление их в целевой блок
 
-var createCards = function (index) {
+var createCard = function (pin) {
   var cardsBeforeElement = map.querySelector('.map__filters-container');
 
   var cardsParentElement = cardsBeforeElement.parentNode;
 
   // Добавление карточек объявлений
-  cardsParentElement.insertBefore(renderAd(pins[index]), cardsBeforeElement);
+  cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
 };
 
 // Находим дефолтную метку на карте
