@@ -216,6 +216,12 @@ var renderAd = function (advertisement) {
     evt.preventDefault();
     cardElement.classList.add('hidden');
   });
+  closeButton.addEventListener('keydown', function (evt) {
+    evt.preventDefault();
+    if (evt.keyCode === 13) {
+      cardElement.classList.add('hidden');
+    }
+  });
   return cardElement;
 };
 
