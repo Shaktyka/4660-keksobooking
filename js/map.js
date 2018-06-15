@@ -158,7 +158,7 @@ var getAdsArray = function (amount) {
 // Функция обработки клика по pin
 var pinClickHandler = function (evt) {
   evt.preventDefault();
-  createCards();
+  createCards(1);
 };
 
 // Находим шаблон изображения
@@ -197,7 +197,6 @@ var pins = getAdsArray(8);
 for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
-// место для кода добавления фрагмента с метками в контейнер
 
 // Находим шаблон для генерации объявлений
 var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
@@ -220,13 +219,13 @@ var renderAd = function (advertisement) {
 
 // Отрисовка объявлений и добавление их в целевой блок
 
-var createCards = function () {
+var createCards = function (index) {
   var cardsBeforeElement = map.querySelector('.map__filters-container');
 
   var cardsParentElement = cardsBeforeElement.parentNode;
 
   // Добавление карточек объявлений
-  cardsParentElement.insertBefore(renderAd(pins[0]), cardsBeforeElement);
+  cardsParentElement.insertBefore(renderAd(pins[index]), cardsBeforeElement);
 };
 
 // Находим дефолтную метку на карте
