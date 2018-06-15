@@ -157,7 +157,7 @@ var getAdsArray = function (amount) {
         'checkout': getRandomElement(OFFER_CHECKS),
         'features': getListFeatures(getVariativeLengthArray(OFFER_FEATURES)),
         'description': '',
-        'photos': OFFER_PHOTOS.sort(function () {
+        'photos': OFFER_PHOTOS.slice().sort(function () {
           return Math.random() - 0.5;
         })
       },
