@@ -287,3 +287,38 @@ var buttonMouseupHandler = function () {
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
+
+// ВАЛИДАЦИЯ
+
+var type = document.getElementById('type');
+
+var price = document.getElementById('price');
+
+var address = document.getElementById('address');
+
+// Синхронизация времени чекина и чекаута
+
+var checkin = document.getElementById('timein');
+
+var checkout = document.getElementById('timeout');
+
+var checkinSelectChangeHandler = function () {
+  checkout.selectedIndex = checkin.selectedIndex;
+};
+
+var checkoutSelectChangeHandler = function () {
+  checkin.selectedIndex = checkout.selectedIndex;
+};
+
+checkin.addEventListener('change', checkinSelectChangeHandler);
+
+checkout.addEventListener('change', checkoutSelectChangeHandler);
+
+var roomNumber = document.getElementById('room_number');
+
+var capacity = document.getElementById('capacity');
+
+var sendForm = document.querySelector('.ad-form__submit');
+
+
+// Соответствие типа и минимальной цены жилья
