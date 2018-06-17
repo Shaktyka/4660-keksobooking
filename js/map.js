@@ -288,13 +288,13 @@ var buttonMouseupHandler = function () {
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
-// ВАЛИДАЦИЯ ЭЛЕМЕНТОВ ФОРМЫ
+// ВАЛИДАЦИЯ ФОРМЫ
 
 var type = document.getElementById('type');
 
 var price = document.getElementById('price');
 
-var typeSelectChangeHandler = function () {
+type.addEventListener('change', function () {
   if (type.value === 'bungalo') {
     price.min = 0;
     price.placeholder = 0;
@@ -308,13 +308,11 @@ var typeSelectChangeHandler = function () {
     price.min = 10000;
     price.placeholder = 10000;
   }
-};
+});
 
-type.addEventListener('change', typeSelectChangeHandler);
-
-// ФУНКЦИЯ ПЕРЕЗАПИСИ АДРЕСА
-
-var address = document.getElementById('address');
+price.addEventListener('invalid', function () {
+  price.style.outline = '2px solid red';
+});
 
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
@@ -322,23 +320,33 @@ var checkin = document.getElementById('timein');
 
 var checkout = document.getElementById('timeout');
 
-var checkinSelectChangeHandler = function () {
+checkin.addEventListener('change', function () {
   checkout.selectedIndex = checkin.selectedIndex;
-};
+});
 
-var checkoutSelectChangeHandler = function () {
+checkout.addEventListener('change', function () {
   checkin.selectedIndex = checkout.selectedIndex;
-};
+});
 
-checkin.addEventListener('change', checkinSelectChangeHandler);
+// СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
 
-checkout.addEventListener('change', checkoutSelectChangeHandler);
-
-var roomNumber = document.getElementById('room_number');
+var roomsNumber = document.getElementById('room_number');
 
 var capacity = document.getElementById('capacity');
 
+// capacity.addEventListener('change', function () {
+//
+// });
+
+roomsNumber.addEventListener('change', function (evt) {
+  evt.preventDefault();
+  if (roomsNumber.value === '1' && (capacity.value !== '1')) {
+    capacity.setCustomValidity('1 комната может быть выбрана только для 1 гостя.');
+  } else if (roomsNumber.value === '100' && (capacity.value !== '0')) {
+    capacity.setCustomValidity('100 комнат может быть выбрано только для не для гостей');         
+  }
+});
+
+// ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
+
 var sendForm = document.querySelector('.ad-form__submit');
-
-
-// Соответствие типа и минимальной цены жилья
