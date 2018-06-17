@@ -288,15 +288,35 @@ var buttonMouseupHandler = function () {
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
-// ВАЛИДАЦИЯ
+// ВАЛИДАЦИЯ ЭЛЕМЕНТОВ ФОРМЫ
 
 var type = document.getElementById('type');
 
 var price = document.getElementById('price');
 
+var typeSelectChangeHandler = function () {
+  if (type.value === 'bungalo') {
+    price.min = 0;
+    price.placeholder = 0;
+  } else if (type.value === 'flat') {
+    price.min = 1000;
+    price.placeholder = 1000;
+  } else if (type.value === 'house') {
+    price.min = 5000;
+    price.placeholder = 5000;
+  } else if (type.value === 'palace') {
+    price.min = 10000;
+    price.placeholder = 10000;
+  }
+};
+
+type.addEventListener('change', typeSelectChangeHandler);
+
+// ФУНКЦИЯ ПЕРЕЗАПИСИ АДРЕСА
+
 var address = document.getElementById('address');
 
-// Синхронизация времени чекина и чекаута
+// СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
 var checkin = document.getElementById('timein');
 
