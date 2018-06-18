@@ -310,9 +310,9 @@ type.addEventListener('change', function () {
   }
 });
 
-price.addEventListener('invalid', function () {
-  price.style.outline = '2px solid red';
-});
+//price.addEventListener('invalid', function () {
+//  price.style.outline = '2px solid red';
+//});
 
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
@@ -333,19 +333,43 @@ checkout.addEventListener('change', function () {
 var roomsNumber = document.getElementById('room_number');
 
 var capacity = document.getElementById('capacity');
-
-// capacity.addEventListener('change', function () {
-//
-// });
+capacity.disabled = true;
+capacity.title = 'Чтобы разблокировать поле, выберите иное количество комнат';
 
 roomsNumber.addEventListener('change', function (evt) {
-  evt.preventDefault();
-  if (roomsNumber.value === '1' && (capacity.value !== '1')) {
-    capacity.setCustomValidity('1 комната может быть выбрана только для 1 гостя.');
-  } else if (roomsNumber.value === '100' && (capacity.value !== '0')) {
-    capacity.setCustomValidity('100 комнат может быть выбрано только для не для гостей');         
+  capacity.disabled = false;
+  capacity.title = '';
+  if (capacity.value === '1') {
+    capacity.options[0].hidden = false;
+    capacity.options[1].hidden = true;
+    capacity.options[2].hidden = true;
+    capacity.options[3].hidden = true;
+  } else if (capacity.value === '2') {
+    capacity.options[0].hidden = false;
+    capacity.options[1].hidden = false;
+    capacity.options[2].hidden = true;
+    capacity.options[3].hidden = true;
+  } else if (capacity.value === '3') {
+    capacity.options[0].hidden = false;
+    capacity.options[1].hidden = false;
+    capacity.options[2].hidden = false;
+    capacity.options[3].hidden = true;
+  } else {
+    capacity.options[0].hidden = true;
+    capacity.options[1].hidden = true;
+    capacity.options[2].hidden = true;
+    capacity.options[3].hidden = false;
   }
 });
+
+//roomsNumber.addEventListener('change', function (evt) {
+//
+//  if (roomsNumber.value === '1' && (capacity.value !== '1')) {
+//    capacity.setCustomValidity('1 комната может быть выбрана только для 1 гостя.');
+//  } else if (roomsNumber.value === '100' && (capacity.value !== '0')) {
+//    capacity.setCustomValidity('100 комнат может быть выбрано только для не для гостей');
+//  }
+//});
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
