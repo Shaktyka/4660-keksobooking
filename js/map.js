@@ -86,13 +86,6 @@ var getMixedArray = function (array) {
   return array;
 };
 
-// Работающий вариант функции для перемешивания фоток
-// var mixPhotos = function (array) {
-//  array.sort(function () {
-//    return Math.random() - 0.5;
-//  });
-// };
-
 // Функция, выдающая 1-й элемент массива поочерёдно
 var getSeriatimElement = function (array) {
   var title = array.shift();
@@ -262,11 +255,12 @@ pinMain.style.top = mainPinTopCentered + 'px';
 var addressInput = document.getElementById('address');
 addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
 
+// АКТИВАЦИЯ СТРАНИЦЫ
+
 // Находим все элементы fieldset
 var fieldsetList = form.querySelectorAll('fieldset');
 
 // Эмулируем перетаскивание дефолтной метки
-// Активация страницы
 
 var buttonMouseupHandler = function () {
   // разблокируем карту
@@ -310,9 +304,9 @@ type.addEventListener('change', function () {
   }
 });
 
-//price.addEventListener('invalid', function () {
+// price.addEventListener('invalid', function () {
 //  price.style.outline = '2px solid red';
-//});
+// });
 
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
@@ -333,43 +327,37 @@ checkout.addEventListener('change', function () {
 var roomsNumber = document.getElementById('room_number');
 
 var capacity = document.getElementById('capacity');
-capacity.disabled = true;
-capacity.title = 'Чтобы разблокировать поле, выберите иное количество комнат';
+// capacity.disabled = true;
+// capacity.title = 'Чтобы разблокировать поле, выберите иное количество комнат';
 
 roomsNumber.addEventListener('change', function (evt) {
-  capacity.disabled = false;
-  capacity.title = '';
-  if (capacity.value === '1') {
-    capacity.options[0].hidden = false;
-    capacity.options[1].hidden = true;
-    capacity.options[2].hidden = true;
-    capacity.options[3].hidden = true;
-  } else if (capacity.value === '2') {
-    capacity.options[0].hidden = false;
-    capacity.options[1].hidden = false;
-    capacity.options[2].hidden = true;
-    capacity.options[3].hidden = true;
-  } else if (capacity.value === '3') {
-    capacity.options[0].hidden = false;
-    capacity.options[1].hidden = false;
-    capacity.options[2].hidden = false;
-    capacity.options[3].hidden = true;
+  var currentValue = roomsNumber.value;
+  if (currentValue === 0) {
+    for (var d = 0; d < capacity.children.length; d++) {
+      capacity.children[d].disabled = true;
+    }
+    capacity.children[capacity.children.length - 1].disabled = false;
+    capacity.children[capacity.children.length - 1].selected = true;
   } else {
-    capacity.options[0].hidden = true;
-    capacity.options[1].hidden = true;
-    capacity.options[2].hidden = true;
-    capacity.options[3].hidden = false;
+    for (var e = 0; e < capacity.children.length; e++) {
+      if (e < currentValue) {
+        capacity.children[e].disabled = false;
+      } else {
+        capacity.children[e].disabled = true;
+      }
+    }
+    capacity.children[0].selected = true;
   }
 });
 
-//roomsNumber.addEventListener('change', function (evt) {
+// roomsNumber.addEventListener('change', function (evt) {
 //
 //  if (roomsNumber.value === '1' && (capacity.value !== '1')) {
 //    capacity.setCustomValidity('1 комната может быть выбрана только для 1 гостя.');
 //  } else if (roomsNumber.value === '100' && (capacity.value !== '0')) {
 //    capacity.setCustomValidity('100 комнат может быть выбрано только для не для гостей');
 //  }
-//});
+// });
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
