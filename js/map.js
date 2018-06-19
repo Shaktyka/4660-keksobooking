@@ -20,7 +20,7 @@ var roomsNum = document.getElementById('rooms');
 
 var guests = document.getElementById('capacity');
 
-// var sendForm = document.querySelector('.ad-form__submit');
+var sendForm = document.querySelector('.ad-form__submit');
 
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
@@ -110,9 +110,9 @@ var getSeriatimElement = function (array) {
 };
 
 // Функция для конвертации англоязычного типа жилья в русскоязычный
-var convertType = function (type) {
+var convertType = function (typeHouse) {
   var typeValue = '';
-  switch (type) {
+  switch (typeHouse) {
     case 'palace':
       typeValue = 'Дворец';
       break;
@@ -352,6 +352,27 @@ roomsNum.addEventListener('change', function () {
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
-// sendForm.addEventListener('submit', function  (subEvt) {
-//  subEvt.preventDefault();
-// });
+var formTitle = document.getElementById('title');
+var formPrice = document.getElementById('price');
+
+sendForm.addEventListener('submit', function (subEvt) {
+  if (!formTitle.value || !formPrice.value) {
+    form.classList.add('error');
+    subEvt.preventDefault();
+    console.log('Введите, пожалуйста, заголовок объявления и стоимость жилья за ночь');
+  } else {
+    form.classList.remove('error');
+  }
+});
+
+document.addEventListener('keydown', function (keyEvt) {
+  if (keyEvt.keyCode === 13) {
+    if (!formTitle.value || !formPrice.value) {
+      form.classList.add('error');
+      keyEvt.preventDefault();
+      console.log('Введите, пожалуйста, заголовок объявления и стоимость жилья за ночь');
+    } else {
+      form.classList.remove('error');
+    }
+  }
+});
