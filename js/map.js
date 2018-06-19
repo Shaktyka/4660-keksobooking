@@ -5,6 +5,23 @@ var map = document.querySelector('.map');
 // Находим форму на странице
 var form = document.querySelector('.ad-form');
 
+// Находим все элементы fieldset
+var fieldsetList = form.querySelectorAll('fieldset');
+
+var type = document.getElementById('type');
+
+var price = document.getElementById('price');
+
+var checkin = document.getElementById('timein');
+
+var checkout = document.getElementById('timeout');
+
+var roomsNum = document.getElementById('rooms');
+
+var guests = document.getElementById('capacity');
+
+// var sendForm = document.querySelector('.ad-form__submit');
+
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
 var OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
@@ -257,9 +274,6 @@ addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
 
 // АКТИВАЦИЯ СТРАНИЦЫ
 
-// Находим все элементы fieldset
-var fieldsetList = form.querySelectorAll('fieldset');
-
 // Эмулируем перетаскивание дефолтной метки
 
 var buttonMouseupHandler = function () {
@@ -284,10 +298,6 @@ pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
 // ВАЛИДАЦИЯ ФОРМЫ
 
-var type = document.getElementById('type');
-
-var price = document.getElementById('price');
-
 type.addEventListener('change', function () {
   if (type.value === 'bungalo') {
     price.min = 0;
@@ -310,10 +320,6 @@ type.addEventListener('change', function () {
 
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
-var checkin = document.getElementById('timein');
-
-var checkout = document.getElementById('timeout');
-
 checkin.addEventListener('change', function () {
   checkout.selectedIndex = checkin.selectedIndex;
 });
@@ -324,41 +330,28 @@ checkout.addEventListener('change', function () {
 
 // СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
 
-var roomsNumber = document.getElementById('room_number');
-
-var capacity = document.getElementById('capacity');
-// capacity.disabled = true;
-// capacity.title = 'Чтобы разблокировать поле, выберите иное количество комнат';
-
-roomsNumber.addEventListener('change', function (evt) {
-  var currentValue = roomsNumber.value;
+roomsNum.addEventListener('change', function () {
+  var currentValue = roomsNum.value;
   if (currentValue === 0) {
-    for (var d = 0; d < capacity.children.length; d++) {
-      capacity.children[d].disabled = true;
+    for (var c = 0; c < guests.children.length; c++) {
+      guests.children[c].disabled = true;
     }
-    capacity.children[capacity.children.length - 1].disabled = false;
-    capacity.children[capacity.children.length - 1].selected = true;
+    guests.children[guests.children.length - 1].disabled = false;
+    guests.children[guests.children.length - 1].selected = true;
   } else {
-    for (var e = 0; e < capacity.children.length; e++) {
-      if (e < currentValue) {
-        capacity.children[e].disabled = false;
+    for (var d = 0; d < guests.children.length; d++) {
+      if (d < currentValue) {
+        guests.children[d].disabled = false;
       } else {
-        capacity.children[e].disabled = true;
+        guests.children[d].disabled = true;
       }
     }
-    capacity.children[0].selected = true;
+    guests.children[0].selected = true;
   }
 });
 
-// roomsNumber.addEventListener('change', function (evt) {
-//
-//  if (roomsNumber.value === '1' && (capacity.value !== '1')) {
-//    capacity.setCustomValidity('1 комната может быть выбрана только для 1 гостя.');
-//  } else if (roomsNumber.value === '100' && (capacity.value !== '0')) {
-//    capacity.setCustomValidity('100 комнат может быть выбрано только для не для гостей');
-//  }
-// });
-
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
-var sendForm = document.querySelector('.ad-form__submit');
+// sendForm.addEventListener('submit', function  (subEvt) {
+//  subEvt.preventDefault();
+// });
