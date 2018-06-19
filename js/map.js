@@ -328,7 +328,7 @@ checkout.addEventListener('change', function () {
 
 roomsNum.addEventListener('change', function () {
   var currentValue = roomsNum.value;
-  if (currentValue === 0) {
+  if (currentValue === '0') {
     for (var c = 0; c < guests.children.length; c++) {
       guests.children[c].disabled = true;
     }
@@ -348,25 +348,35 @@ roomsNum.addEventListener('change', function () {
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
+// sendForm.addEventListener('invalid', function (e) {
+//  var target = e.target;
+//
+//
+//    // добавить красную рамку полям invalid
+//    e.preventDefault();
+//  }
+// }, true);
+
+
 var formTitle = document.getElementById('title');
 var formPrice = document.getElementById('price');
 
-sendForm.addEventListener('submit', function (subEvt) {
-  if (!formTitle.value || !formPrice.value) {
-    form.classList.add('error');
-    subEvt.preventDefault();
-  } else {
-    form.classList.remove('error');
-  }
-});
-
-document.addEventListener('keydown', function (keyEvt) {
-  if (keyEvt.keyCode === 13) {
-    if (!formTitle.value || !formPrice.value) {
-      form.classList.add('error');
-      keyEvt.preventDefault();
-    } else {
-      form.classList.remove('error');
-    }
-  }
-});
+// sendForm.addEventListener('submit', function (subEvt) {
+//  if (!formTitle.value || !formPrice.value) {
+//    form.classList.add('error');
+//    subEvt.preventDefault();
+//  } else {
+//    form.classList.remove('error');
+//  }
+// });
+//
+// document.addEventListener('keydown', function (keyEvt) {
+//  if (keyEvt.keyCode === 13) {
+//    if (!formTitle.value || !formPrice.value) {
+//      form.classList.add('error');
+//      keyEvt.preventDefault();
+//    } else {
+//      form.classList.remove('error');
+//    }
+//  }
+// });
