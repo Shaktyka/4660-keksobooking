@@ -314,10 +314,6 @@ type.addEventListener('change', function () {
   }
 });
 
-// price.addEventListener('invalid', function () {
-//  price.style.outline = '2px solid red';
-// });
-
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
 
 checkin.addEventListener('change', function () {

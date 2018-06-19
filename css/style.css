@@ -59,6 +59,10 @@
   display: none;
 }
 
+.error {
+  outline: 2px solid red;
+}
+
 body {
   max-width: 1200px;
   margin: 0 auto;
