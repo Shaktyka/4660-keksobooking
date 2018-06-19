@@ -10,17 +10,17 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-var map = document.querySelector('.map');
-
-// Находим дефолтную метку на карте
-var pinMain = map.querySelector('.map__pin--main');
-
-// Размеры и положение дефолтной метки
-
 var MAIN_PIN_WIDTH = 60;
 var MAIN_PIN_HEIGTH = 80;
 var MAIN_PIN_DEF_LEFT = 570;
 var MAIN_PIN_DEF_TOP = 375;
+
+var map = document.querySelector('.map');
+
+// Дефолтная метка на карте
+var pinMain = map.querySelector('.map__pin--main');
+
+// Размеры и положение дефолтной метки
 
 // Координаты дефолтной метки по её центру
 
@@ -344,27 +344,22 @@ roomsNum.addEventListener('change', function () {
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
-// var formTitle = document.getElementById('title');
-// var formPrice = document.getElementById('price');
+var sendForm = document.querySelector('.ad-form__submit');
 
-// var sendForm = document.querySelector('.ad-form__submit');
-//
-// sendForm.addEventListener('submit', function (subEvt) {
-//  if (!formTitle.value || !formPrice.value) {
-//    form.classList.add('error');
-//    subEvt.preventDefault();
-//  } else {
-//    form.classList.remove('error');
+// form.addEventListener('invalid', function (e) {
+//  var target = e.target;
+//  for (var h = 0; h < target.length; h++) {
+//    target[h].style.border = '2px solid red';
 //  }
-// });
-//
-// document.addEventListener('keydown', function (keyEvt) {
-//  if (keyEvt.keyCode === 13) {
-//    if (!formTitle.value || !formPrice.value) {
-//      form.classList.add('error');
-//      keyEvt.preventDefault();
-//    } else {
-//      form.classList.remove('error');
-//    }
-//  }
-// });
+// }, true);
+
+sendForm.addEventListener('click', function () {
+  var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
+
+  for (var h = 0; h < inputs.length; h++) {
+    var input = inputs[i];
+    if (input.checkValidity() === false) {
+      input.style.outline = '2px solid red';
+    }
+  }
+});
