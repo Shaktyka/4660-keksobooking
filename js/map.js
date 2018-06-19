@@ -1,27 +1,5 @@
 'use strict';
 
-var map = document.querySelector('.map');
-
-// Находим форму на странице
-var form = document.querySelector('.ad-form');
-
-// Находим все элементы fieldset
-var fieldsetList = form.querySelectorAll('fieldset');
-
-var type = document.getElementById('type');
-
-var price = document.getElementById('price');
-
-var checkin = document.getElementById('timein');
-
-var checkout = document.getElementById('timeout');
-
-var roomsNum = document.getElementById('rooms');
-
-var guests = document.getElementById('capacity');
-
-var sendForm = document.querySelector('.ad-form__submit');
-
 var OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
 var OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
@@ -31,6 +9,8 @@ var OFFER_CHECKS = ['12:00', '13:00', '14:00'];
 var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+
+var map = document.querySelector('.map');
 
 // Находим дефолтную метку на карте
 var pinMain = map.querySelector('.map__pin--main');
@@ -298,23 +278,35 @@ pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
 // ВАЛИДАЦИЯ ФОРМЫ
 
+var form = document.querySelector('.ad-form');
+
+var fieldsetList = form.querySelectorAll('fieldset');
+
+var type = document.getElementById('type');
+
+var price = document.getElementById('price');
+
 type.addEventListener('change', function () {
-  if (type.value === 'bungalo') {
+  if (type.selectedIndex === 0) {
     price.min = 0;
     price.placeholder = 0;
-  } else if (type.value === 'flat') {
+  } else if (type.selectedIndex === 1) {
     price.min = 1000;
     price.placeholder = 1000;
-  } else if (type.value === 'house') {
+  } else if (type.selectedIndex === 2) {
     price.min = 5000;
     price.placeholder = 5000;
-  } else if (type.value === 'palace') {
+  } else if (type.selectedIndex === 3) {
     price.min = 10000;
     price.placeholder = 10000;
   }
 });
 
 // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
+
+var checkin = document.getElementById('timein');
+
+var checkout = document.getElementById('timeout');
 
 checkin.addEventListener('change', function () {
   checkout.selectedIndex = checkin.selectedIndex;
@@ -325,6 +317,10 @@ checkout.addEventListener('change', function () {
 });
 
 // СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
+
+var roomsNum = document.getElementById('rooms');
+
+var guests = document.getElementById('capacity');
 
 roomsNum.addEventListener('change', function () {
   var currentValue = roomsNum.value;
@@ -348,19 +344,11 @@ roomsNum.addEventListener('change', function () {
 
 // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
-// sendForm.addEventListener('invalid', function (e) {
-//  var target = e.target;
+// var formTitle = document.getElementById('title');
+// var formPrice = document.getElementById('price');
+
+// var sendForm = document.querySelector('.ad-form__submit');
 //
-//
-//    // добавить красную рамку полям invalid
-//    e.preventDefault();
-//  }
-// }, true);
-
-
-var formTitle = document.getElementById('title');
-var formPrice = document.getElementById('price');
-
 // sendForm.addEventListener('submit', function (subEvt) {
 //  if (!formTitle.value || !formPrice.value) {
 //    form.classList.add('error');
