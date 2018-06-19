@@ -357,9 +357,8 @@ sendForm.addEventListener('click', function () {
   var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
 
   for (var h = 0; h < inputs.length; h++) {
-    var input = inputs[i];
-    if (input.checkValidity() === false) {
-      input.style.outline = '2px solid red';
+    if (inputs[h].checkValidity() === false) {
+      inputs[h].style.outline = '2px solid red';
     }
   }
 });
