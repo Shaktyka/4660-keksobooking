@@ -355,7 +355,6 @@ sendForm.addEventListener('submit', function (subEvt) {
   if (!formTitle.value || !formPrice.value) {
     form.classList.add('error');
     subEvt.preventDefault();
-    console.log('Введите, пожалуйста, заголовок объявления и стоимость жилья за ночь');
   } else {
     form.classList.remove('error');
   }
@@ -366,7 +365,6 @@ document.addEventListener('keydown', function (keyEvt) {
     if (!formTitle.value || !formPrice.value) {
       form.classList.add('error');
       keyEvt.preventDefault();
-      console.log('Введите, пожалуйста, заголовок объявления и стоимость жилья за ночь');
     } else {
       form.classList.remove('error');
     }
