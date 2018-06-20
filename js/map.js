@@ -367,7 +367,7 @@ var hidePins = function () {
 };
 
 // Функция закрытия открытых объявлений при reset
-var closeAds = function () {
+var hideAds = function () {
   var adsList = map.querySelectorAll('article.map__card');
   if (adsList) {
     for (var l = 0; l < adsList.length; l++) {
@@ -396,12 +396,43 @@ var resetInvalidDecor = function (invalidInputs) {
   }
 };
 
+// Reset введённых данных
+var resetInputs = function () {
+  var titleInput = document.getElementById('title');
+  var description = document.getElementById('description');
+
+  if (titleInput.value) {
+    titleInput.value = '';
+  }
+  if (description.value) {
+    description.value = '';
+  }
+  if (price.value) {
+    price.value = '';
+  }
+  if (type.selectedIndex !== 0) {
+    type.selectedIndex = 0;
+  }
+  if (rooms.selectedIndex !== 0) {
+    rooms.selectedIndex = 0;
+  }
+  if (guests.selectedIndex !== 0) {
+    guests.selectedIndex = 0;
+  }
+  if (checkin.selectedIndex !== 0) {
+    checkin.selectedIndex = 0;
+  }
+  if (checkout.selectedIndex !== 0) {
+    checkout.selectedIndex = 0;
+  }
+};
+
 // Функция обработки сброса формы
 var resetButton = document.querySelector('.ad-form__reset');
 
 resetButton.addEventListener('click', function () {
   // закрываем открытые объявления
-  closeAds();
+  hideAds();
   // убираем все метки с карты
   hidePins();
   // ставим главную метку на исходную позицию
@@ -409,6 +440,8 @@ resetButton.addEventListener('click', function () {
   pinMain.style.top = mainPinTopCentered + 'px';
   // устанавливаем координаты в поле address
   addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
+  // сбрасываем введённые данные, если были
+  resetInputs();
   // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
   // убираем красные рамки invalid полей при наличии
