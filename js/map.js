@@ -202,6 +202,8 @@ for (var i = 0; i < pins.length; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
 
+// Функция закрытия объявления нажатием на крестик
+
 // Находим шаблон для генерации объявлений
 var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
 
@@ -346,13 +348,6 @@ roomsNum.addEventListener('change', function () {
 
 var sendForm = document.querySelector('.ad-form__submit');
 
-// form.addEventListener('invalid', function (e) {
-//  var target = e.target;
-//  for (var h = 0; h < target.length; h++) {
-//    target[h].style.border = '2px solid red';
-//  }
-// }, true);
-
 sendForm.addEventListener('click', function () {
   var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
 
@@ -363,21 +358,48 @@ sendForm.addEventListener('click', function () {
   }
 });
 
+// Функция удаления меток с карты
+
+var hidePins = function () {
+  var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+  for (var g = 0; g < pinsList.length; g++) {
+    pinsList[g].remove();
+  }
+};
+
+// Функция закрытия открытых объявлений при reset
+
+var closeAds = function () {
+  var adsList = map.querySelectorAll('article.map__card');
+  for (var l = 0; l < adsList.length; l++) {
+    adsList[l].classList.add('hidden');
+  }
+};
+
 // Функция обработки сброса формы
 
 var resetButton = document.querySelector('.ad-form__reset');
 
 resetButton.addEventListener('click', function () {
   // убираем все метки с карты
-  // ставим главную метку на начальное место
-  // вызов функции установки координат в поле address
+  hidePins();
   // закрываем открытое объявление
+  closeAds();
+  // ставим главную метку на начальное место
+  pinMain.style.left = mainPinLeftCentered + 'px';
+  pinMain.style.top = mainPinTopCentered + 'px';
+  // вызов функции установки координат в поле address
+  addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
   // затемняем карту
   map.classList.add('map--faded');
   // затемняем форму
   form.classList.add('ad-form--disabled');
-  // устанавливаем дефолтное значение плейсхолдера селекта price
+  // блокируем филдсеты
+  fieldsetList.forEach(function (item) {
+    item.disabled = true;
+  });
+  // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
-  // убираем красные рамки невалидных значений, при наличии
+  // убираем красные рамки invalid полей, при наличии
 });
 
