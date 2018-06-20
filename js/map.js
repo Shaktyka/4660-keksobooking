@@ -362,3 +362,12 @@ sendForm.addEventListener('click', function () {
     }
   }
 });
+
+// Функция обработки сброса формы
+
+var resetButton = document.querySelector('.ad-form__reset');
+
+resetButton.addEventListener('click', function () {
+  price.placeholder = 5000;
+});
+
