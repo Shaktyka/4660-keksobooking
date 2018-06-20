@@ -348,7 +348,7 @@ roomsNum.addEventListener('change', function () {
 
 var sendForm = document.querySelector('.ad-form__submit');
 
-sendForm.addEventListener('click', function () {
+var submitButtonClickHandler = function () {
   var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
   var novalidInputs = [];
 
@@ -360,7 +360,9 @@ sendForm.addEventListener('click', function () {
     }
   }
   return novalidInputs;
-});
+};
+
+sendForm.addEventListener('click', submitButtonClickHandler);
 
 // Функция скрытия меток на карте при reset
 
@@ -393,23 +395,35 @@ var resetCheckboxes = function () {
   }
 };
 
+// Функция сброса красных рамок у невалидных полей
+
+var resetInvalidDecor = function (invalidInputs) {
+  if (invalidInputs) {
+    for (var x = 0; x < invalidInputs.length; x++) {
+      var invalidInput = invalidInputs[x];
+      invalidInput.style.outline = '';
+    }
+  }
+};
+
 // Функция обработки сброса формы
 
 var resetButton = document.querySelector('.ad-form__reset');
 
 resetButton.addEventListener('click', function () {
-  // закрываем открытое объявление
+  // закрываем открытые объявления
   closeAds();
   // убираем все метки с карты
   hidePins();
-  // ставим главную метку на начальное место
+  // ставим главную метку на исходную позицию
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = mainPinTopCentered + 'px';
-  // вызов функции установки координат в поле address
+  // устанавливаем координаты в поле address
   addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
   // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
   // убираем красные рамки invalid полей, при наличии
+  resetInvalidDecor(submitButtonClickHandler());
   // сбрасываем чекбоксы
   resetCheckboxes();
   // затемняем карту
@@ -421,4 +435,3 @@ resetButton.addEventListener('click', function () {
   // затемняем форму
   form.classList.add('ad-form--disabled');
 });
-
