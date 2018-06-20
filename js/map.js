@@ -350,15 +350,19 @@ var sendForm = document.querySelector('.ad-form__submit');
 
 sendForm.addEventListener('click', function () {
   var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
+  var novalidInputs = [];
 
   for (var h = 0; h < inputs.length; h++) {
     if (inputs[h].checkValidity() === false) {
-      inputs[h].style.outline = '2px solid red';
+      var input = inputs[h];
+      novalidInputs.push([input]);
+      input.style.outline = '2px solid red';
     }
   }
+  return novalidInputs;
 });
 
-// Функция удаления меток с карты
+// Функция скрытия меток на карте при reset
 
 var hidePins = function () {
   var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
