@@ -368,6 +368,16 @@ sendForm.addEventListener('click', function () {
 var resetButton = document.querySelector('.ad-form__reset');
 
 resetButton.addEventListener('click', function () {
+  // убираем все метки с карты
+  // ставим главную метку на начальное место
+  // вызов функции установки координат в поле address
+  // закрываем открытое объявление
+  // затемняем карту
+  map.classList.add('map--faded');
+  // затемняем форму
+  form.classList.add('ad-form--disabled');
+  // устанавливаем дефолтное значение плейсхолдера селекта price
   price.placeholder = 5000;
+  // убираем красные рамки невалидных значений, при наличии
 });
 
