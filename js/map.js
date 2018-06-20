@@ -355,7 +355,8 @@ var submitButtonClickHandler = function () {
   for (var h = 0; h < inputs.length; h++) {
     if (inputs[h].checkValidity() === false) {
       var input = inputs[h];
-      novalidInputs.push([input]);
+      novalidInputs.push(input);
+      // input.classList.add('error');
       input.style.outline = '2px solid red';
     }
   }
@@ -401,6 +402,7 @@ var resetInvalidDecor = function (invalidInputs) {
   if (invalidInputs) {
     for (var x = 0; x < invalidInputs.length; x++) {
       var invalidInput = invalidInputs[x];
+      // invalidInput.classList.remove('error');
       invalidInput.style.outline = '';
     }
   }
