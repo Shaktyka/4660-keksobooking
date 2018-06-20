@@ -363,7 +363,7 @@ sendForm.addEventListener('click', function () {
 var hidePins = function () {
   var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
   for (var g = 0; g < pinsList.length; g++) {
-    pinsList[g].remove();
+    pinsList[g].classList.add('hidden');
   }
 };
 
@@ -371,8 +371,21 @@ var hidePins = function () {
 
 var closeAds = function () {
   var adsList = map.querySelectorAll('article.map__card');
-  for (var l = 0; l < adsList.length; l++) {
-    adsList[l].classList.add('hidden');
+  if (adsList) {
+    for (var l = 0; l < adsList.length; l++) {
+      adsList[l].classList.add('hidden');
+    }
+  }
+};
+
+// Функция сброса выделенных чекбоксов
+
+var resetCheckboxes = function () {
+  var featuresList = form.querySelector('.features').querySelectorAll('input');
+  if (featuresList) {
+    for (var z = 0; z < featuresList.length; z++) {
+      featuresList[z].checked = false;
+    }
   }
 };
 
@@ -381,25 +394,27 @@ var closeAds = function () {
 var resetButton = document.querySelector('.ad-form__reset');
 
 resetButton.addEventListener('click', function () {
-  // убираем все метки с карты
-  hidePins();
   // закрываем открытое объявление
   closeAds();
+  // убираем все метки с карты
+  hidePins();
   // ставим главную метку на начальное место
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = mainPinTopCentered + 'px';
   // вызов функции установки координат в поле address
   addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
+  // устанавливаем default плейсхолдера селекта price
+  price.placeholder = 5000;
+  // убираем красные рамки invalid полей, при наличии
+  // сбрасываем чекбоксы
+  resetCheckboxes();
   // затемняем карту
   map.classList.add('map--faded');
-  // затемняем форму
-  form.classList.add('ad-form--disabled');
   // блокируем филдсеты
   fieldsetList.forEach(function (item) {
     item.disabled = true;
   });
-  // устанавливаем default плейсхолдера селекта price
-  price.placeholder = 5000;
-  // убираем красные рамки invalid полей, при наличии
+  // затемняем форму
+  form.classList.add('ad-form--disabled');
 });
 
