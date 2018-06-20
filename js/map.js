@@ -195,12 +195,15 @@ var renderPin = function (pin) {
   return pinElement;
 };
 
-// Отрисовка меток и добавление в целевой блок
-var fragment = document.createDocumentFragment();
-var pins = getAdsArray(8);
-for (var i = 0; i < pins.length; i++) {
-  fragment.appendChild(renderPin(pins[i]));
-}
+var createPins = function () {
+  // Отрисовка меток и добавление в целевой блок
+  var fragment = document.createDocumentFragment();
+  var pins = getAdsArray(8);
+  for (var i = 0; i < pins.length; i++) {
+    fragment.appendChild(renderPin(pins[i]));
+  }
+  similarListPins.appendChild(fragment);
+};
 
 // Функция закрытия объявления нажатием на крестик
 
@@ -268,7 +271,7 @@ var buttonMouseupHandler = function () {
     item.disabled = false;
   });
   // разблокируем генерацию массива меток и объявлений
-  similarListPins.appendChild(fragment);
+  createPins();
   // координаты дефолтной метки по указателю
   pinMain.style.left = mainPinLeftCentered + 'px';
   pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
@@ -370,7 +373,7 @@ sendForm.addEventListener('click', submitButtonClickHandler);
 var hidePins = function () {
   var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
   for (var g = 0; g < pinsList.length; g++) {
-    pinsList[g].classList.add('hidden');
+    pinsList[g].remove();
   }
 };
 
@@ -424,7 +427,7 @@ resetButton.addEventListener('click', function () {
   addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
   // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
-  // убираем красные рамки invalid полей, при наличии
+  // убираем красные рамки invalid полей при наличии
   resetInvalidDecor(submitButtonClickHandler());
   // сбрасываем чекбоксы
   resetCheckboxes();
