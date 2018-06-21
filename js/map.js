@@ -12,8 +12,8 @@ var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http:
 
 var MAIN_PIN_WIDTH = 60;
 var MAIN_PIN_HEIGTH = 80;
-var MAIN_PIN_DEF_LEFT = 570;
-var MAIN_PIN_DEF_TOP = 375;
+var MAIN_PIN_LEFT = 570;
+var MAIN_PIN_TOP = 375;
 
 var map = document.querySelector('.map');
 
@@ -22,12 +22,12 @@ var pinMain = map.querySelector('.map__pin--main');
 
 
 // Координаты дефолтной метки по её центру
-var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
+var mainPinCenteredLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinCenteredTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH / 2;
 
 // Координаты дефолтной метки по указателю
-var mainPinLeftPointed = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopPointed = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH;
+var mainPinPointLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
+var mainPinPointTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH;
 
 // Функция, возвращающая рандомное число в диапазоне между переданными min и max.
 var getRandomNumber = function (min, max) {
@@ -242,12 +242,12 @@ var createCard = function (pin) {
 };
 
 // Прописываем координаты дефолтной метки по центру
-pinMain.style.left = mainPinLeftCentered + 'px';
-pinMain.style.top = mainPinTopCentered + 'px';
+pinMain.style.left = mainPinCenteredLeft + 'px';
+pinMain.style.top = mainPinCenteredTop + 'px';
 
 // Прописываем координаты в поле Адрес при неактивной странице
 var addressInput = document.getElementById('address');
-addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
+addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
 
 // АКТИВАЦИЯ СТРАНИЦЫ
 
@@ -263,14 +263,31 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   createPins();
-  // координаты дефолтной метки по указателю
-  pinMain.style.left = mainPinLeftCentered + 'px';
-  pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
+  // Координаты дефолтной метки по указателю
+  pinMain.style.left = mainPinCenteredLeft + 'px';
+  pinMain.style.top = MAIN_PIN_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
   addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
+
+// DRAGNDROP ГЛАВНОЙ МЕТКИ
+
+// Дефолтная метка на карте
+// var pinMain = map.querySelector('.map__pin--main');
+
+//pinMain.addEventListener('mousedown', function(mousEvt) {
+//  mousEvt.preventDefault();
+//  
+//  var startCoords = {
+//    x: mousEvt.clientX,
+//    y: mousEvt.clientY
+//  };
+//  
+//  document.addEventListener('mousemove', pinMoveHandler);
+//  document.addEventListener('mouseup', pinMoveHandler);
+//});
 
 // ВАЛИДАЦИЯ ФОРМЫ
 
