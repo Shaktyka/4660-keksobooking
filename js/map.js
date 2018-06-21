@@ -342,18 +342,29 @@ rooms.addEventListener('change', function () {
 
 var sendForm = document.querySelector('.ad-form__submit');
 
-var submitClickHandler = function () {
-  var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
-  var invalidInputs = [];
+// Функция поиска невалидных полей
+var findInvalidFields = function () {
+  var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
+  var invalidFields = [];
 
-  for (var h = 0; h < inputs.length; h++) {
-    if (inputs[h].checkValidity() === false) {
-      var input = inputs[h];
-      invalidInputs.push(input);
+  for (var h = 0; h < fields.length; h++) {
+    if (fields[h].checkValidity() === false) {
+      var field = fields[h];
+      invalidFields.push(field);
+    }
+  }
+  return invalidFields;
+};
+
+// Функция навешивания красных рамок на невалидные поля
+var submitClickHandler = function () {
+  var invalidInputs = findInvalidFields();
+  if (invalidInputs) {
+    for (var y = 0; y < invalidInputs.length; y++) {
+      var input = invalidInputs[y];
       input.style.outline = '2px solid red';
     }
   }
-  return invalidInputs;
 };
 
 sendForm.addEventListener('click', submitClickHandler);
@@ -445,7 +456,7 @@ resetButton.addEventListener('click', function () {
   // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
   // убираем красные рамки invalid полей при наличии
-  resetInvalidDecor(submitClickHandler());
+  resetInvalidDecor(findInvalidFields());
   // сбрасываем чекбоксы
   resetCheckboxes();
   // затемняем карту
