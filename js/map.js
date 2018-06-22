@@ -198,7 +198,12 @@ var createPins = function () {
   for (var i = 0; i < pins.length; i++) {
     fragment.appendChild(renderPin(pins[i]));
   }
-  similarListPins.appendChild(fragment);
+  
+  var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+  console.log(buttonsList);
+  if (buttonsList.length === 0) {
+    similarListPins.appendChild(fragment);
+  }
 };
 
 // Функция закрытия объявления нажатием на крестик
