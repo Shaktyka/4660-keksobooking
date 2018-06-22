@@ -198,9 +198,8 @@ var createPins = function () {
   for (var i = 0; i < pins.length; i++) {
     fragment.appendChild(renderPin(pins[i]));
   }
-  
+  // Проверяем, ечть ли уже на карте метки. Если есть, то новые метки не генерируем.
   var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
-  console.log(buttonsList);
   if (buttonsList.length === 0) {
     similarListPins.appendChild(fragment);
   }
