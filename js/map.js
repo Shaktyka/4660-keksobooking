@@ -273,7 +273,8 @@ var buttonMouseupHandler = function () {
   // pinMain.style.left = mainPinCenteredLeft + 'px';
   // pinMain.style.top = MAIN_PIN_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
-  addressInput.value = mainPinPointLeft + ', ' + mainPinPointTop;
+  //addressInput.value = mainPinPointLeft + ', ' + mainPinPointTop;
+  translateCoordsPin();
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
