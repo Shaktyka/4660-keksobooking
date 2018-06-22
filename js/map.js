@@ -263,11 +263,11 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   createPins();
-  // Координаты дефолтной метки по указателю
+  // координаты дефолтной метки по указателю
   pinMain.style.left = mainPinCenteredLeft + 'px';
   pinMain.style.top = MAIN_PIN_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
-  addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
+  addressInput.value = mainPinPointLeft + ', ' + mainPinPointTop;
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
@@ -277,17 +277,41 @@ pinMain.addEventListener('mouseup', buttonMouseupHandler);
 // Дефолтная метка на карте
 // var pinMain = map.querySelector('.map__pin--main');
 
-//pinMain.addEventListener('mousedown', function(mousEvt) {
-//  mousEvt.preventDefault();
-//  
-//  var startCoords = {
-//    x: mousEvt.clientX,
-//    y: mousEvt.clientY
-//  };
-//  
-//  document.addEventListener('mousemove', pinMoveHandler);
-//  document.addEventListener('mouseup', pinMoveHandler);
-//});
+pinMain.addEventListener('mousedown', function (mouseEvt) {
+  mouseEvt.preventDefault();
+
+  var startCoords = {
+    x: mouseEvt.clientX,
+    y: mouseEvt.clientY
+  };
+
+  var pinMoveHandler = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+    pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+  };
+
+  var pinUpHandler = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', pinMoveHandler);
+    document.removeEventListener('mouseup', pinUpHandler);
+  };
+
+  document.addEventListener('mousemove', pinMoveHandler);
+  document.addEventListener('mouseup', pinUpHandler);
+});
 
 // ВАЛИДАЦИЯ ФОРМЫ
 
@@ -464,10 +488,10 @@ resetButton.addEventListener('click', function () {
   // убираем все метки с карты
   hidePins();
   // ставим главную метку на исходную позицию
-  pinMain.style.left = mainPinLeftCentered + 'px';
-  pinMain.style.top = mainPinTopCentered + 'px';
+  pinMain.style.left = mainPinCenteredLeft + 'px';
+  pinMain.style.top = mainPinCenteredTop + 'px';
   // устанавливаем координаты в поле address
-  addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
+  addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
   // сбрасываем введённые данные, если были
   resetInputs();
   // устанавливаем default плейсхолдера селекта price
