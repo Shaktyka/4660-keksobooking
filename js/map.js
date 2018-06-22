@@ -316,8 +316,8 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
 
       // берём текущие координаты метки
       var coordinates = {
-        x: upEvt.clientX,
-        y: upEvt.clientY
+        x: pinMain.offsetLeft,
+        y: pinMain.offsetTop
       };
 
       // прописываем координаты в поле address
