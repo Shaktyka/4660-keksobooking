@@ -29,6 +29,8 @@ var mainPinCenteredTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH / 2;
 var mainPinPointLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
 var mainPinPointTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH;
 
+// СЛУЖЕБНЫЕ ФУНКЦИИ
+
 // Функция, возвращающая рандомное число в диапазоне между переданными min и max.
 var getRandomNumber = function (min, max) {
   var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -198,7 +200,7 @@ var createPins = function () {
   for (var i = 0; i < pins.length; i++) {
     fragment.appendChild(renderPin(pins[i]));
   }
-  // Проверяем, ечть ли уже на карте метки. Если есть, то новые метки не генерируем.
+  // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
   var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
   if (buttonsList.length === 0) {
     similarListPins.appendChild(fragment);
@@ -278,9 +280,6 @@ pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
 // DRAGNDROP ГЛАВНОЙ МЕТКИ
 
-// Дефолтная метка на карте
-// var pinMain = map.querySelector('.map__pin--main');
-
 pinMain.addEventListener('mousedown', function (mouseEvt) {
   mouseEvt.preventDefault();
 
@@ -308,6 +307,23 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
 
   var pinUpHandler = function (upEvt) {
     upEvt.preventDefault();
+
+    // Функция для трансляции кординат в поле address
+    var translateCoordsPin = function () {
+
+      // var pinMain = map.querySelector('.map__pin--main');
+      // var addressInput = document.getElementById('address');
+
+      // берём текущие координаты метки
+      var coordinates = {
+        x: upEvt.clientX,
+        y: upEvt.clientY
+      };
+
+      // прописываем координаты в поле address
+      addressInput.value = coordinates.x + ', ' + coordinates.y;
+    };
+    translateCoordsPin();
 
     document.removeEventListener('mousemove', pinMoveHandler);
     document.removeEventListener('mouseup', pinUpHandler);
