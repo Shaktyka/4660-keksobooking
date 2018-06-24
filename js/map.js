@@ -23,8 +23,10 @@ var MAIN_PIN_LEFT = 570;
 var MAIN_PIN_TOP = 375;
 
 // Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
-// var EDGE_TOP = 130;
-// var EDGE_BOTTOM = 630;
+var MAP_MIN_Y = 130;
+var MAP_MAX_Y = 630;
+var MAP_MIN_X = map.offsetLeft;
+var MAP_MAX_X = map.offsetLeft + map.offsetWidth;
 
 // Координаты дефолтной метки по её центру
 var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
@@ -276,20 +278,13 @@ pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
 // DRAGNDROP ГЛАВНОЙ МЕТКИ
 
-pinMain.addEventListener('mousedown', function (mouseEvt) {
-  mouseEvt.preventDefault();
+pinMain.addEventListener('mousedown', function (ee) {
+  ee.preventDefault();
 
   var startCoords = {
-    x: mouseEvt.clientX,
-    y: mouseEvt.clientY
+    x: ee.clientX,
+    y: ee.clientY
   };
-
-  var limits = {
-      top: map.offsetTop + 130,
-      right: map.offsetWidth + map.offsetLeft - pinMain.offsetWidth,
-      bottom: (map.offsetHeight - 120) + map.offsetTop - pinMain.offsetHeight,
-      left: map.offsetLeft
-    };
 
   var pinMoveHandler = function (moveEvt) {
     moveEvt.preventDefault();
