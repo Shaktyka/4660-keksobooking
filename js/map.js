@@ -25,8 +25,6 @@ var MAIN_PIN_TOP = 375;
 // Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
 var MAP_MIN_Y = 130;
 var MAP_MAX_Y = 630;
-var MAP_MIN_X = map.offsetLeft;
-var MAP_MAX_X = map.offsetLeft + map.offsetWidth;
 
 // Координаты дефолтной метки по её центру
 var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
@@ -290,8 +288,8 @@ pinMain.addEventListener('mousedown', function (ee) {
     moveEvt.preventDefault();
 
     var shift = {
-      x: startCoords.x - moveEvt.clientX,
-      y: startCoords.y - moveEvt.clientY
+      x: moveEvt.clientX - startCoords.x,
+      y: moveEvt.clientY - startCoords.y
     };
 
     startCoords = {
@@ -299,11 +297,32 @@ pinMain.addEventListener('mousedown', function (ee) {
       y: moveEvt.clientY
     };
 
-    pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
-    pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+    var newX = pinMain.offsetLeft + shift.x;
+    var newY = pinMain.offsetTop + shift.y;
+
+    if (newX < 0) {
+      newX = 0;
+    }
+
+    if (newX > pinMain.parentElement.offsetWidth - pinMain.offsetWidth) {
+      newX = pinMain.parentElement.offsetWidth - pinMain.offsetWidth;
+    }
+
+    if (newY < MAP_MIN_Y) {
+      newY = MAP_MIN_Y;
+    }
+    if (newY > MAP_MAX_Y) {
+      newY = MAP_MAX_Y;
+    }
+
+    pinMain.style.left = newX + 'px';
+    pinMain.style.top = newY + 'px';
 
     // трансляция координат метки в поле address
-    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop - MAIN_PIN_HEIGTH);
+    var locationX = newX + Math.round(pinMain.offsetWidth / 2);
+    var locationY = newY + pinMain.offsetHeight;
+
+    addressInput.value = locationX + ', ' + locationY;
   };
 
   var pinUpHandler = function (upEvt) {
