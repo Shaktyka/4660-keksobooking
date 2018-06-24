@@ -27,14 +27,16 @@ var MAIN_PIN_TOP = 375;
 // var EDGE_BOTTOM = 630;
 
 // Координаты дефолтной метки по её центру
-var mainPinCenteredLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinCenteredTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH / 2;
+var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
+var mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGTH / 2);
 
-// Координаты дефолтной метки по указателю
-// 1. От отступа слева отнимаем половину ширины
-// var mainPinPointLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
-// 2. От отступа сверху отнимаем значение высоты метки
-// var mainPinPointTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH;
+// Прописываем координаты дефолтной метки по центру
+pinMain.style.left = mainPinCenteredLeft + 'px';
+pinMain.style.top = mainPinCenteredTop + 'px';
+
+// Прописываем координаты в поле Адрес при неактивной странице
+var addressInput = document.getElementById('address');
+addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
 
 // СЛУЖЕБНЫЕ ФУНКЦИИ
 
@@ -254,14 +256,6 @@ var createCard = function (pin) {
   cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
 };
 
-// Прописываем координаты дефолтной метки по центру
-pinMain.style.left = mainPinCenteredLeft + 'px';
-pinMain.style.top = mainPinCenteredTop + 'px';
-
-// Прописываем координаты в поле Адрес при неактивной странице
-var addressInput = document.getElementById('address');
-addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
-
 // АКТИВАЦИЯ СТРАНИЦЫ
 
 // Эмулируем перетаскивание дефолтной метки
@@ -276,11 +270,6 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   createPins();
-  // координаты дефолтной метки по указателю
-  // pinMain.style.left = mainPinCenteredLeft + 'px';
-  // pinMain.style.top = MAIN_PIN_TOP - MAIN_PIN_HEIGTH + 'px';
-  // прописываем координаты дефолтной метки в поле адреса по указателю
-  // addressInput.value = mainPinPointLeft + ', ' + mainPinPointTop;
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
