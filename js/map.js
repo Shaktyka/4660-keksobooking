@@ -284,6 +284,13 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
     y: mouseEvt.clientY
   };
 
+  var limits = {
+      top: map.offsetTop + 130,
+      right: map.offsetWidth + map.offsetLeft - pinMain.offsetWidth,
+      bottom: (map.offsetHeight - 120) + map.offsetTop - pinMain.offsetHeight,
+      left: map.offsetLeft
+    };
+
   var pinMoveHandler = function (moveEvt) {
     moveEvt.preventDefault();
 
@@ -297,8 +304,8 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
       y: moveEvt.clientY
     };
 
-    pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
     pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+    pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
 
     // трансляция координат метки в поле address
     addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop - MAIN_PIN_HEIGTH);
