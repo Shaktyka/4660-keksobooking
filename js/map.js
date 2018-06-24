@@ -15,6 +15,9 @@ var MAIN_PIN_HEIGTH = 80;
 var MAIN_PIN_LEFT = 570;
 var MAIN_PIN_TOP = 375;
 
+var EDGE_TOP = 130;
+var EDGE_BOTTOM = 630;
+
 var map = document.querySelector('.map');
 
 // Дефолтная метка на карте
@@ -295,15 +298,6 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
       x: startCoords.x - moveEvt.clientX,
       y: startCoords.y - moveEvt.clientY
     };
-
-    var EDGE_TOP = 130;
-    var EDGE_BOTTOM = 630;
-
-    if (moveEvt.pageY < EDGE_TOP) {
-      moveEvt.clientY = EDGE_TOP;
-    } else if (moveEvt.pageY > EDGE_BOTTOM) {
-      moveEvt.clientY = EDGE_BOTTOM;
-    }
 
     startCoords = {
       x: moveEvt.clientX,
