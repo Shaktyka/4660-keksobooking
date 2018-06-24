@@ -274,7 +274,6 @@ var buttonMouseupHandler = function () {
   // pinMain.style.top = MAIN_PIN_TOP - MAIN_PIN_HEIGTH + 'px';
   // прописываем координаты дефолтной метки в поле адреса по указателю
   // addressInput.value = mainPinPointLeft + ', ' + mainPinPointTop;
-  window.translateCoordsPin();
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
@@ -297,10 +296,13 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
       y: startCoords.y - moveEvt.clientY
     };
 
-    if (moveEvt.pageY < 130) {
-      moveEvt.clientY = 130;
-    } else if (moveEvt.pageY > 630) {
-      moveEvt.clientY = 630;
+    var EDGE_TOP = 130;
+    var EDGE_BOTTOM = 630;
+
+    if (moveEvt.pageY < EDGE_TOP) {
+      moveEvt.clientY = EDGE_TOP;
+    } else if (moveEvt.pageY > EDGE_BOTTOM) {
+      moveEvt.clientY = EDGE_BOTTOM;
     }
 
     startCoords = {
@@ -315,22 +317,7 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
   var pinUpHandler = function (upEvt) {
     upEvt.preventDefault();
 
-    // Функция для трансляции кординат в поле address
-    window.translateCoordsPin = function () {
-
-      // var pinMain = map.querySelector('.map__pin--main');
-      // var addressInput = document.getElementById('address');
-
-      // берём текущие координаты метки
-      var coordinates = {
-        x: pinMain.offsetLeft,
-        y: pinMain.offsetTop
-      };
-
-      // прописываем координаты в поле address
-      addressInput.value = coordinates.x + ', ' + coordinates.y;
-    };
-    window.translateCoordsPin();
+    addressInput.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
 
     document.removeEventListener('mousemove', pinMoveHandler);
     document.removeEventListener('mouseup', pinUpHandler);
