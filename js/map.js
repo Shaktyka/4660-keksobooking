@@ -31,8 +31,10 @@ var mainPinCenteredLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
 var mainPinCenteredTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH / 2;
 
 // Координаты дефолтной метки по указателю
-var mainPinPointLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinPointTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH;
+// 1. От отступа слева отнимаем половину ширины
+// var mainPinPointLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
+// 2. От отступа сверху отнимаем значение высоты метки
+// var mainPinPointTop = MAIN_PIN_TOP - MAIN_PIN_HEIGTH;
 
 // СЛУЖЕБНЫЕ ФУНКЦИИ
 
@@ -310,14 +312,14 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
     pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
 
     // трансляция координат метки в поле address
-    addressInput.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
+    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop - MAIN_PIN_HEIGTH);
   };
 
   var pinUpHandler = function (upEvt) {
     upEvt.preventDefault();
 
     // обновление координат метки в поле address после отжатия мыши
-    addressInput.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
+    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop - MAIN_PIN_HEIGTH);
 
     document.removeEventListener('mousemove', pinMoveHandler);
     document.removeEventListener('mouseup', pinUpHandler);
