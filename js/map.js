@@ -312,11 +312,15 @@ pinMain.addEventListener('mousedown', function (mouseEvt) {
 
     pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
     pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+
+    // трансляция координат метки в поле address
+    addressInput.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
   };
 
   var pinUpHandler = function (upEvt) {
     upEvt.preventDefault();
 
+    // обновление координат метки в поле address после отжатия мыши
     addressInput.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
 
     document.removeEventListener('mousemove', pinMoveHandler);
