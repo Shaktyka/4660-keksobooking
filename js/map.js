@@ -10,19 +10,21 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-var MAIN_PIN_WIDTH = 60;
-var MAIN_PIN_HEIGTH = 80;
-var MAIN_PIN_LEFT = 570;
-var MAIN_PIN_TOP = 375;
-
-var EDGE_TOP = 130;
-var EDGE_BOTTOM = 630;
-
 var map = document.querySelector('.map');
 
 // Дефолтная метка на карте
 var pinMain = map.querySelector('.map__pin--main');
 
+var MAIN_PIN_WIDTH = pinMain.offsetWidth;
+// 22 - это высота псевдоэлемента-указателя
+var MAIN_PIN_HEIGTH = pinMain.offsetHeight + 22;
+
+var MAIN_PIN_LEFT = 570;
+var MAIN_PIN_TOP = 375;
+
+// Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
+// var EDGE_TOP = 130;
+// var EDGE_BOTTOM = 630;
 
 // Координаты дефолтной метки по её центру
 var mainPinCenteredLeft = MAIN_PIN_LEFT - MAIN_PIN_WIDTH / 2;
