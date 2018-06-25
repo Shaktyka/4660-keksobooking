@@ -10,24 +10,35 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-var MAIN_PIN_WIDTH = 60;
-var MAIN_PIN_HEIGTH = 80;
-var MAIN_PIN_DEF_LEFT = 570;
-var MAIN_PIN_DEF_TOP = 375;
-
 var map = document.querySelector('.map');
 
 // Дефолтная метка на карте
 var pinMain = map.querySelector('.map__pin--main');
 
+var MAIN_PIN_WIDTH = pinMain.offsetWidth;
+// 22 - это высота псевдоэлемента-указателя
+var MAIN_PIN_HEIGTH = pinMain.offsetHeight + 22;
+
+var MAIN_PIN_LEFT = 570;
+var MAIN_PIN_TOP = 375;
+
+// Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
+var MAP_MIN_Y = 130;
+var MAP_MAX_Y = 630;
 
 // Координаты дефолтной метки по её центру
-var mainPinLeftCentered = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopCentered = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH / 2;
+var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
+var mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGTH / 2);
 
-// Координаты дефолтной метки по указателю
-var mainPinLeftPointed = MAIN_PIN_DEF_LEFT - MAIN_PIN_WIDTH / 2;
-var mainPinTopPointed = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH;
+// Прописываем координаты дефолтной метки по центру
+pinMain.style.left = mainPinCenteredLeft + 'px';
+pinMain.style.top = mainPinCenteredTop + 'px';
+
+// Прописываем координаты в поле Адрес при неактивной странице
+var addressInput = document.getElementById('address');
+addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
+
+// СЛУЖЕБНЫЕ ФУНКЦИИ
 
 // Функция, возвращающая рандомное число в диапазоне между переданными min и max.
 var getRandomNumber = function (min, max) {
@@ -198,7 +209,11 @@ var createPins = function () {
   for (var i = 0; i < pins.length; i++) {
     fragment.appendChild(renderPin(pins[i]));
   }
-  similarListPins.appendChild(fragment);
+  // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
+  var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+  if (buttonsList.length === 0) {
+    similarListPins.appendChild(fragment);
+  }
 };
 
 // Функция закрытия объявления нажатием на крестик
@@ -241,14 +256,6 @@ var createCard = function (pin) {
   cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
 };
 
-// Прописываем координаты дефолтной метки по центру
-pinMain.style.left = mainPinLeftCentered + 'px';
-pinMain.style.top = mainPinTopCentered + 'px';
-
-// Прописываем координаты в поле Адрес при неактивной странице
-var addressInput = document.getElementById('address');
-addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
-
 // АКТИВАЦИЯ СТРАНИЦЫ
 
 // Эмулируем перетаскивание дефолтной метки
@@ -263,14 +270,76 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   createPins();
-  // координаты дефолтной метки по указателю
-  pinMain.style.left = mainPinLeftCentered + 'px';
-  pinMain.style.top = MAIN_PIN_DEF_TOP - MAIN_PIN_HEIGTH + 'px';
-  // прописываем координаты дефолтной метки в поле адреса по указателю
-  addressInput.value = mainPinLeftPointed + ', ' + mainPinTopPointed;
+  // подняли главную метку над всеми остальными
+  pinMain.style.zIndex = 100;
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
+
+// DRAGNDROP ГЛАВНОЙ МЕТКИ
+
+pinMain.addEventListener('mousedown', function (ee) {
+  ee.preventDefault();
+
+  var startCoords = {
+    x: ee.clientX,
+    y: ee.clientY
+  };
+
+  var pinMoveHandler = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: moveEvt.clientX - startCoords.x,
+      y: moveEvt.clientY - startCoords.y
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    var newX = pinMain.offsetLeft + shift.x;
+    var newY = pinMain.offsetTop + shift.y;
+
+    if (newX < 0) {
+      newX = 0;
+    }
+
+    if (newX > pinMain.parentElement.offsetWidth - pinMain.offsetWidth) {
+      newX = pinMain.parentElement.offsetWidth - pinMain.offsetWidth;
+    }
+
+    if (newY < MAP_MIN_Y) {
+      newY = MAP_MIN_Y;
+    }
+    if (newY > MAP_MAX_Y) {
+      newY = MAP_MAX_Y;
+    }
+
+    pinMain.style.left = newX + 'px';
+    pinMain.style.top = newY + 'px';
+
+    // трансляция координат метки в поле address
+    var locationX = newX + Math.round(pinMain.offsetWidth / 2);
+    var locationY = newY + pinMain.offsetHeight;
+
+    addressInput.value = locationX + ', ' + locationY;
+  };
+
+  var pinUpHandler = function (upEvt) {
+    upEvt.preventDefault();
+
+    // обновление координат метки в поле address после отжатия мыши
+    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop + MAIN_PIN_HEIGTH);
+
+    document.removeEventListener('mousemove', pinMoveHandler);
+    document.removeEventListener('mouseup', pinUpHandler);
+  };
+
+  document.addEventListener('mousemove', pinMoveHandler);
+  document.addEventListener('mouseup', pinUpHandler);
+});
 
 // ВАЛИДАЦИЯ ФОРМЫ
 
@@ -342,18 +411,29 @@ rooms.addEventListener('change', function () {
 
 var sendForm = document.querySelector('.ad-form__submit');
 
-var submitClickHandler = function () {
-  var inputs = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
-  var invalidInputs = [];
+// Функция поиска невалидных полей
+var findInvalidFields = function () {
+  var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
+  var invalidFields = [];
 
-  for (var h = 0; h < inputs.length; h++) {
-    if (inputs[h].checkValidity() === false) {
-      var input = inputs[h];
-      invalidInputs.push(input);
+  for (var h = 0; h < fields.length; h++) {
+    if (fields[h].checkValidity() === false) {
+      var field = fields[h];
+      invalidFields.push(field);
+    }
+  }
+  return invalidFields;
+};
+
+// Функция навешивания красных рамок на невалидные поля
+var submitClickHandler = function () {
+  var invalidInputs = findInvalidFields();
+  if (invalidInputs) {
+    for (var y = 0; y < invalidInputs.length; y++) {
+      var input = invalidInputs[y];
       input.style.outline = '2px solid red';
     }
   }
-  return invalidInputs;
 };
 
 sendForm.addEventListener('click', submitClickHandler);
@@ -436,16 +516,16 @@ resetButton.addEventListener('click', function () {
   // убираем все метки с карты
   hidePins();
   // ставим главную метку на исходную позицию
-  pinMain.style.left = mainPinLeftCentered + 'px';
-  pinMain.style.top = mainPinTopCentered + 'px';
+  pinMain.style.left = mainPinCenteredLeft + 'px';
+  pinMain.style.top = mainPinCenteredTop + 'px';
   // устанавливаем координаты в поле address
-  addressInput.value = mainPinLeftCentered + ', ' + mainPinTopCentered;
+  addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
   // сбрасываем введённые данные, если были
   resetInputs();
   // устанавливаем default плейсхолдера селекта price
   price.placeholder = 5000;
   // убираем красные рамки invalid полей при наличии
-  resetInvalidDecor(submitClickHandler());
+  resetInvalidDecor(findInvalidFields());
   // сбрасываем чекбоксы
   resetCheckboxes();
   // затемняем карту
