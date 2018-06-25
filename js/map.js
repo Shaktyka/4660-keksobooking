@@ -270,6 +270,8 @@ var buttonMouseupHandler = function () {
   });
   // разблокируем генерацию массива меток и объявлений
   createPins();
+  // подняли главную метку над всеми остальными
+  pinMain.style.zIndex = 100;
 };
 
 pinMain.addEventListener('mouseup', buttonMouseupHandler);
@@ -329,7 +331,7 @@ pinMain.addEventListener('mousedown', function (ee) {
     upEvt.preventDefault();
 
     // обновление координат метки в поле address после отжатия мыши
-    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop - MAIN_PIN_HEIGTH);
+    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop + MAIN_PIN_HEIGTH);
 
     document.removeEventListener('mousemove', pinMoveHandler);
     document.removeEventListener('mouseup', pinUpHandler);
