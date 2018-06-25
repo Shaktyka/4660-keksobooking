@@ -10,14 +10,14 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-var map = document.querySelector('.map');
+window.map = document.querySelector('.map');
 
 // Дефолтная метка на карте
-var pinMain = map.querySelector('.map__pin--main');
+window.pinMain = window.map.querySelector('.map__pin--main');
 
-var MAIN_PIN_WIDTH = pinMain.offsetWidth;
+var MAIN_PIN_WIDTH = window.pinMain.offsetWidth;
 // 22 - это высота псевдоэлемента-указателя
-var MAIN_PIN_HEIGTH = pinMain.offsetHeight + 22;
+var MAIN_PIN_HEIGTH = window.pinMain.offsetHeight + 22;
 
 var MAIN_PIN_LEFT = 570;
 var MAIN_PIN_TOP = 375;
@@ -31,8 +31,8 @@ var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
 var mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGTH / 2);
 
 // Прописываем координаты дефолтной метки по центру
-pinMain.style.left = mainPinCenteredLeft + 'px';
-pinMain.style.top = mainPinCenteredTop + 'px';
+window.pinMain.style.left = mainPinCenteredLeft + 'px';
+window.pinMain.style.top = mainPinCenteredTop + 'px';
 
 // Прописываем координаты в поле Адрес при неактивной странице
 var addressInput = document.getElementById('address');
@@ -183,7 +183,7 @@ var renderPhotos = function (photos, cardElement) {
 };
 
 // Находим блок, куда поместим все новые метки
-var similarListPins = map.querySelector('.map__pins');
+var similarListPins = window.map.querySelector('.map__pins');
 
 // Находим шаблон, который будем использовать для генерации меток
 var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
@@ -248,7 +248,7 @@ var renderAd = function (advertisement) {
 
 // Отрисовка объявлений и добавление их в целевой блок
 var createCard = function (pin) {
-  var cardsBeforeElement = map.querySelector('.map__filters-container');
+  var cardsBeforeElement = window.map.querySelector('.map__filters-container');
 
   var cardsParentElement = cardsBeforeElement.parentNode;
 
@@ -258,10 +258,14 @@ var createCard = function (pin) {
 
 // АКТИВАЦИЯ СТРАНИЦЫ
 
+// переменные для активации формы
+var form = document.querySelector('.ad-form');
+var fieldsetList = form.querySelectorAll('fieldset');
+
 // Эмулируем перетаскивание дефолтной метки
 var buttonMouseupHandler = function () {
   // разблокируем карту
-  map.classList.remove('map--faded');
+  window.map.classList.remove('map--faded');
   // разблокируем форму
   form.classList.remove('ad-form--disabled');
   // разблокируем филдсеты
@@ -271,14 +275,14 @@ var buttonMouseupHandler = function () {
   // разблокируем генерацию массива меток и объявлений
   createPins();
   // подняли главную метку над всеми остальными
-  pinMain.style.zIndex = 100;
+  window.pinMain.style.zIndex = 100;
 };
 
-pinMain.addEventListener('mouseup', buttonMouseupHandler);
+window.pinMain.addEventListener('mouseup', buttonMouseupHandler);
 
 // DRAGNDROP ГЛАВНОЙ МЕТКИ
 
-pinMain.addEventListener('mousedown', function (ee) {
+window.pinMain.addEventListener('mousedown', function (ee) {
   ee.preventDefault();
 
   var startCoords = {
@@ -299,15 +303,15 @@ pinMain.addEventListener('mousedown', function (ee) {
       y: moveEvt.clientY
     };
 
-    var newX = pinMain.offsetLeft + shift.x;
-    var newY = pinMain.offsetTop + shift.y;
+    var newX = window.pinMain.offsetLeft + shift.x;
+    var newY = window.pinMain.offsetTop + shift.y;
 
     if (newX < 0) {
       newX = 0;
     }
 
-    if (newX > pinMain.parentElement.offsetWidth - pinMain.offsetWidth) {
-      newX = pinMain.parentElement.offsetWidth - pinMain.offsetWidth;
+    if (newX > window.pinMain.parentElement.offsetWidth - window.pinMain.offsetWidth) {
+      newX = window.pinMain.parentElement.offsetWidth - window.pinMain.offsetWidth;
     }
 
     if (newY < MAP_MIN_Y) {
@@ -317,12 +321,12 @@ pinMain.addEventListener('mousedown', function (ee) {
       newY = MAP_MAX_Y;
     }
 
-    pinMain.style.left = newX + 'px';
-    pinMain.style.top = newY + 'px';
+    window.pinMain.style.left = newX + 'px';
+    window.pinMain.style.top = newY + 'px';
 
     // трансляция координат метки в поле address
-    var locationX = newX + Math.round(pinMain.offsetWidth / 2);
-    var locationY = newY + pinMain.offsetHeight;
+    var locationX = newX + Math.round(window.pinMain.offsetWidth / 2);
+    var locationY = newY + window.pinMain.offsetHeight;
 
     addressInput.value = locationX + ', ' + locationY;
   };
@@ -331,7 +335,7 @@ pinMain.addEventListener('mousedown', function (ee) {
     upEvt.preventDefault();
 
     // обновление координат метки в поле address после отжатия мыши
-    addressInput.value = (pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (pinMain.offsetTop + MAIN_PIN_HEIGTH);
+    addressInput.value = (window.pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.pinMain.offsetTop + MAIN_PIN_HEIGTH);
 
     document.removeEventListener('mousemove', pinMoveHandler);
     document.removeEventListener('mouseup', pinUpHandler);
@@ -339,201 +343,4 @@ pinMain.addEventListener('mousedown', function (ee) {
 
   document.addEventListener('mousemove', pinMoveHandler);
   document.addEventListener('mouseup', pinUpHandler);
-});
-
-// ВАЛИДАЦИЯ ФОРМЫ
-
-var form = document.querySelector('.ad-form');
-
-var fieldsetList = form.querySelectorAll('fieldset');
-
-var type = document.getElementById('type');
-
-var price = document.getElementById('price');
-
-type.addEventListener('change', function () {
-  if (type.selectedIndex === 0) {
-    price.min = 0;
-    price.placeholder = 0;
-  } else if (type.selectedIndex === 1) {
-    price.min = 1000;
-    price.placeholder = 1000;
-  } else if (type.selectedIndex === 2) {
-    price.min = 5000;
-    price.placeholder = 5000;
-  } else if (type.selectedIndex === 3) {
-    price.min = 10000;
-    price.placeholder = 10000;
-  }
-});
-
-// СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
-
-var checkin = document.getElementById('timein');
-
-var checkout = document.getElementById('timeout');
-
-checkin.addEventListener('change', function () {
-  checkout.selectedIndex = checkin.selectedIndex;
-});
-
-checkout.addEventListener('change', function () {
-  checkin.selectedIndex = checkout.selectedIndex;
-});
-
-// СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
-
-var rooms = document.getElementById('rooms');
-
-var guests = document.getElementById('capacity');
-
-rooms.addEventListener('change', function () {
-  var currentValue = rooms.value;
-  if (currentValue === '0') {
-    for (var c = 0; c < guests.children.length; c++) {
-      guests.children[c].disabled = true;
-    }
-    guests.children[guests.children.length - 1].disabled = false;
-    guests.children[guests.children.length - 1].selected = true;
-  } else {
-    for (var d = 0; d < guests.children.length; d++) {
-      if (d < currentValue) {
-        guests.children[d].disabled = false;
-      } else {
-        guests.children[d].disabled = true;
-      }
-    }
-    guests.children[0].selected = true;
-  }
-});
-
-// ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
-
-var sendForm = document.querySelector('.ad-form__submit');
-
-// Функция поиска невалидных полей
-var findInvalidFields = function () {
-  var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
-  var invalidFields = [];
-
-  for (var h = 0; h < fields.length; h++) {
-    if (fields[h].checkValidity() === false) {
-      var field = fields[h];
-      invalidFields.push(field);
-    }
-  }
-  return invalidFields;
-};
-
-// Функция навешивания красных рамок на невалидные поля
-var submitClickHandler = function () {
-  var invalidInputs = findInvalidFields();
-  if (invalidInputs) {
-    for (var y = 0; y < invalidInputs.length; y++) {
-      var input = invalidInputs[y];
-      input.style.outline = '2px solid red';
-    }
-  }
-};
-
-sendForm.addEventListener('click', submitClickHandler);
-
-// Функция скрытия меток на карте при reset
-var hidePins = function () {
-  var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
-  for (var g = 0; g < pinsList.length; g++) {
-    pinsList[g].remove();
-  }
-};
-
-// Функция закрытия открытых объявлений при reset
-var hideAds = function () {
-  var adsList = map.querySelectorAll('article.map__card');
-  if (adsList) {
-    for (var l = 0; l < adsList.length; l++) {
-      adsList[l].classList.add('hidden');
-    }
-  }
-};
-
-// Функция сброса выделенных чекбоксов
-var resetCheckboxes = function () {
-  var featuresList = form.querySelector('.features').querySelectorAll('input');
-  if (featuresList) {
-    for (var z = 0; z < featuresList.length; z++) {
-      featuresList[z].checked = false;
-    }
-  }
-};
-
-// Функция сброса красных рамок у невалидных полей
-var resetInvalidDecor = function (invalidInputs) {
-  if (invalidInputs) {
-    for (var x = 0; x < invalidInputs.length; x++) {
-      var invalidInput = invalidInputs[x];
-      invalidInput.style.outline = '';
-    }
-  }
-};
-
-// Reset введённых данных
-var resetInputs = function () {
-  var titleInput = document.getElementById('title');
-  var description = document.getElementById('description');
-
-  if (titleInput.value) {
-    titleInput.value = '';
-  }
-  if (description.value) {
-    description.value = '';
-  }
-  if (price.value) {
-    price.value = '';
-  }
-  if (type.selectedIndex !== 0) {
-    type.selectedIndex = 0;
-  }
-  if (rooms.selectedIndex !== 0) {
-    rooms.selectedIndex = 0;
-  }
-  if (guests.selectedIndex !== 0) {
-    guests.selectedIndex = 0;
-  }
-  if (checkin.selectedIndex !== 0) {
-    checkin.selectedIndex = 0;
-  }
-  if (checkout.selectedIndex !== 0) {
-    checkout.selectedIndex = 0;
-  }
-};
-
-// Функция обработки сброса формы
-var resetButton = document.querySelector('.ad-form__reset');
-
-resetButton.addEventListener('click', function () {
-  // закрываем открытые объявления
-  hideAds();
-  // убираем все метки с карты
-  hidePins();
-  // ставим главную метку на исходную позицию
-  pinMain.style.left = mainPinCenteredLeft + 'px';
-  pinMain.style.top = mainPinCenteredTop + 'px';
-  // устанавливаем координаты в поле address
-  addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
-  // сбрасываем введённые данные, если были
-  resetInputs();
-  // устанавливаем default плейсхолдера селекта price
-  price.placeholder = 5000;
-  // убираем красные рамки invalid полей при наличии
-  resetInvalidDecor(findInvalidFields());
-  // сбрасываем чекбоксы
-  resetCheckboxes();
-  // затемняем карту
-  map.classList.add('map--faded');
-  // блокируем филдсеты
-  fieldsetList.forEach(function (item) {
-    item.disabled = true;
-  });
-  // затемняем форму
-  form.classList.add('ad-form--disabled');
 });
