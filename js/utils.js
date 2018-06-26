@@ -2,7 +2,7 @@
 
 // СЛУЖЕБНЫЕ ФУНКЦИИ
 
-window.util = (function () {
+window.utils = (function () {
 
   return {
     // Функция, возвращающая рандомное число в диапазоне между переданными min и max.
@@ -32,11 +32,11 @@ window.util = (function () {
     getVariativeLengthArray: function (array) {
       var newArray = [];
       // Перемешиваем переданный массив
-      var draftArray = window.util.getMixedArray(array);
+      var draftArray = window.utils.getMixedArray(array);
       // Определяем длину массива
       var arrayLength = draftArray.length;
       // Генерируем случайное число от 1 до длины массива
-      var num = window.util.getRandomNumber(1, arrayLength);
+      var num = window.utils.getRandomNumber(1, arrayLength);
       // Записываем в новый массив выбранное из перемешанного мссива число элементов
       for (var i = 0; i < num; i++) {
         newArray.push(draftArray[i]);
