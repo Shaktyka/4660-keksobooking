@@ -38,6 +38,8 @@ window.pinMain.style.top = mainPinCenteredTop + 'px';
 var addressInput = document.getElementById('address');
 addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
 
+// СБОРКА ОБЪЯВЛЕНИЯ
+
 // Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться.
 var getAvatarLink = function (num) {
   if (num < 10) {
@@ -135,6 +137,8 @@ var renderPhotos = function (photos, cardElement) {
   }
 };
 
+// ГЕНЕРАЦИЯ ПИНОВ
+
 // Находим блок, куда поместим все новые метки
 var similarListPins = window.map.querySelector('.map__pins');
 
@@ -169,8 +173,12 @@ var createPins = function () {
   }
 };
 
+// ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
+
 // Функция закрытия объявления нажатием на крестик
 var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
+
+// ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
 
 // Генерация объявления на основе шаблона
 var renderAd = function (advertisement) {
