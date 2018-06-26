@@ -31,14 +31,14 @@
   // Функция отрисовки меток и добавления в целевой блок
   var createPins = function () {
     var fragment = document.createDocumentFragment();
-    var pins = getAdsArray(8);
+    var pins = window.getAdsArray(8);
     for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(renderPin(pins[i]));
+      fragment.appendChild(window.renderPin(pins[i]));
     }
     // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
-    var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+    var buttonsList = window.similarListPins.querySelectorAll('button:not(.map__pin--main)');
     if (buttonsList.length === 0) {
-      similarListPins.appendChild(fragment);
+      window.similarListPins.appendChild(fragment);
     }
   };
 

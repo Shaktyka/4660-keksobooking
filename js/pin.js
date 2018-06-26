@@ -4,13 +4,13 @@
 
 (function () {
   // Находим блок, куда поместим все новые метки
-  var similarListPins = window.map.querySelector('.map__pins');
+  window.similarListPins = window.map.querySelector('.map__pins');
 
   // Находим шаблон, который будем использовать для генерации меток
   var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
   // Генерация метки на основе шаблона
-  var renderPin = function (pin) {
+  window.renderPin = function (pin) {
     var pinElement = similarPinTemplate.cloneNode(true);
     pinElement.style.left = pin.location.x - 25 + 'px';
     pinElement.style.top = pin.location.y - 70 + 'px';
@@ -24,7 +24,7 @@
   };
 
   // Функция для сборки массива объектов объявлений
-  var getAdsArray = function (amount) {
+  window.getAdsArray = function (amount) {
     var adsArray = [];
     for (var i = 0; i < amount; i++) {
       var ad = {
