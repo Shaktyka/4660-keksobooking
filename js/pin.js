@@ -2,37 +2,57 @@
 
 // ГЕНЕРАЦИЯ ПИНОВ
 
-// Находим блок, куда поместим все новые метки
+(function () {
+  // Находим блок, куда поместим все новые метки
+  var similarListPins = window.map.querySelector('.map__pins');
 
-var similarListPins = window.map.querySelector('.map__pins');
+  // Находим шаблон, который будем использовать для генерации меток
+  var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
-// Находим шаблон, который будем использовать для генерации меток
-var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
+  // Генерация метки на основе шаблона
+  var renderPin = function (pin) {
+    var pinElement = similarPinTemplate.cloneNode(true);
+    pinElement.style.left = pin.location.x - 25 + 'px';
+    pinElement.style.top = pin.location.y - 70 + 'px';
+    pinElement.querySelector('img').src = pin.author.avatar;
+    pinElement.querySelector('img').alt = pin.offer.title;
+    pinElement.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      window.createCard(pin);
+    });
+    return pinElement;
+  };
 
-// Генерация метки на основе шаблона
-var renderPin = function (pin) {
-  var pinElement = similarPinTemplate.cloneNode(true);
-  pinElement.style.left = pin.location.x - 25 + 'px';
-  pinElement.style.top = pin.location.y - 70 + 'px';
-  pinElement.querySelector('img').src = pin.author.avatar;
-  pinElement.querySelector('img').alt = pin.offer.title;
-  pinElement.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    createCard(pin);
-  });
-  return pinElement;
-};
-
-// Функция отрисовки меток и добавления в целевой блок
-var createPins = function () {
-  var fragment = document.createDocumentFragment();
-  var pins = getAdsArray(8);
-  for (var i = 0; i < pins.length; i++) {
-    fragment.appendChild(renderPin(pins[i]));
-  }
-  // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
-  var buttonsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
-  if (buttonsList.length === 0) {
-    similarListPins.appendChild(fragment);
-  }
-};
+  // Функция для сборки массива объектов объявлений
+  var getAdsArray = function (amount) {
+    var adsArray = [];
+    for (var i = 0; i < amount; i++) {
+      var ad = {
+        'author': {
+          'avatar': window.getAvatarLink(i + 1)
+        },
+        'offer': {
+          'title': window.util.getSeriatimElement(window.OFFER_TITLES),
+          'price': window.util.getRandomNumber(1000, 1000000),
+          'type': window.convertType(window.util.getRandomElement(window.OFFER_TYPES)),
+          'rooms': window.util.getRandomNumber(1, 5),
+          'guests': window.util.getRandomNumber(1, 8),
+          'checkin': window.util.getRandomElement(window.OFFER_CHECKS),
+          'checkout': window.util.getRandomElement(window.OFFER_CHECKS),
+          'features': window.getListFeatures(window.util.getVariativeLengthArray(window.OFFER_FEATURES)),
+          'description': '',
+          'photos': window.OFFER_PHOTOS.slice().sort(function () {
+            return Math.random() - 0.5;
+          })
+        },
+        'location': {
+          'x': window.util.getRandomNumber(300, 900),
+          'y': window.util.getRandomNumber(130, 630)
+        }
+      };
+      ad.offer.address = ad.location.x + ', ' + ad.location.y;
+      adsArray.push(ad);
+    }
+    return adsArray;
+  };
+})();

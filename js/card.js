@@ -2,101 +2,121 @@
 
 // СБОРКА ОБЪЯВЛЕНИЯ
 
-window.map = document.querySelector('.map');
+(function () {
+  window.map = document.querySelector('.map');
 
-// Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться.
-var getAvatarLink = function (num) {
-  if (num < 10) {
-    var index = '0' + num;
-  } else {
-    index = num;
-  }
-  var linkPath = 'img/avatars/user';
-  var linkExtension = '.png';
-  return linkPath + index + linkExtension;
-};
+  window.OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
-// Функция для конвертации англоязычного типа жилья в русскоязычный
-var convertType = function (typeHouse) {
-  var typeValue = '';
-  switch (typeHouse) {
-    case 'palace':
-      typeValue = 'Дворец';
-      break;
-    case 'flat':
-      typeValue = 'Квартира';
-      break;
-    case 'house':
-      typeValue = 'Дом';
-      break;
-    case 'bungalo':
-      typeValue = 'Бунгало';
-  }
-  return typeValue;
-};
+  window.OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 
-// Функция для сборки списка фичей
-var getListFeatures = function (rawList) {
-  var parsedList = '';
-  for (var i = 0; i < rawList.length; i++) {
-    if (rawList[i] === 'wifi') {
-      parsedList += '<li class="popup__feature popup__feature--wifi">wifi</li>';
-    } else if (rawList[i] === 'dishwasher') {
-      parsedList += '<li class="popup__feature popup__feature--dishwasher">dishwasher</li>';
-    } else if (rawList[i] === 'parking') {
-      parsedList += '<li class="popup__feature popup__feature--parking">parking</li>';
-    } else if (rawList[i] === 'washer') {
-      parsedList += '<li class="popup__feature popup__feature--washer">washer</li>';
-    } else if (rawList[i] === 'elevator') {
-      parsedList += '<li class="popup__feature popup__feature--elevator">elevator</li>';
-    } else if (rawList[i] === 'conditioner') {
-      parsedList += '<li class="popup__feature popup__feature--conditioner">conditioner</li>';
+  window.OFFER_CHECKS = ['12:00', '13:00', '14:00'];
+
+  window.OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+  window.OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+
+  // Функция, возвращающая адрес ссылки аватара автора. Значения не повторяются.
+  window.getAvatarLink = function (num) {
+    if (num < 10) {
+      var index = '0' + num;
+    } else {
+      index = num;
     }
-  }
-  return parsedList;
-};
+    var linkPath = 'img/avatars/user';
+    var linkExtension = '.png';
+    return linkPath + index + linkExtension;
+  };
 
-// Функция для сбора массива объектов объявлений
-var getAdsArray = function (amount) {
-  var adsArray = [];
-  for (var i = 0; i < amount; i++) {
-    var ad = {
-      'author': {
-        'avatar': getAvatarLink(i + 1)
-      },
-      'offer': {
-        'title': window.util.getSeriatimElement(OFFER_TITLES),
-        'price': window.util.getRandomNumber(1000, 1000000),
-        'type': convertType(window.util.getRandomElement(OFFER_TYPES)),
-        'rooms': window.util.getRandomNumber(1, 5),
-        'guests': window.util.getRandomNumber(1, 8),
-        'checkin': window.util.getRandomElement(OFFER_CHECKS),
-        'checkout': window.util.getRandomElement(OFFER_CHECKS),
-        'features': getListFeatures(window.util.getVariativeLengthArray(OFFER_FEATURES)),
-        'description': '',
-        'photos': OFFER_PHOTOS.slice().sort(function () {
-          return Math.random() - 0.5;
-        })
-      },
-      'location': {
-        'x': window.util.getRandomNumber(300, 900),
-        'y': window.util.getRandomNumber(130, 630)
+  // Функция для конвертации англоязычного типа жилья в русскоязычный
+  window.convertType = function (typeHouse) {
+    var typeValue = '';
+    switch (typeHouse) {
+      case 'palace':
+        typeValue = 'Дворец';
+        break;
+      case 'flat':
+        typeValue = 'Квартира';
+        break;
+      case 'house':
+        typeValue = 'Дом';
+        break;
+      case 'bungalo':
+        typeValue = 'Бунгало';
+    }
+    return typeValue;
+  };
+
+  // Функция для сборки списка фичей для объявления
+  window.getListFeatures = function (rawList) {
+    var parsedList = '';
+    for (var i = 0; i < rawList.length; i++) {
+      if (rawList[i] === 'wifi') {
+        parsedList += '<li class="popup__feature popup__feature--wifi">wifi</li>';
+      } else if (rawList[i] === 'dishwasher') {
+        parsedList += '<li class="popup__feature popup__feature--dishwasher">dishwasher</li>';
+      } else if (rawList[i] === 'parking') {
+        parsedList += '<li class="popup__feature popup__feature--parking">parking</li>';
+      } else if (rawList[i] === 'washer') {
+        parsedList += '<li class="popup__feature popup__feature--washer">washer</li>';
+      } else if (rawList[i] === 'elevator') {
+        parsedList += '<li class="popup__feature popup__feature--elevator">elevator</li>';
+      } else if (rawList[i] === 'conditioner') {
+        parsedList += '<li class="popup__feature popup__feature--conditioner">conditioner</li>';
       }
-    };
-    ad.offer.address = ad.location.x + ', ' + ad.location.y;
-    adsArray.push(ad);
-  }
-  return adsArray;
-};
+    }
+    return parsedList;
+  };
 
-// Находим шаблон изображения
-var renderPhotos = function (photos, cardElement) {
-  var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
-  var photoContainer = cardElement.querySelector('.popup__photos');
-  photoContainer.innerHTML = '';
-  for (var i = 0; i < photos.length; i++) {
-    var photoElement = photoTemplateElement.cloneNode(true);
-    photoElement.src = photos[i];
-    photoContainer.appendChild(photoElement);
-  }
-};
+  // Функция для вставки фото жилья в объявление
+  var renderPhotos = function (photos, cardElement) {
+    var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
+    var photoContainer = cardElement.querySelector('.popup__photos');
+    photoContainer.innerHTML = '';
+    for (var i = 0; i < photos.length; i++) {
+      var photoElement = photoTemplateElement.cloneNode(true);
+      photoElement.src = photos[i];
+      photoContainer.appendChild(photoElement);
+    }
+  };
+
+  // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
+
+  var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
+
+  // Генерация объявления на основе шаблона
+  var renderAd = function (advertisement) {
+    var cardElement = similarAdTemplate.cloneNode(true);
+    cardElement.querySelector('img').src = advertisement.author.avatar;
+    cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
+    cardElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
+    cardElement.querySelector('.popup__text--price').innerHTML = advertisement.offer.price + '&#x20bd;<span>/ночь</span>';
+    cardElement.querySelector('.popup__type').textContent = advertisement.offer.type;
+    cardElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
+    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ', выезд до ' + advertisement.offer.checkout;
+    cardElement.querySelector('.popup__features').innerHTML = advertisement.offer.features;
+    cardElement.querySelector('.popup__description').textContent = advertisement.offer.description;
+    renderPhotos(advertisement.offer.photos, cardElement);
+    var closeButton = cardElement.querySelector('.popup__close');
+    closeButton.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      cardElement.classList.add('hidden');
+    });
+    closeButton.addEventListener('keydown', function (evt) {
+      evt.preventDefault();
+      if (evt.keyCode === 13) {
+        cardElement.classList.add('hidden');
+      }
+    });
+    return cardElement;
+  };
+
+  // Отрисовка объявлений и добавление их в целевой блок
+  var createCard = function (pin) {
+    var cardsBeforeElement = window.map.querySelector('.map__filters-container');
+
+    var cardsParentElement = cardsBeforeElement.parentNode;
+
+    // Добавление карточек объявлений
+    cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
+  };
+})();
