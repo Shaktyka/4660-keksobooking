@@ -5,7 +5,7 @@
   // Функция отрисовки меток и добавления в целевой блок
   var createPins = function () {
     var fragment = document.createDocumentFragment();
-    var pins = window.getAdsArray(8);
+    var pins = window.getCardsArray(8);
     for (var i = 0; i < pins.length; i++) {
       fragment.appendChild(window.renderPin(pins[i]));
     }

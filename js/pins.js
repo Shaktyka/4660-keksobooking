@@ -16,7 +16,7 @@
     var cardsParentElement = cardsBeforeElement.parentNode;
 
     // Добавление карточек объявлений
-    cardsParentElement.insertBefore(window.renderAd(pin), cardsBeforeElement);
+    cardsParentElement.insertBefore(window.renderCard(pin), cardsBeforeElement);
   };
 
   // Генерация метки на основе шаблона
@@ -34,10 +34,10 @@
   };
 
   // Функция для сборки массива объектов объявлений
-  window.getAdsArray = function (amount) {
-    var adsArray = [];
+  window.getCardsArray = function (amount) {
+    var cardsArray = [];
     for (var i = 0; i < amount; i++) {
-      var ad = {
+      var card = {
         'author': {
           'avatar': window.getAvatarLink(i + 1)
         },
@@ -60,9 +60,9 @@
           'y': window.getRandomNumber(130, 630)
         }
       };
-      ad.offer.address = ad.location.x + ', ' + ad.location.y;
-      adsArray.push(ad);
+      card.offer.address = card.location.x + ', ' + card.location.y;
+      cardsArray.push(card);
     }
-    return adsArray;
+    return cardsArray;
   };
 })();
