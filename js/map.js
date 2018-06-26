@@ -38,14 +38,6 @@ window.pinMain.style.top = mainPinCenteredTop + 'px';
 var addressInput = document.getElementById('address');
 addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
 
-// СЛУЖЕБНЫЕ ФУНКЦИИ
-
-// Функция, возвращающая рандомное число в диапазоне между переданными min и max.
-var getRandomNumber = function (min, max) {
-  var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomNumber;
-};
-
 // Функция, возвращающая адрес ссылки аватара автора. Значения не должны повторяться.
 var getAvatarLink = function (num) {
   if (num < 10) {
@@ -56,45 +48,6 @@ var getAvatarLink = function (num) {
   var linkPath = 'img/avatars/user';
   var linkExtension = '.png';
   return linkPath + index + linkExtension;
-};
-
-// Функция, возвращающая один рандомный элемент из переданного массива.
-var getRandomElement = function (array) {
-  var randomElement = Math.floor(Math.random() * array.length);
-  return array[randomElement];
-};
-
-// Функция, возвращающая массив строк случайной длины из переданного массива.
-var getVariativeLengthArray = function (array) {
-  var newArray = [];
-  // Перемешиваем переданный массив
-  var draftArray = getMixedArray(array);
-  // Определяем длину массива
-  var arrayLength = draftArray.length;
-  // Генерируем случайное число от 1 до длины массива
-  var num = getRandomNumber(1, arrayLength);
-  // Записываем в новый массив выбранное из перемешанного мссива число элементов
-  for (var i = 0; i < num; i++) {
-    newArray.push(draftArray[i]);
-  }
-  return newArray;
-};
-
-// Функция, возвращающая рандомно перемешанный массив той же длины (для фото).
-var getMixedArray = function (array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-};
-
-// Функция, выдающая 1-й элемент массива поочерёдно
-var getSeriatimElement = function (array) {
-  var title = array.shift();
-  return title;
 };
 
 // Функция для конвертации англоязычного типа жилья в русскоязычный
@@ -146,22 +99,22 @@ var getAdsArray = function (amount) {
         'avatar': getAvatarLink(i + 1)
       },
       'offer': {
-        'title': getSeriatimElement(OFFER_TITLES),
-        'price': getRandomNumber(1000, 1000000),
-        'type': convertType(getRandomElement(OFFER_TYPES)),
-        'rooms': getRandomNumber(1, 5),
-        'guests': getRandomNumber(1, 8),
-        'checkin': getRandomElement(OFFER_CHECKS),
-        'checkout': getRandomElement(OFFER_CHECKS),
-        'features': getListFeatures(getVariativeLengthArray(OFFER_FEATURES)),
+        'title': window.util.getSeriatimElement(OFFER_TITLES),
+        'price': window.util.getRandomNumber(1000, 1000000),
+        'type': convertType(window.util.getRandomElement(OFFER_TYPES)),
+        'rooms': window.util.getRandomNumber(1, 5),
+        'guests': window.util.getRandomNumber(1, 8),
+        'checkin': window.util.getRandomElement(OFFER_CHECKS),
+        'checkout': window.util.getRandomElement(OFFER_CHECKS),
+        'features': getListFeatures(window.util.getVariativeLengthArray(OFFER_FEATURES)),
         'description': '',
         'photos': OFFER_PHOTOS.slice().sort(function () {
           return Math.random() - 0.5;
         })
       },
       'location': {
-        'x': getRandomNumber(300, 900),
-        'y': getRandomNumber(130, 630)
+        'x': window.util.getRandomNumber(300, 900),
+        'y': window.util.getRandomNumber(130, 630)
       }
     };
     ad.offer.address = ad.location.x + ', ' + ad.location.y;
