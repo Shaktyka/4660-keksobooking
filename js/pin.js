@@ -42,22 +42,22 @@
           'avatar': window.getAvatarLink(i + 1)
         },
         'offer': {
-          'title': window.utils.getSeriatimElement(window.OFFER_TITLES),
-          'price': window.utils.getRandomNumber(1000, 1000000),
-          'type': window.convertType(window.utils.getRandomElement(window.OFFER_TYPES)),
-          'rooms': window.utils.getRandomNumber(1, 5),
-          'guests': window.utils.getRandomNumber(1, 8),
-          'checkin': window.utils.getRandomElement(window.OFFER_CHECKS),
-          'checkout': window.utils.getRandomElement(window.OFFER_CHECKS),
-          'features': window.getListFeatures(window.utils.getVariativeLengthArray(window.OFFER_FEATURES)),
+          'title': window.getSeriatimElement(window.OFFER_TITLES),
+          'price': window.getRandomNumber(1000, 1000000),
+          'type': window.convertType(window.getRandomElement(window.OFFER_TYPES)),
+          'rooms': window.getRandomNumber(1, 5),
+          'guests': window.getRandomNumber(1, 8),
+          'checkin': window.getRandomElement(window.OFFER_CHECKS),
+          'checkout': window.getRandomElement(window.OFFER_CHECKS),
+          'features': window.getListFeatures(window.getVariativeLengthArray(window.OFFER_FEATURES)),
           'description': '',
           'photos': window.OFFER_PHOTOS.slice().sort(function () {
             return Math.random() - 0.5;
           })
         },
         'location': {
-          'x': window.utils.getRandomNumber(300, 900),
-          'y': window.utils.getRandomNumber(130, 630)
+          'x': window.getRandomNumber(300, 900),
+          'y': window.getRandomNumber(130, 630)
         }
       };
       ad.offer.address = ad.location.x + ', ' + ad.location.y;
