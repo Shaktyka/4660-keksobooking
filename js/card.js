@@ -84,7 +84,7 @@
   var similarAdTemplate = document.querySelector('template').content.querySelector('.map__card');
 
   // Генерация объявления на основе шаблона
-  var renderAd = function (advertisement) {
+  window.renderAd = function (advertisement) {
     var cardElement = similarAdTemplate.cloneNode(true);
     cardElement.querySelector('img').src = advertisement.author.avatar;
     cardElement.querySelector('.popup__title').textContent = advertisement.offer.title;
@@ -108,15 +108,5 @@
       }
     });
     return cardElement;
-  };
-
-  // Отрисовка объявлений и добавление их в целевой блок
-  var createCard = function (pin) {
-    var cardsBeforeElement = window.map.querySelector('.map__filters-container');
-
-    var cardsParentElement = cardsBeforeElement.parentNode;
-
-    // Добавление карточек объявлений
-    cardsParentElement.insertBefore(renderAd(pin), cardsBeforeElement);
   };
 })();
