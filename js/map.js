@@ -1,32 +1,33 @@
 'use strict';
 
 (function () {
+  window.map = document.querySelector('.map');
 
   // Дефолтная метка на карте
   window.pinMain = window.map.querySelector('.map__pin--main');
 
-  var MAIN_PIN_WIDTH = window.pinMain.offsetWidth;
+  window.MAIN_PIN_WIDTH = window.pinMain.offsetWidth;
   // 22 - это высота псевдоэлемента-указателя
-  var MAIN_PIN_HEIGTH = window.pinMain.offsetHeight + 22;
+  window.MAIN_PIN_HEIGTH = window.pinMain.offsetHeight + 22;
 
-  var MAIN_PIN_LEFT = 570;
-  var MAIN_PIN_TOP = 375;
+  window.MAIN_PIN_LEFT = 570;
+  window.MAIN_PIN_TOP = 375;
 
   // Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
 
   // Координаты дефолтной метки по её центру
-  var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
-  var mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGTH / 2);
+  window.mainPinCenteredLeft = window.MAIN_PIN_LEFT - Math.round(window.MAIN_PIN_WIDTH / 2);
+  window.mainPinCenteredTop = window.MAIN_PIN_TOP - Math.round(window.MAIN_PIN_HEIGTH / 2);
 
   // Прописываем координаты дефолтной метки по центру
-  window.pinMain.style.left = mainPinCenteredLeft + 'px';
-  window.pinMain.style.top = mainPinCenteredTop + 'px';
+  window.pinMain.style.left = window.mainPinCenteredLeft + 'px';
+  window.pinMain.style.top = window.mainPinCenteredTop + 'px';
 
   // Прописываем координаты в поле Адрес при неактивной странице
   var addressInput = document.getElementById('address');
-  addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
+  addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
 
   // DRAGNDROP ГЛАВНОЙ МЕТКИ
 
@@ -83,7 +84,7 @@
       upEvt.preventDefault();
 
       // обновление координат метки в поле address после отжатия мыши
-      addressInput.value = (window.pinMain.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.pinMain.offsetTop + MAIN_PIN_HEIGTH);
+      addressInput.value = (window.pinMain.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.pinMain.offsetTop + window.MAIN_PIN_HEIGTH);
 
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);

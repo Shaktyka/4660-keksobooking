@@ -6,17 +6,6 @@
 
 var similarListPins = window.map.querySelector('.map__pins');
 
-// Координаты дефолтной метки по её центру
-var mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
-var mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGTH / 2);
-
-var MAIN_PIN_WIDTH = window.pinMain.offsetWidth;
-// 22 - это высота псевдоэлемента-указателя
-var MAIN_PIN_HEIGTH = window.pinMain.offsetHeight + 22;
-
-var MAIN_PIN_LEFT = 570;
-var MAIN_PIN_TOP = 375;
-
 // Переменные формы
 
 var form = document.querySelector('.ad-form');
@@ -194,10 +183,10 @@ resetButton.addEventListener('click', function () {
   // убираем все метки с карты
   hidePins();
   // ставим главную метку на исходную позицию
-  window.pinMain.style.left = mainPinCenteredLeft + 'px';
-  window.pinMain.style.top = mainPinCenteredTop + 'px';
+  window.pinMain.style.left = window.mainPinCenteredLeft + 'px';
+  window.pinMain.style.top = window.mainPinCenteredTop + 'px';
   // устанавливаем координаты в поле address
-  addressInput.value = mainPinCenteredLeft + ', ' + mainPinCenteredTop;
+  addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
   // сбрасываем введённые данные, если были
   resetInputs();
   // устанавливаем default плейсхолдера селекта price
