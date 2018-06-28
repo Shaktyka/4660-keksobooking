@@ -4,27 +4,27 @@
 
 (function () {
 
-  window.OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
+  // window.OFFER_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 
-  window.OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
+  // window.OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 
-  window.OFFER_CHECKS = ['12:00', '13:00', '14:00'];
+  // window.OFFER_CHECKS = ['12:00', '13:00', '14:00'];
 
-  window.OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  // window.OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-  window.OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+  // window.OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
   // Функция, возвращающая адрес ссылки аватара автора. Значения не повторяются.
-  window.getAvatarLink = function (num) {
-    if (num < 10) {
-      var index = '0' + num;
-    } else {
-      index = num;
-    }
-    var linkPath = 'img/avatars/user';
-    var linkExtension = '.png';
-    return linkPath + index + linkExtension;
-  };
+//  window.getAvatarLink = function (num) {
+//    if (num < 10) {
+//      var index = '0' + num;
+//    } else {
+//      index = num;
+//    }
+//    var linkPath = 'img/avatars/user';
+//    var linkExtension = '.png';
+//    return linkPath + index + linkExtension;
+//  };
 
   // Функция для конвертации англоязычного типа жилья в русскоязычный
   window.convertType = function (typeHouse) {
