@@ -33,7 +33,6 @@
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
 
-      window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
       // var openedCard = window.map.querySelector('popup:not(.hidden)');
 
       if (window.clickedPin) {

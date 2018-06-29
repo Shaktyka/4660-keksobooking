@@ -77,6 +77,8 @@
     closeButton.addEventListener('click', function (evt) {
       evt.preventDefault();
       cardElement.classList.add('hidden');
+      window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
+      window.clickedPin.classList.remove('map__pin--active');
     });
     closeButton.addEventListener('keydown', function (evt) {
       evt.preventDefault();
