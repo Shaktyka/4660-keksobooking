@@ -205,4 +205,21 @@
     // затемняем форму
     form.classList.add('ad-form--disabled');
   });
+
+  var successHandler = function () {
+    // что-то внутри
+  };
+
+  var errorHandler = function () {
+    // что-то внутри
+  };
+
+  form.addEventListener('submit', function (submitEvt) {
+    submitEvt.preventDefault();
+    var formData = new FormData(form);
+    window.save(formData, successHandler, errorHandler);
+    resetInputs();
+    resetCheckboxes();
+  });
+
 })();
