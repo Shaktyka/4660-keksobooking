@@ -28,10 +28,23 @@
     pinElement.style.top = pin.location.y - 70 + 'px';
     pinElement.querySelector('img').src = pin.author.avatar;
     pinElement.querySelector('img').alt = pin.offer.title;
+
+    // Добавляем пину обработку клика
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
-      createCard(pin);
-      pinElement.classList.add('.map__pin--active');
+
+      var clickedPin = window.similarListPins.querySelector('.map__pin--active');
+      // var openedCard = window.map.querySelector('popup:not(.hidden)');
+
+      if (clickedPin) {
+        clickedPin.classList.remove('map__pin--active');
+        pinElement.classList.add('map__pin--active');
+        // openedCard.classList.add('hidden');
+        createCard(pin);
+      } else {
+        createCard(pin);
+        pinElement.classList.add('map__pin--active');
+      }
     });
     return pinElement;
   };
