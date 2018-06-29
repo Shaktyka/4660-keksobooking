@@ -19,8 +19,6 @@
     // Вывод окна с сообщением об ошибке
   };
 
-  window.load(createPins, errorHandler);
-
   // АКТИВАЦИЯ СТРАНИЦЫ
 
   // переменные для активации формы
@@ -37,7 +35,7 @@
       item.disabled = false;
     });
     // разблокируем генерацию массива меток и объявлений
-    createPins();
+    window.load(createPins, errorHandler);
     // подняли главную метку над всеми остальными
     window.pinMain.style.zIndex = 100;
   };
