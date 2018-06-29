@@ -45,7 +45,7 @@
   };
 
   // Функция для загрузки объявлений с сервера
-  window.download = function (onLoad, onError) {
+  window.load = function (onLoad, onError) {
     var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
 
     var xhr = new XMLHttpRequest();

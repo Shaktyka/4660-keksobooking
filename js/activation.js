@@ -3,11 +3,10 @@
 (function () {
 
   // Функция отрисовки меток и добавления в целевой блок
-  var createPins = function () {
+  var createPins = function (data) {
     var fragment = document.createDocumentFragment();
-    var pins = window.getCardsArray(8);
-    for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.renderPin(pins[i]));
+    for (var i = 0; i < data.length; i++) {
+      fragment.appendChild(window.renderPin(data[i]));
     }
     // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
     var buttonsList = window.similarListPins.querySelectorAll('button:not(.map__pin--main)');
@@ -15,6 +14,12 @@
       window.similarListPins.appendChild(fragment);
     }
   };
+
+  var errorHandler = function () {
+    // Вывод окна с сообщением об ошибке
+  };
+
+  window.load(createPins, errorHandler);
 
   // АКТИВАЦИЯ СТРАНИЦЫ
 
