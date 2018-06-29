@@ -22,7 +22,6 @@
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
 
-  // Эмулируем перетаскивание дефолтной метки
   var buttonMouseupHandler = function () {
     // разблокируем карту
     window.map.classList.remove('map--faded');
