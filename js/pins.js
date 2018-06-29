@@ -21,7 +21,9 @@
 
   // Генерация метки на основе шаблона
   window.renderPin = function (pin) {
+
     var pinElement = similarPinTemplate.cloneNode(true);
+
     pinElement.style.left = pin.location.x - 25 + 'px';
     pinElement.style.top = pin.location.y - 70 + 'px';
     pinElement.querySelector('img').src = pin.author.avatar;
@@ -29,6 +31,7 @@
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
       createCard(pin);
+      pinElement.classList.add('.map__pin--active');
     });
     return pinElement;
   };
