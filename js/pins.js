@@ -33,11 +33,11 @@
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
 
-      var clickedPin = window.similarListPins.querySelector('.map__pin--active');
+      window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
       // var openedCard = window.map.querySelector('popup:not(.hidden)');
 
-      if (clickedPin) {
-        clickedPin.classList.remove('map__pin--active');
+      if (window.clickedPin) {
+        window.clickedPin.classList.remove('map__pin--active');
         pinElement.classList.add('map__pin--active');
         // openedCard.classList.add('hidden');
         createCard(pin);
