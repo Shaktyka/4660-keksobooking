@@ -206,16 +206,23 @@
     form.classList.add('ad-form--disabled');
   });
 
+  window.escKeydownSuccessHandler = function (evt) {
+    window.utils.isEscEvent(evt, window.closeSuccess);
+  };
+
   var successHandler = function () {
     var success = document.querySelector('.success');
     success.classList.remove('hidden');
 
-    var closeSuccess = function () {
+    document.addEventListener('keydown', window.escKeydownSuccessHandler);
+
+    window.closeSuccess = function () {
       success.classList.add('hidden');
+      document.removeEventListener('keydown', window.escKeydownSuccessHandler);
     };
 
     success.addEventListener('click', function () {
-      closeSuccess();
+      window.closeSuccess();
     });
   };
 
