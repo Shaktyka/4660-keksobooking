@@ -209,6 +209,14 @@
   var successHandler = function () {
     var success = document.querySelector('.success');
     success.classList.remove('hidden');
+
+    var closeSuccess = function () {
+      success.classList.add('hidden');
+    };
+
+    success.addEventListener('click', function () {
+      closeSuccess();
+    });
   };
 
   var errorHandler = function (errorMessage) {
