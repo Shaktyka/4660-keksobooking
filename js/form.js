@@ -207,7 +207,8 @@
   });
 
   var successHandler = function () {
-    // что-то внутри
+    var success = document.querySelector('.success');
+    success.classList.remove('hidden');
   };
 
   var errorHandler = function (errorMessage) {
@@ -236,10 +237,8 @@
     submitEvt.preventDefault();
     var formData = new FormData(form);
     window.save(formData, successHandler, errorHandler);
-    if (!errorHandler) {
-      resetInputs();
-      resetCheckboxes();
-    }
+    resetInputs();
+    resetCheckboxes();
   });
 
 })();
