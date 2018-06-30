@@ -210,16 +210,36 @@
     // что-то внутри
   };
 
-  var errorHandler = function () {
-    // что-то внутри
+  var errorHandler = function (errorMessage) {
+    window.node = document.createElement('div');
+    window.node.classList.add('modal');
+    window.node.classList.add('modal--error');
+    window.node.tabIndex = 0;
+
+    window.node.textContent = errorMessage;
+    document.body.insertBefore(window.node, document.body.firstChild);
+
+    window.closeError = function () {
+      window.node.classList.add('hidden');
+    };
+
+    window.node.addEventListener('click', function () {
+      window.closeError();
+    });
+
+    window.node.addEventListener('keydown', function (e) {
+      window.util.isEnterEvent(e, window.closeError);
+    });
   };
 
   form.addEventListener('submit', function (submitEvt) {
     submitEvt.preventDefault();
     var formData = new FormData(form);
     window.save(formData, successHandler, errorHandler);
-    resetInputs();
-    resetCheckboxes();
+    if (!errorHandler) {
+      resetInputs();
+      resetCheckboxes();
+    }
   });
 
 })();

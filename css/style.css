@@ -63,6 +63,24 @@
   outline: 2px solid red;
 }
 
+.modal {
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  margin-top: 200px;
+  z-index: 100;
+}
+
+.modal--error {
+  width: 500px;  
+  padding: 20px; 
+  background-color: red;
+  text-align: center;
+  font-size: 20px;
+}
+
 body {
   max-width: 1200px;
   margin: 0 auto;
