@@ -66,6 +66,7 @@
   window.closeCard = function () {
     window.cardElement.classList.add('hidden');
     document.removeEventListener('keydown', window.escKeydownHandler);
+    window.deactivatePin();
   };
 
   // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ

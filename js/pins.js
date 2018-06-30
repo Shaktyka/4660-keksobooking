@@ -17,6 +17,13 @@
     cardsParentElement.insertBefore(window.renderCard(pin), cardsBeforeElement);
   };
 
+  window.deactivatePin = function () {
+    var activePin = window.similarListPins.querySelector('.map__pin--active');
+    if (activePin) {
+      activePin.classList.remove('map__pin--active');
+    }
+  };
+
   // Генерация метки на основе шаблона
   window.renderPin = function (pin) {
 
@@ -31,16 +38,9 @@
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
 
-      window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
-
-      if (window.clickedPin) {
-        window.clickedPin.classList.remove('map__pin--active');
-        pinElement.classList.add('map__pin--active');
-        createCard(pin);
-      } else {
-        createCard(pin);
-        pinElement.classList.add('map__pin--active');
-      }
+      window.deactivatePin();
+      pinElement.classList.add('map__pin--active');
+      createCard(pin);
     });
     return pinElement;
   };
