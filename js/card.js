@@ -58,15 +58,16 @@
 
   // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
 
-  // var escKeydownHandler = function (evt) {
-  // window.utils.isEscEvent(evt, window.closeCard);
-  // };
+  window.escKeydownHandler = function (evt) {
+    window.utils.isEscEvent(evt, window.closeCard);
+  };
 
   // Функция закрытия карточки объявления
   window.closeCard = function () {
     // window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
     // window.clickedPin.classList.remove('map__pin--active');
     window.cardElement.classList.add('hidden');
+    document.removeEventListener('keydown', window.escKeydownHandler);
   };
 
   // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
@@ -100,9 +101,7 @@
     });
 
     // Вешаем прослушку на нажатие esc
-    document.addEventListener('keydown', function (evt) {
-      window.utils.isEscEvent(evt, window.closeCard);
-    });
+    document.addEventListener('keydown', window.escKeydownHandler);
     return window.cardElement;
   };
 
