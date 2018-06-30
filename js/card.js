@@ -69,6 +69,15 @@
     window.deactivatePin();
   };
 
+  // ЗАКРЫТИЕ ОТКРЫТОГО ОБЪЯВЛЕНИЯ
+
+  window.hideOpenedCard = function () {
+    var openedCard = window.map.querySelector('.popup:not(.hidden)');
+    if (openedCard) {
+      openedCard.classList.add('hidden');
+    }
+  };
+
   // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
 
   var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
@@ -86,6 +95,8 @@
     window.cardElement.querySelector('.popup__features').innerHTML = getListFeatures(card.offer.features);
     window.cardElement.querySelector('.popup__description').textContent = card.offer.description;
     renderPhotos(card.offer.photos, window.cardElement);
+
+    // ЗАКРЫТИЕ КАРТОЧКИ ОБЪЯВЛЕНИЯ
 
     var closeButton = window.cardElement.querySelector('.popup__close');
 

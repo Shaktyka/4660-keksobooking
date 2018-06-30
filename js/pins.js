@@ -40,6 +40,7 @@
 
       window.deactivatePin();
       pinElement.classList.add('map__pin--active');
+      window.hideOpenedCard();
       createCard(pin);
     });
     return pinElement;
