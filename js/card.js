@@ -56,36 +56,54 @@
     }
   };
 
+  // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
+
+  // var escKeydownHandler = function (evt) {
+  // window.utils.isEscEvent(evt, window.closeCard);
+  // };
+
+  // Функция закрытия карточки объявления
+  window.closeCard = function () {
+    // window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
+    // window.clickedPin.classList.remove('map__pin--active');
+    window.cardElement.classList.add('hidden');
+  };
+
   // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
 
   var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
   // Генерация объявления на основе шаблона
   window.renderCard = function (card) {
-    var cardElement = similarCardTemplate.cloneNode(true);
-    cardElement.querySelector('img').src = card.author.avatar;
-    cardElement.querySelector('.popup__title').textContent = card.offer.title;
-    cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
-    cardElement.querySelector('.popup__text--price').innerHTML = card.offer.price + '&#x20bd;<span>/ночь</span>';
-    cardElement.querySelector('.popup__type').textContent = convertType(card.offer.type);
-    cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
-    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
-    cardElement.querySelector('.popup__features').innerHTML = getListFeatures(card.offer.features);
-    cardElement.querySelector('.popup__description').textContent = card.offer.description;
-    renderPhotos(card.offer.photos, cardElement);
-    var closeButton = cardElement.querySelector('.popup__close');
-    closeButton.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      cardElement.classList.add('hidden');
-      window.clickedPin = window.similarListPins.querySelector('.map__pin--active');
-      window.clickedPin.classList.remove('map__pin--active');
+    window.cardElement = similarCardTemplate.cloneNode(true);
+    window.cardElement.querySelector('img').src = card.author.avatar;
+    window.cardElement.querySelector('.popup__title').textContent = card.offer.title;
+    window.cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
+    window.cardElement.querySelector('.popup__text--price').innerHTML = card.offer.price + '&#x20bd;<span>/ночь</span>';
+    window.cardElement.querySelector('.popup__type').textContent = convertType(card.offer.type);
+    window.cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
+    window.cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
+    window.cardElement.querySelector('.popup__features').innerHTML = getListFeatures(card.offer.features);
+    window.cardElement.querySelector('.popup__description').textContent = card.offer.description;
+    renderPhotos(card.offer.photos, window.cardElement);
+
+    var closeButton = window.cardElement.querySelector('.popup__close');
+
+    // Карточка объявления закрывается при клике на неё
+    closeButton.addEventListener('click', function () {
+      window.closeCard();
     });
+
+    // Карточка объявления закрывается при нажатии Enter
     closeButton.addEventListener('keydown', function (evt) {
-      evt.preventDefault();
-      if (evt.keyCode === 13) {
-        cardElement.classList.add('hidden');
-      }
+      window.utils.isEnterEvent(evt, window.closeCard);
     });
-    return cardElement;
+
+    // Вешаем прослушку на нажатие esc
+    document.addEventListener('keydown', function (evt) {
+      window.utils.isEscEvent(evt, window.closeCard);
+    });
+    return window.cardElement;
   };
+
 })();
