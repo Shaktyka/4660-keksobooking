@@ -14,8 +14,6 @@
     var cardsBeforeElement = window.map.querySelector('.map__filters-container');
 
     var cardsParentElement = cardsBeforeElement.parentNode;
-
-    // Добавление карточек объявлений
     cardsParentElement.insertBefore(window.renderCard(pin), cardsBeforeElement);
   };
 
@@ -47,37 +45,4 @@
     });
     return pinElement;
   };
-
-  // Функция для сборки массива объектов объявлений
-//  window.getCardsArray = function (amount) {
-//    var cardsArray = [];
-//    for (var i = 0; i < amount; i++) {
-//      var card = {
-//        'author': {
-//          'avatar': window.getAvatarLink(i + 1)
-//        },
-//        'offer': {
-//          'title': window.getSeriatimElement(window.OFFER_TITLES),
-//          'price': window.getRandomNumber(1000, 1000000),
-//          'type': window.convertType(window.getRandomElement(window.OFFER_TYPES)),
-//          'rooms': window.getRandomNumber(1, 5),
-//          'guests': window.getRandomNumber(1, 8),
-//          'checkin': window.getRandomElement(window.OFFER_CHECKS),
-//          'checkout': window.getRandomElement(window.OFFER_CHECKS),
-//          'features': window.getListFeatures(window.utils.getVariativeLengthArray(window.OFFER_FEATURES)),
-//          'description': '',
-//          'photos': window.OFFER_PHOTOS.slice().sort(function () {
-//            return Math.random() - 0.5;
-//          })
-//        },
-//        'location': {
-//          'x': window.getRandomNumber(300, 900),
-//          'y': window.getRandomNumber(130, 630)
-//        }
-//      };
-//      card.offer.address = card.location.x + ', ' + card.location.y;
-//      cardsArray.push(card);
-//    }
-//    return cardsArray;
-//  };
 })();

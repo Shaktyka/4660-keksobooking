@@ -5,7 +5,7 @@
 (function () {
 
   // Функция для конвертации англоязычного типа жилья в русскоязычный
-  window.convertType = function (typeHouse) {
+  var convertType = function (typeHouse) {
     var typeValue = '';
     switch (typeHouse) {
       case 'palace':
@@ -24,7 +24,7 @@
   };
 
   // Функция для сборки списка фичей для объявления
-  window.getListFeatures = function (rawList) {
+  var getListFeatures = function (rawList) {
     var parsedList = '';
     for (var i = 0; i < rawList.length; i++) {
       if (rawList[i] === 'wifi') {
@@ -67,10 +67,10 @@
     cardElement.querySelector('.popup__title').textContent = card.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
     cardElement.querySelector('.popup__text--price').innerHTML = card.offer.price + '&#x20bd;<span>/ночь</span>';
-    cardElement.querySelector('.popup__type').textContent = card.offer.type;
+    cardElement.querySelector('.popup__type').textContent = convertType(card.offer.type);
     cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
-    cardElement.querySelector('.popup__features').innerHTML = card.offer.features;
+    cardElement.querySelector('.popup__features').innerHTML = getListFeatures(card.offer.features);
     cardElement.querySelector('.popup__description').textContent = card.offer.description;
     renderPhotos(card.offer.photos, cardElement);
     var closeButton = cardElement.querySelector('.popup__close');
