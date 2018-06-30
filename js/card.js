@@ -55,6 +55,15 @@
       photoContainer.appendChild(photoElement);
     }
   };
+  
+  // ПРОВЕРКА НА НАЛИЧИЕ ДАННЫХ
+  
+  var findEmptyData = function (data) {
+    // найти блок, куда помещаются эти данные
+    if (data.length === 0) {
+      // скрыть блок
+    }
+  }
 
   // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
 
