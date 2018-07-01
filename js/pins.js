@@ -3,6 +3,9 @@
 // ГЕНЕРАЦИЯ ПИНОВ
 
 (function () {
+  var PIN_HALFWIDTH = 25;
+  var PIN_HEIGHT = 70;
+
   // Находим блок, куда поместим все новые метки
   window.similarListPins = window.map.querySelector('.map__pins');
 
@@ -29,8 +32,8 @@
 
     var pinElement = similarPinTemplate.cloneNode(true);
 
-    pinElement.style.left = pin.location.x - 25 + 'px';
-    pinElement.style.top = pin.location.y - 70 + 'px';
+    pinElement.style.left = pin.location.x - PIN_HALFWIDTH + 'px';
+    pinElement.style.top = pin.location.y - PIN_HEIGHT + 'px';
     pinElement.querySelector('img').src = pin.author.avatar;
     pinElement.querySelector('img').alt = pin.offer.title;
 
