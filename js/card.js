@@ -3,7 +3,6 @@
 (function () {
 
   var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
-  var closeButton = window.cardElement.querySelector('.popup__close');
 
   // ФУНКЦИИ ДЛЯ СБОРКИ ОБЪЯВЛЕНИЯ
 
@@ -104,6 +103,8 @@
     renderPhotos(card.offer.photos, window.cardElement);
 
     // ОБРАБОТЧИКИ СОБЫТИЙ
+
+    var closeButton = window.cardElement.querySelector('.popup__close');
 
     // Карточка объявления закрывается при клике на неё
     closeButton.addEventListener('click', function () {
