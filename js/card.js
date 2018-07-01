@@ -58,15 +58,6 @@
     }
   };
 
-  // ПРОВЕРКА НА НАЛИЧИЕ ДАННЫХ
-
-  var findEmptyData = function (data) {
-    var parentElement = 0;
-    if (data.length === 0) {
-      parentElement.classList.add('hidden');
-    }
-  };
-
   // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
 
   window.escKeydownHandler = function (evt) {
@@ -98,7 +89,13 @@
     window.cardElement.querySelector('.popup__type').textContent = convertType(card.offer.type);
     window.cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     window.cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
-    window.cardElement.querySelector('.popup__features').innerHTML = getListFeatures(card.offer.features);
+
+    var featuresBlock = window.cardElement.querySelector('.popup__features');
+    if (card.offer.features.length === 0) {
+      featuresBlock.classList.add('hidden');
+    } else {
+      featuresBlock.innerHTML = getListFeatures(card.offer.features);
+    }
     window.cardElement.querySelector('.popup__description').textContent = card.offer.description;
     renderPhotos(card.offer.photos, window.cardElement);
 
