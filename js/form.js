@@ -35,14 +35,6 @@
     }
   });
 
-  // Синхронизация времени чекина и чекаута
-  checkin.addEventListener('change', function () {
-    checkout.selectedIndex = checkin.selectedIndex;
-  });
-  checkout.addEventListener('change', function () {
-    checkin.selectedIndex = checkout.selectedIndex;
-  });
-
   // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
     var currentValue = rooms.value;
@@ -91,7 +83,7 @@
     }
   };
 
-  sendForm.addEventListener('click', submitClickHandler);
+  // РЕСЕТ ДАННЫХ
 
   // Функция скрытия меток на карте при reset
   var hidePins = function () {
@@ -191,11 +183,11 @@
     form.classList.add('ad-form--disabled');
   };
 
-  resetButton.addEventListener('click', resetHandler);
-
   window.escKeydownSuccessHandler = function (evt) {
     window.utils.isEscEvent(evt, window.closeSuccess);
   };
+
+  // ОБРАБОТКА ОТПРАВКИ ФОРМЫ
 
   // Обработка успешной отправки формы
   var successHandler = function () {
@@ -236,6 +228,20 @@
       window.util.isEnterEvent(e, window.closeError);
     });
   };
+
+  // ОБРАБОТЧИКИ СОБЫТИЙ
+
+  checkin.addEventListener('change', function () {
+    checkout.selectedIndex = checkin.selectedIndex;
+  });
+
+  checkout.addEventListener('change', function () {
+    checkin.selectedIndex = checkout.selectedIndex;
+  });
+
+  sendForm.addEventListener('click', submitClickHandler);
+
+  resetButton.addEventListener('click', resetHandler);
 
   form.addEventListener('submit', function (submitEvt) {
     submitEvt.preventDefault();
