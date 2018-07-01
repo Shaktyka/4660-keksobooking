@@ -173,12 +173,12 @@
     }
   };
 
-  // Функция обработки сброса формы
+  // Cброс данных формы
   var resetButton = document.querySelector('.ad-form__reset');
 
   var addressInput = document.getElementById('address');
 
-  resetButton.addEventListener('click', function () {
+  var resetHandler = function () {
     // закрываем открытые объявления
     hideAds();
     // убираем все метки с карты
@@ -204,7 +204,9 @@
     });
     // затемняем форму
     form.classList.add('ad-form--disabled');
-  });
+  };
+
+  resetButton.addEventListener('click', resetHandler);
 
   window.escKeydownSuccessHandler = function (evt) {
     window.utils.isEscEvent(evt, window.closeSuccess);
@@ -252,8 +254,7 @@
     submitEvt.preventDefault();
     var formData = new FormData(form);
     window.save(formData, successHandler, errorHandler);
-    resetInputs();
-    resetCheckboxes();
+    resetHandler();
   });
 
 })();
