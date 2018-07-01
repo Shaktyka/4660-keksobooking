@@ -3,20 +3,22 @@
 // ВСЁ, ЧТО КАСАЕТСЯ ФОРМЫ
 
 (function () {
-  // Общие переменные, нужные для обработки формы
-
-  var similarListPins = window.map.querySelector('.map__pins');
 
   // Переменные формы
-
+  var INVALID_FIELD_STYLE = '2px solid #ff0000';
   var form = document.querySelector('.ad-form');
-
   var fieldsetList = form.querySelectorAll('fieldset');
-
   var type = document.getElementById('type');
-
   var price = document.getElementById('price');
+  var checkin = document.getElementById('timein');
+  var checkout = document.getElementById('timeout');
+  var rooms = document.getElementById('rooms');
+  var guests = document.getElementById('capacity');
+  var sendForm = document.querySelector('.ad-form__submit');
+  var resetButton = document.querySelector('.ad-form__reset');
+  var addressInput = document.getElementById('address');
 
+  // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     if (type.selectedIndex === 0) {
       price.min = 0;
@@ -33,26 +35,15 @@
     }
   });
 
-  // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
-
-  var checkin = document.getElementById('timein');
-
-  var checkout = document.getElementById('timeout');
-
+  // Синхронизация времени чекина и чекаута
   checkin.addEventListener('change', function () {
     checkout.selectedIndex = checkin.selectedIndex;
   });
-
   checkout.addEventListener('change', function () {
     checkin.selectedIndex = checkout.selectedIndex;
   });
 
-  // СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
-
-  var rooms = document.getElementById('rooms');
-
-  var guests = document.getElementById('capacity');
-
+  // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
     var currentValue = rooms.value;
     if (currentValue === '0') {
@@ -75,8 +66,6 @@
 
   // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
 
-  var sendForm = document.querySelector('.ad-form__submit');
-
   // Функция поиска невалидных полей
   var findInvalidFields = function () {
     var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
@@ -97,7 +86,7 @@
     if (invalidInputs) {
       for (var y = 0; y < invalidInputs.length; y++) {
         var input = invalidInputs[y];
-        input.style.outline = '2px solid red';
+        input.style.outline = INVALID_FIELD_STYLE;
       }
     }
   };
@@ -106,7 +95,7 @@
 
   // Функция скрытия меток на карте при reset
   var hidePins = function () {
-    var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+    var pinsList = window.similarListPins.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
     }
@@ -174,10 +163,6 @@
   };
 
   // Cброс данных формы
-  var resetButton = document.querySelector('.ad-form__reset');
-
-  var addressInput = document.getElementById('address');
-
   var resetHandler = function () {
     // закрываем открытые объявления
     hideAds();
@@ -212,6 +197,7 @@
     window.utils.isEscEvent(evt, window.closeSuccess);
   };
 
+  // Обработка успешной отправки формы
   var successHandler = function () {
     var success = document.querySelector('.success');
     success.classList.remove('hidden');
@@ -228,6 +214,7 @@
     });
   };
 
+  // Функция обработки неуспеха при отправке формы
   var errorHandler = function (errorMessage) {
     window.node = document.createElement('div');
     window.node.classList.add('modal');

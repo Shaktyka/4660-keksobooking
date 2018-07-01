@@ -3,7 +3,7 @@
 (function () {
   window.map = document.querySelector('.map');
 
-  // Дефолтная метка на карте
+  // Константы для главной метки
   window.pinMain = window.map.querySelector('.map__pin--main');
 
   window.MAIN_PIN_WIDTH = window.pinMain.offsetWidth;

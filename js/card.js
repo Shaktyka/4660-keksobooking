@@ -58,12 +58,12 @@
 
   // ПРОВЕРКА НА НАЛИЧИЕ ДАННЫХ
 
-  // var findEmptyData = function (data) {
-  // найти блок, куда помещаются эти данные
-  // if (data.length === 0) {
-  // скрыть блок
-  // }
-  // };
+  var findEmptyData = function (data) {
+    var parentElement = 0;
+    if (data.length === 0) {
+      parentElement.classList.add('hidden');
+    }
+  };
 
   // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
 
