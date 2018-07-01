@@ -46,18 +46,6 @@
     return parsedList;
   };
 
-  // Функция для вставки фото жилья в объявление
-  var renderPhotos = function (photos, cardElement) {
-    var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
-    var photoContainer = cardElement.querySelector('.popup__photos');
-    photoContainer.innerHTML = '';
-    for (var i = 0; i < photos.length; i++) {
-      var photoElement = photoTemplateElement.cloneNode(true);
-      photoElement.src = photos[i];
-      photoContainer.appendChild(photoElement);
-    }
-  };
-
   // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
 
   window.escKeydownHandler = function (evt) {
@@ -104,7 +92,26 @@
       descriptionBlock.textContent = card.offer.description;
     }
 
-    renderPhotos(card.offer.photos, window.cardElement);
+    // Функция для вставки фото жилья в объявление
+    var photoContainer = window.cardElement.querySelector('.popup__photos');
+
+    var renderPhotos = function (photos) {
+      var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
+
+      photoContainer.innerHTML = '';
+      for (var i = 0; i < photos.length; i++) {
+        var photoElement = photoTemplateElement.cloneNode(true);
+        photoElement.src = photos[i];
+        photoContainer.appendChild(photoElement);
+      }
+    };
+
+    if (card.offer.photos.length === 0) {
+      photoContainer.innerHTML = '';
+      photoContainer.classList.add('hidden');
+    } else {
+      renderPhotos(card.offer.photos);
+    }
 
     // ОБРАБОТЧИКИ СОБЫТИЙ
 
