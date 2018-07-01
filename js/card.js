@@ -96,7 +96,14 @@
     } else {
       featuresBlock.innerHTML = getListFeatures(card.offer.features);
     }
-    window.cardElement.querySelector('.popup__description').textContent = card.offer.description;
+
+    var descriptionBlock = window.cardElement.querySelector('.popup__description');
+    if (card.offer.description.length === 0) {
+      descriptionBlock.classList.add('hidden');
+    } else {
+      descriptionBlock.textContent = card.offer.description;
+    }
+
     renderPhotos(card.offer.photos, window.cardElement);
 
     // ОБРАБОТЧИКИ СОБЫТИЙ
