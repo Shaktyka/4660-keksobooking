@@ -2,6 +2,9 @@
 
 (function () {
 
+  var form = document.querySelector('.ad-form');
+  var fieldsetList = form.querySelectorAll('fieldset');
+
   // Функция отрисовки меток и добавления в целевой блок
   var createPins = function (data) {
     var fragment = document.createDocumentFragment();
@@ -15,15 +18,30 @@
     }
   };
 
-  var errorHandler = function () {
-    // Вывод окна с сообщением об ошибке
+  // Функция обработки неуспеха при выполнении запроса
+  window.errorHandler = function (errorMessage) {
+    window.node = document.createElement('div');
+    window.node.classList.add('modal');
+    window.node.classList.add('modal--error');
+    window.node.tabIndex = 0;
+
+    window.node.textContent = errorMessage;
+    document.body.insertBefore(window.node, document.body.firstChild);
+
+    window.closeError = function () {
+      window.node.classList.add('hidden');
+    };
+
+    window.node.addEventListener('click', function () {
+      window.closeError();
+    });
+
+    window.node.addEventListener('keydown', function (e) {
+      window.util.isEnterEvent(e, window.closeError);
+    });
   };
 
   // АКТИВАЦИЯ СТРАНИЦЫ
-
-  // переменные для активации формы
-  var form = document.querySelector('.ad-form');
-  var fieldsetList = form.querySelectorAll('fieldset');
 
   var buttonMouseupHandler = function () {
     // разблокируем карту
@@ -35,8 +53,8 @@
       item.disabled = false;
     });
     // разблокируем генерацию массива меток и объявлений
-    window.load(createPins, errorHandler);
-    // подняли главную метку над всеми остальными
+    window.load(createPins, window.errorHandler);
+    // поднимаем главную метку над всеми остальными
     window.pinMain.style.zIndex = 100;
   };
 

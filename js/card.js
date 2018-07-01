@@ -1,8 +1,11 @@
 'use strict';
 
-// СБОРКА ОБЪЯВЛЕНИЯ
-
 (function () {
+
+  var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
+  var closeButton = window.cardElement.querySelector('.popup__close');
+
+  // ФУНКЦИИ ДЛЯ СБОРКИ ОБЪЯВЛЕНИЯ
 
   // Функция для конвертации англоязычного типа жилья в русскоязычный
   var convertType = function (typeHouse) {
@@ -71,14 +74,11 @@
     window.utils.isEscEvent(evt, window.closeCard);
   };
 
-  // Функция закрытия карточки объявления
   window.closeCard = function () {
     window.cardElement.classList.add('hidden');
     document.removeEventListener('keydown', window.escKeydownHandler);
     window.deactivatePin();
   };
-
-  // ЗАКРЫТИЕ ОТКРЫТОГО ОБЪЯВЛЕНИЯ
 
   window.hideOpenedCard = function () {
     var openedCard = window.map.querySelector('.popup:not(.hidden)');
@@ -87,9 +87,7 @@
     }
   };
 
-  // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЙ
-
-  var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
+  // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЯ
 
   // Генерация объявления на основе шаблона
   window.renderCard = function (card) {
@@ -105,9 +103,7 @@
     window.cardElement.querySelector('.popup__description').textContent = card.offer.description;
     renderPhotos(card.offer.photos, window.cardElement);
 
-    // ЗАКРЫТИЕ КАРТОЧКИ ОБЪЯВЛЕНИЯ
-
-    var closeButton = window.cardElement.querySelector('.popup__close');
+    // ОБРАБОТЧИКИ СОБЫТИЙ
 
     // Карточка объявления закрывается при клике на неё
     closeButton.addEventListener('click', function () {
