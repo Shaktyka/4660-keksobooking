@@ -28,17 +28,18 @@
   };
 
   // Стартовые координаты главной метки
-  window.getStartCoords = function () {
-    window.mainPin.style.left = window.MainPinCentered.x + 'px';
-    window.mainPin.style.top = window.MainPinCentered.y + 'px';
+  window.getStartCoords = function (coord) {
+    // debugger;
+    window.mainPin.style.left = coord.x + 'px';
+    window.mainPin.style.top = coord.y + 'px';
   };
-  window.getStartCoords();
+  window.getStartCoords(window.MainPinCentered);
 
   // Прописываем координаты в поле Адрес при неактивной странице
-  window.putCoordsInAddress = function () {
-    addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
+  window.putCoordsInAddress = function (coordinates) {
+    addressInput.value = coordinates.x + ', ' + coordinates.y;
   };
-  window.putCoordsInAddress();
+  window.putCoordsInAddress(window.MainPinCentered);
 
   // DragAndDrop главной метки
 
