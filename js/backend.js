@@ -12,7 +12,7 @@
 
   // Функция для отправки данных на сервер
   window.save = function (data, onLoad, onError) {
-    var url_save = 'https://js.dump.academy/keksobooking';
+    var urlSave = 'https://js.dump.academy/keksobooking';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -53,13 +53,13 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('POST', url_save);
+    xhr.open('POST', urlSave);
     xhr.send(data);
   };
 
   // Функция для загрузки объявлений с сервера
   window.load = function (onLoad, onError) {
-    var url_load = 'https://js.dump.academy/keksobooking/data';
+    var urlLoad = 'https://js.dump.academy/keksobooking/data';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -100,7 +100,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('GET', url_load);
+    xhr.open('GET', urlLoad);
     xhr.send();
   };
 
