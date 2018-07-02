@@ -4,22 +4,16 @@
 
   var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
+  var TypeHouse = {
+    'palace': 'Дворец',
+    'flat': 'Квартира',
+    'house': 'Дом',
+    'bungalo': 'Бунгало'
+  };
+
   // Функция для конвертации англоязычного типа жилья в русскоязычный
-  var convertType = function (typeHouse) {
-    var typeValue = '';
-    switch (typeHouse) {
-      case 'palace':
-        typeValue = 'Дворец';
-        break;
-      case 'flat':
-        typeValue = 'Квартира';
-        break;
-      case 'house':
-        typeValue = 'Дом';
-        break;
-      case 'bungalo':
-        typeValue = 'Бунгало';
-    }
+  var convertType = function (type) {
+    var typeValue = TypeHouse[type];
     return typeValue;
   };
 
