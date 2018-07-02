@@ -15,21 +15,25 @@
   var resetButton = document.querySelector('.ad-form__reset');
   var addressInput = document.getElementById('address');
 
+  var MinPrice = {
+    0: 0,
+    1: 1000,
+    2: 5000,
+    3: 10000
+  };
+
+  var Placeholder = {
+    0: 0,
+    1: 1000,
+    2: 5000,
+    3: 10000
+  };
+
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
-    if (type.selectedIndex === 0) {
-      price.min = 0;
-      price.placeholder = 0;
-    } else if (type.selectedIndex === 1) {
-      price.min = 1000;
-      price.placeholder = 1000;
-    } else if (type.selectedIndex === 2) {
-      price.min = 5000;
-      price.placeholder = 5000;
-    } else if (type.selectedIndex === 3) {
-      price.min = 10000;
-      price.placeholder = 10000;
-    }
+    var index = type.selectedIndex;
+    price.min = MinPrice[index];
+    price.placeholder = Placeholder[index];
   });
 
   // Соответствие количества комнат количеству гостей
