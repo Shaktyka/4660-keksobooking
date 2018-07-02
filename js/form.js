@@ -3,6 +3,8 @@
 (function () {
 
   // Переменные формы
+  var PRICE_VALUE = [0, 1000, 5000, 10000];
+
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
   var type = document.getElementById('type');
@@ -14,25 +16,11 @@
   var sendForm = document.querySelector('.ad-form__submit');
   var resetButton = document.querySelector('.ad-form__reset');
 
-  var MinPrice = {
-    0: 0,
-    1: 1000,
-    2: 5000,
-    3: 10000
-  };
-
-  var Placeholder = {
-    0: 0,
-    1: 1000,
-    2: 5000,
-    3: 10000
-  };
-
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
-    price.min = MinPrice[index];
-    price.placeholder = Placeholder[index];
+    price.min = PRICE_VALUE[index];
+    price.placeholder = PRICE_VALUE[index];
   });
 
   // Соответствие количества комнат количеству гостей
