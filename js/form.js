@@ -160,8 +160,8 @@
     // убираем все метки с карты
     hidePins();
     // ставим главную метку на исходную позицию
-    window.pinMain.style.left = window.mainPinCenteredLeft + 'px';
-    window.pinMain.style.top = window.mainPinCenteredTop + 'px';
+    window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
+    window.mainPin.style.top = window.mainPinCenteredTop + 'px';
     // устанавливаем координаты в поле address
     addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
     // сбрасываем введённые данные, если были

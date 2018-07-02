@@ -56,5 +56,5 @@
     window.load(createPins, window.errorHandler);
   };
 
-  window.pinMain.addEventListener('mouseup', pinMouseupHandler);
+  window.mainPin.addEventListener('mouseup', pinMouseupHandler);
 })();

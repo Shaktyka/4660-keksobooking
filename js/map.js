@@ -4,11 +4,11 @@
   window.map = document.querySelector('.map');
 
   // Константы для главной метки
-  window.pinMain = window.map.querySelector('.map__pin--main');
+  window.mainPin = window.map.querySelector('.map__pin--main');
 
-  window.MAIN_PIN_WIDTH = window.pinMain.offsetWidth;
+  window.MAIN_PIN_WIDTH = window.mainPin.offsetWidth;
   // 22 - это высота псевдоэлемента-указателя
-  window.MAIN_PIN_HEIGTH = window.pinMain.offsetHeight + 22;
+  window.MAIN_PIN_HEIGTH = window.mainPin.offsetHeight + 22;
 
   window.MAIN_PIN_LEFT = 570;
   window.MAIN_PIN_TOP = 375;
@@ -22,8 +22,8 @@
   window.mainPinCenteredTop = window.MAIN_PIN_TOP - Math.round(window.MAIN_PIN_HEIGTH / 2);
 
   // Прописываем координаты дефолтной метки по центру
-  window.pinMain.style.left = window.mainPinCenteredLeft + 'px';
-  window.pinMain.style.top = window.mainPinCenteredTop + 'px';
+  window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
+  window.mainPin.style.top = window.mainPinCenteredTop + 'px';
 
   // Прописываем координаты в поле Адрес при неактивной странице
   var addressInput = document.getElementById('address');
@@ -31,7 +31,7 @@
 
   // DRAGNDROP ГЛАВНОЙ МЕТКИ
 
-  window.pinMain.addEventListener('mousedown', function (ee) {
+  window.mainPin.addEventListener('mousedown', function (ee) {
     ee.preventDefault();
 
     var startCoords = {
@@ -52,15 +52,15 @@
         y: moveEvt.clientY
       };
 
-      var newX = window.pinMain.offsetLeft + shift.x;
-      var newY = window.pinMain.offsetTop + shift.y;
+      var newX = window.mainPin.offsetLeft + shift.x;
+      var newY = window.mainPin.offsetTop + shift.y;
 
       if (newX < 0) {
         newX = 0;
       }
 
-      if (newX > window.pinMain.parentElement.offsetWidth - window.pinMain.offsetWidth) {
-        newX = window.pinMain.parentElement.offsetWidth - window.pinMain.offsetWidth;
+      if (newX > window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth) {
+        newX = window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth;
       }
 
       if (newY < MAP_MIN_Y) {
@@ -70,12 +70,12 @@
         newY = MAP_MAX_Y;
       }
 
-      window.pinMain.style.left = newX + 'px';
-      window.pinMain.style.top = newY + 'px';
+      window.mainPin.style.left = newX + 'px';
+      window.mainPin.style.top = newY + 'px';
 
       // трансляция координат метки в поле address
-      var locationX = newX + Math.round(window.pinMain.offsetWidth / 2);
-      var locationY = newY + window.pinMain.offsetHeight;
+      var locationX = newX + Math.round(window.mainPin.offsetWidth / 2);
+      var locationY = newY + window.mainPin.offsetHeight;
 
       addressInput.value = locationX + ', ' + locationY;
     };
@@ -84,7 +84,7 @@
       upEvt.preventDefault();
 
       // обновление координат метки в поле address после отжатия мыши
-      addressInput.value = (window.pinMain.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.pinMain.offsetTop + window.MAIN_PIN_HEIGTH);
+      addressInput.value = (window.mainPin.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + window.MAIN_PIN_HEIGTH);
 
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);
