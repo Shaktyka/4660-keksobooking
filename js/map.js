@@ -22,13 +22,17 @@
 
   var addressInput = document.getElementById('address');
 
-  // Координаты дефолтной метки по её центру
-  window.mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
-  window.mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2);
+  window.MainPinCentered = {
+    x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
+    y: MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2)
+  };
 
-  // Прописываем координаты дефолтной метки по центру
-  window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
-  window.mainPin.style.top = window.mainPinCenteredTop + 'px';
+  // Стартовые координаты главной метки
+  window.getStartCoords = function () {
+    window.mainPin.style.left = window.MainPinCentered.x + 'px';
+    window.mainPin.style.top = window.MainPinCentered.y + 'px';
+  };
+  window.getStartCoords();
 
   // Прописываем координаты в поле Адрес при неактивной странице
   window.putCoordsInAddress = function () {

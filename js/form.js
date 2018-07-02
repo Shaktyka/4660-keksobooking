@@ -161,8 +161,7 @@
     // убираем все метки с карты
     hidePins();
     // ставим главную метку на исходную позицию
-    window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
-    window.mainPin.style.top = window.mainPinCenteredTop + 'px';
+    window.getStartCoords();
     // устанавливаем координаты в поле address
     window.putCoordsInAddress();
     // сбрасываем введённые данные, если были
