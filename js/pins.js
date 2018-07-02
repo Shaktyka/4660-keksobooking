@@ -1,7 +1,5 @@
 'use strict';
 
-// ГЕНЕРАЦИЯ ПИНОВ
-
 (function () {
   var PIN_HALFWIDTH = 25;
   var PIN_HEIGHT = 70;
@@ -27,7 +25,7 @@
     }
   };
 
-  // Генерация метки на основе шаблона
+  // Генерация пина на основе шаблона
   window.renderPin = function (pin) {
 
     var pinElement = pinTemplate.cloneNode(true);

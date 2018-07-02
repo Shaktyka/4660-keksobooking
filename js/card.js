@@ -4,8 +4,6 @@
 
   var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
-  // ФУНКЦИИ ДЛЯ СБОРКИ ОБЪЯВЛЕНИЯ
-
   // Функция для конвертации англоязычного типа жилья в русскоязычный
   var convertType = function (typeHouse) {
     var typeValue = '';
@@ -46,7 +44,7 @@
     return parsedList;
   };
 
-  // ЗАКРЫТИЕ ОБЪЯВЛЕНИЯ
+  // Закрытие объявления
 
   window.escKeydownHandler = function (evt) {
     window.utils.isEscEvent(evt, window.closeCard);
@@ -64,8 +62,6 @@
       openedCard.classList.add('hidden');
     }
   };
-
-  // ГЕНЕРАЦИЯ ОБЪЯВЛЕНИЯ
 
   // Генерация объявления на основе шаблона
   window.renderCard = function (card) {
@@ -113,7 +109,7 @@
       renderPhotos(card.offer.photos);
     }
 
-    // ОБРАБОТЧИКИ СОБЫТИЙ
+    // Обработчики событий
 
     var closeButton = window.cardElement.querySelector('.popup__close');
 
