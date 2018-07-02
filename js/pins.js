@@ -7,10 +7,10 @@
   var PIN_HEIGHT = 70;
 
   // Находим блок, куда поместим все новые метки
-  window.similarListPins = window.map.querySelector('.map__pins');
+  window.pinsContainer = window.map.querySelector('.map__pins');
 
   // Находим шаблон, который будем использовать для генерации меток
-  var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
+  var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
   // Отрисовка объявлений и добавление их в целевой блок
   var createCard = function (pin) {
@@ -21,7 +21,7 @@
   };
 
   window.deactivatePin = function () {
-    var activePin = window.similarListPins.querySelector('.map__pin--active');
+    var activePin = window.pinsContainer.querySelector('.map__pin--active');
     if (activePin) {
       activePin.classList.remove('map__pin--active');
     }
@@ -30,7 +30,7 @@
   // Генерация метки на основе шаблона
   window.renderPin = function (pin) {
 
-    var pinElement = similarPinTemplate.cloneNode(true);
+    var pinElement = pinTemplate.cloneNode(true);
 
     pinElement.style.left = pin.location.x - PIN_HALFWIDTH + 'px';
     pinElement.style.top = pin.location.y - PIN_HEIGHT + 'px';

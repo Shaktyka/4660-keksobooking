@@ -87,7 +87,7 @@
 
   // Функция скрытия меток на карте при reset
   var hidePins = function () {
-    var pinsList = window.similarListPins.querySelectorAll('button:not(.map__pin--main)');
+    var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
     }

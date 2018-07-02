@@ -2,7 +2,7 @@
 
 (function () {
 
-  var similarCardTemplate = document.querySelector('template').content.querySelector('.map__card');
+  var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
   // ФУНКЦИИ ДЛЯ СБОРКИ ОБЪЯВЛЕНИЯ
 
@@ -69,7 +69,7 @@
 
   // Генерация объявления на основе шаблона
   window.renderCard = function (card) {
-    window.cardElement = similarCardTemplate.cloneNode(true);
+    window.cardElement = cardTemplate.cloneNode(true);
     window.cardElement.querySelector('img').src = card.author.avatar;
     window.cardElement.querySelector('.popup__title').textContent = card.offer.title;
     window.cardElement.querySelector('.popup__text--address').textContent = card.offer.address;

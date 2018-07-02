@@ -12,9 +12,9 @@
       fragment.appendChild(window.renderPin(data[i]));
     }
     // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
-    var buttonsList = window.similarListPins.querySelectorAll('button:not(.map__pin--main)');
+    var buttonsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     if (buttonsList.length === 0) {
-      window.similarListPins.appendChild(fragment);
+      window.pinsContainer.appendChild(fragment);
     }
   };
 
@@ -54,8 +54,6 @@
     });
     // разблокируем генерацию массива меток и объявлений
     window.load(createPins, window.errorHandler);
-    // поднимаем главную метку над всеми остальными
-    window.pinMain.style.zIndex = 100;
   };
 
   window.pinMain.addEventListener('mouseup', buttonMouseupHandler);
