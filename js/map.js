@@ -2,14 +2,12 @@
 
 (function () {
 
-  window.map = document.querySelector('.map');
+  // высота кончика пина
+  var TIP = 22;
 
-  // Константы для главной метки
-  window.mainPin = window.map.querySelector('.map__pin--main');
+  var MAIN_PIN_WIDTH = document.querySelector('.map').querySelector('.map__pin--main').offsetWidth;
 
-  var MAIN_PIN_WIDTH = window.mainPin.offsetWidth;
-  // 22 - это высота псевдоэлемента-указателя
-  var MAIN_PIN_HEIGHT = window.mainPin.offsetHeight + 22;
+  var MAIN_PIN_HEIGHT = document.querySelector('.map').querySelector('.map__pin--main').offsetHeight + TIP;
 
   var MAIN_PIN_LEFT = 570;
   var MAIN_PIN_TOP = 375;
@@ -17,6 +15,11 @@
   // Границы доступной области
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
+
+  window.map = document.querySelector('.map');
+
+  // Константы для главной метки
+  window.mainPin = window.map.querySelector('.map__pin--main');
 
   // Координаты дефолтной метки по её центру
   window.mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
