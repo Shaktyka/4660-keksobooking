@@ -18,8 +18,9 @@
 
   window.map = document.querySelector('.map');
 
-  // Константы для главной метки
   window.mainPin = window.map.querySelector('.map__pin--main');
+
+  var addressInput = document.getElementById('address');
 
   // Координаты дефолтной метки по её центру
   window.mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
@@ -30,8 +31,10 @@
   window.mainPin.style.top = window.mainPinCenteredTop + 'px';
 
   // Прописываем координаты в поле Адрес при неактивной странице
-  var addressInput = document.getElementById('address');
-  addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
+  window.putCoordsInAddress = function () {
+    addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
+  };
+  window.putCoordsInAddress();
 
   // DragAndDrop главной метки
 

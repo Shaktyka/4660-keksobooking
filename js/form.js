@@ -13,7 +13,6 @@
   var guests = document.getElementById('capacity');
   var sendForm = document.querySelector('.ad-form__submit');
   var resetButton = document.querySelector('.ad-form__reset');
-  var addressInput = document.getElementById('address');
 
   var MinPrice = {
     0: 0,
@@ -165,7 +164,7 @@
     window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
     window.mainPin.style.top = window.mainPinCenteredTop + 'px';
     // устанавливаем координаты в поле address
-    addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
+    window.putCoordsInAddress();
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price
