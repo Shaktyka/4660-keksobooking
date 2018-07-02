@@ -2,9 +2,6 @@
 
 (function () {
 
-  var URL_SAVE = 'https://js.dump.academy/keksobooking';
-  var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
-
   var Code = {
     SUCCESS: 200,
     INVALID_REQUEST: 400,
@@ -15,6 +12,7 @@
 
   // Функция для отправки данных на сервер
   window.save = function (data, onLoad, onError) {
+    var url_save = 'https://js.dump.academy/keksobooking';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -55,12 +53,13 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('POST', URL_SAVE);
+    xhr.open('POST', url_save);
     xhr.send(data);
   };
 
   // Функция для загрузки объявлений с сервера
   window.load = function (onLoad, onError) {
+    var url_load = 'https://js.dump.academy/keksobooking/data';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -101,7 +100,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('GET', URL_LOAD);
+    xhr.open('GET', url_load);
     xhr.send();
   };
 
