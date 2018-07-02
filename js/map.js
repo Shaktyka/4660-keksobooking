@@ -8,7 +8,7 @@
 
   window.MAIN_PIN_WIDTH = window.mainPin.offsetWidth;
   // 22 - это высота псевдоэлемента-указателя
-  window.MAIN_PIN_HEIGTH = window.mainPin.offsetHeight + 22;
+  window.MAIN_PIN_HEIGHT = window.mainPin.offsetHeight + 22;
 
   window.MAIN_PIN_LEFT = 570;
   window.MAIN_PIN_TOP = 375;
@@ -19,7 +19,7 @@
 
   // Координаты дефолтной метки по её центру
   window.mainPinCenteredLeft = window.MAIN_PIN_LEFT - Math.round(window.MAIN_PIN_WIDTH / 2);
-  window.mainPinCenteredTop = window.MAIN_PIN_TOP - Math.round(window.MAIN_PIN_HEIGTH / 2);
+  window.mainPinCenteredTop = window.MAIN_PIN_TOP - Math.round(window.MAIN_PIN_HEIGHT / 2);
 
   // Прописываем координаты дефолтной метки по центру
   window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
@@ -84,7 +84,7 @@
       upEvt.preventDefault();
 
       // обновление координат метки в поле address после отжатия мыши
-      addressInput.value = (window.mainPin.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + window.MAIN_PIN_HEIGTH);
+      addressInput.value = (window.mainPin.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + window.MAIN_PIN_HEIGHT);
 
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);
