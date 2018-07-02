@@ -4,7 +4,7 @@
 
   var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
-  var TypeHouse = {
+  var HOUSE_TYPE = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
@@ -13,7 +13,7 @@
 
   // Функция для конвертации англоязычного типа жилья в русскоязычный
   var convertType = function (type) {
-    var typeValue = TypeHouse[type];
+    var typeValue = HOUSE_TYPE[type];
     return typeValue;
   };
 
