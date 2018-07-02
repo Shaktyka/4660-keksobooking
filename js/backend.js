@@ -2,8 +2,10 @@
 
 (function () {
 
-  var SAVE_URL = 'https://js.dump.academy/keksobooking';
-  var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
+  var Url = {
+    SAVE: 'https://js.dump.academy/keksobooking',
+    LOAD: 'https://js.dump.academy/keksobooking/data'
+  };
 
   var Code = {
     SUCCESS: 200,
@@ -55,7 +57,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('POST', SAVE_URL);
+    xhr.open('POST', Url.SAVE);
     xhr.send(data);
   };
 
@@ -101,7 +103,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('GET', LOAD_URL);
+    xhr.open('GET', Url.LOAD);
     xhr.send();
   };
 
