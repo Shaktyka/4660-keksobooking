@@ -6,20 +6,20 @@
   // Константы для главной метки
   window.mainPin = window.map.querySelector('.map__pin--main');
 
-  window.MAIN_PIN_WIDTH = window.mainPin.offsetWidth;
+  var MAIN_PIN_WIDTH = window.mainPin.offsetWidth;
   // 22 - это высота псевдоэлемента-указателя
-  window.MAIN_PIN_HEIGHT = window.mainPin.offsetHeight + 22;
+  var MAIN_PIN_HEIGHT = window.mainPin.offsetHeight + 22;
 
-  window.MAIN_PIN_LEFT = 570;
-  window.MAIN_PIN_TOP = 375;
+  var MAIN_PIN_LEFT = 570;
+  var MAIN_PIN_TOP = 375;
 
   // Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
 
   // Координаты дефолтной метки по её центру
-  window.mainPinCenteredLeft = window.MAIN_PIN_LEFT - Math.round(window.MAIN_PIN_WIDTH / 2);
-  window.mainPinCenteredTop = window.MAIN_PIN_TOP - Math.round(window.MAIN_PIN_HEIGHT / 2);
+  window.mainPinCenteredLeft = MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2);
+  window.mainPinCenteredTop = MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2);
 
   // Прописываем координаты дефолтной метки по центру
   window.mainPin.style.left = window.mainPinCenteredLeft + 'px';
@@ -84,7 +84,7 @@
       upEvt.preventDefault();
 
       // обновление координат метки в поле address после отжатия мыши
-      addressInput.value = (window.mainPin.offsetLeft - Math.round(window.MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + window.MAIN_PIN_HEIGHT);
+      addressInput.value = (window.mainPin.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + MAIN_PIN_HEIGHT);
 
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);
