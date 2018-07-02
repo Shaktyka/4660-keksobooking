@@ -149,9 +149,9 @@
     // убираем все метки с карты
     hidePins();
     // ставим главную метку на исходную позицию
-    window.getStartCoords(window.MainPinCentered);
+    window.getStartCoords(window.mainPinCentered);
     // устанавливаем координаты в поле address
-    window.putCoordsInAddress(window.MainPinCentered);
+    window.putCoordsInAddress(window.mainPinCentered);
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price

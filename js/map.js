@@ -22,7 +22,7 @@
 
   var addressInput = document.getElementById('address');
 
-  window.MainPinCentered = {
+  window.mainPinCentered = {
     x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
     y: MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2)
   };
@@ -33,13 +33,13 @@
     window.mainPin.style.left = coord.x + 'px';
     window.mainPin.style.top = coord.y + 'px';
   };
-  window.getStartCoords(window.MainPinCentered);
+  window.getStartCoords(window.mainPinCentered);
 
   // Прописываем координаты в поле Адрес при неактивной странице
   window.putCoordsInAddress = function (coordinates) {
     addressInput.value = coordinates.x + ', ' + coordinates.y;
   };
-  window.putCoordsInAddress(window.MainPinCentered);
+  window.putCoordsInAddress(window.mainPinCentered);
 
   // DragAndDrop главной метки
 
