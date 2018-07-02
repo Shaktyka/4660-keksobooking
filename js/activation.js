@@ -37,7 +37,7 @@
     });
 
     window.node.addEventListener('keydown', function (e) {
-      window.util.isEnterEvent(e, window.closeError);
+      window.utils.isEnterEvent(e, window.closeError);
     });
   };
 
