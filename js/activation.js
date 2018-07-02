@@ -43,7 +43,7 @@
 
   // АКТИВАЦИЯ СТРАНИЦЫ
 
-  var buttonMouseupHandler = function () {
+  var pinMouseupHandler = function () {
     // разблокируем карту
     window.map.classList.remove('map--faded');
     // разблокируем форму
@@ -56,5 +56,5 @@
     window.load(createPins, window.errorHandler);
   };
 
-  window.pinMain.addEventListener('mouseup', buttonMouseupHandler);
+  window.pinMain.addEventListener('mouseup', pinMouseupHandler);
 })();
