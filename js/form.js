@@ -1,58 +1,29 @@
 'use strict';
 
-// ВСЁ, ЧТО КАСАЕТСЯ ФОРМЫ
-
 (function () {
-  // Общие переменные, нужные для обработки формы
-
-  var similarListPins = window.map.querySelector('.map__pins');
 
   // Переменные формы
+  var MIN_PRICE = [0, 1000, 5000, 10000];
 
   var form = document.querySelector('.ad-form');
-
   var fieldsetList = form.querySelectorAll('fieldset');
-
   var type = document.getElementById('type');
-
   var price = document.getElementById('price');
-
-  type.addEventListener('change', function () {
-    if (type.selectedIndex === 0) {
-      price.min = 0;
-      price.placeholder = 0;
-    } else if (type.selectedIndex === 1) {
-      price.min = 1000;
-      price.placeholder = 1000;
-    } else if (type.selectedIndex === 2) {
-      price.min = 5000;
-      price.placeholder = 5000;
-    } else if (type.selectedIndex === 3) {
-      price.min = 10000;
-      price.placeholder = 10000;
-    }
-  });
-
-  // СИНХРОНИЗАЦИЯ времени ЧЕКИНА и ЧЕКАУТА
-
   var checkin = document.getElementById('timein');
-
   var checkout = document.getElementById('timeout');
-
-  checkin.addEventListener('change', function () {
-    checkout.selectedIndex = checkin.selectedIndex;
-  });
-
-  checkout.addEventListener('change', function () {
-    checkin.selectedIndex = checkout.selectedIndex;
-  });
-
-  // СООТВЕТСТВИЕ КОЛ-ВА КОМНАТ И КОЛ-ВА ГОСТЕЙ
-
   var rooms = document.getElementById('rooms');
-
   var guests = document.getElementById('capacity');
+  var sendForm = document.querySelector('.ad-form__submit');
+  var resetButton = document.querySelector('.ad-form__reset');
 
+  // Соответствие типа жилья и цены
+  type.addEventListener('change', function () {
+    var index = type.selectedIndex;
+    price.min = MIN_PRICE[index];
+    price.placeholder = MIN_PRICE[index];
+  });
+
+  // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
     var currentValue = rooms.value;
     if (currentValue === '0') {
@@ -73,9 +44,7 @@
     }
   });
 
-  // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
-
-  var sendForm = document.querySelector('.ad-form__submit');
+  // Валидация отправки формы
 
   // Функция поиска невалидных полей
   var findInvalidFields = function () {
@@ -97,16 +66,16 @@
     if (invalidInputs) {
       for (var y = 0; y < invalidInputs.length; y++) {
         var input = invalidInputs[y];
-        input.style.outline = '2px solid red';
+        input.classList.add('error');
       }
     }
   };
 
-  sendForm.addEventListener('click', submitClickHandler);
+  // Ресет данных
 
   // Функция скрытия меток на карте при reset
   var hidePins = function () {
-    var pinsList = similarListPins.querySelectorAll('button:not(.map__pin--main)');
+    var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
     }
@@ -137,7 +106,7 @@
     if (invalidInputs) {
       for (var x = 0; x < invalidInputs.length; x++) {
         var invalidInput = invalidInputs[x];
-        invalidInput.style.outline = '';
+        invalidInput.classList.remove('error');
       }
     }
   };
@@ -173,21 +142,16 @@
     }
   };
 
-  // Функция обработки сброса формы
-  var resetButton = document.querySelector('.ad-form__reset');
-
-  var addressInput = document.getElementById('address');
-
-  resetButton.addEventListener('click', function () {
+  // Обработчик сброса данных
+  var resetHandler = function () {
     // закрываем открытые объявления
     hideAds();
     // убираем все метки с карты
     hidePins();
     // ставим главную метку на исходную позицию
-    window.pinMain.style.left = window.mainPinCenteredLeft + 'px';
-    window.pinMain.style.top = window.mainPinCenteredTop + 'px';
+    window.getStartCoords(window.mainPinCentered);
     // устанавливаем координаты в поле address
-    addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
+    window.putCoordsInAddress(window.mainPinCentered);
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price
@@ -204,5 +168,50 @@
     });
     // затемняем форму
     form.classList.add('ad-form--disabled');
+  };
+
+  window.escKeydownSuccessHandler = function (evt) {
+    window.utils.isEscEvent(evt, window.closeSuccess);
+  };
+
+  // Обработка отправки формы
+
+  // Обработка успешной отправки формы
+  var successHandler = function () {
+    var success = document.querySelector('.success');
+    success.classList.remove('hidden');
+
+    document.addEventListener('keydown', window.escKeydownSuccessHandler);
+
+    window.closeSuccess = function () {
+      success.classList.add('hidden');
+      document.removeEventListener('keydown', window.escKeydownSuccessHandler);
+    };
+
+    success.addEventListener('click', function () {
+      window.closeSuccess();
+    });
+  };
+
+  // Обработчики событий
+
+  checkin.addEventListener('change', function () {
+    checkout.selectedIndex = checkin.selectedIndex;
   });
+
+  checkout.addEventListener('change', function () {
+    checkin.selectedIndex = checkout.selectedIndex;
+  });
+
+  sendForm.addEventListener('click', submitClickHandler);
+
+  resetButton.addEventListener('click', resetHandler);
+
+  form.addEventListener('submit', function (submitEvt) {
+    submitEvt.preventDefault();
+    var formData = new FormData(form);
+    window.save(formData, successHandler, window.errorHandler);
+    resetHandler();
+  });
+
 })();
