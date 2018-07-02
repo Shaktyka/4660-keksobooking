@@ -2,9 +2,11 @@
 
 (function () {
 
+  var SAVE_URL = 'https://js.dump.academy/keksobooking';
+  var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
+
   // Функция для отправки данных на сервер
   window.save = function (data, onLoad, onError) {
-    var SAVE_URL = 'https://js.dump.academy/keksobooking';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -46,7 +48,6 @@
 
   // Функция для загрузки объявлений с сервера
   window.load = function (onLoad, onError) {
-    var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';

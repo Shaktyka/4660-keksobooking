@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   window.map = document.querySelector('.map');
 
   // Константы для главной метки
@@ -13,7 +14,7 @@
   var MAIN_PIN_LEFT = 570;
   var MAIN_PIN_TOP = 375;
 
-  // Отступы от краёв карты сверху и снизу, на которые метка не должна заходить
+  // Границы доступной области
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
 
@@ -29,7 +30,7 @@
   var addressInput = document.getElementById('address');
   addressInput.value = window.mainPinCenteredLeft + ', ' + window.mainPinCenteredTop;
 
-  // DRAGNDROP ГЛАВНОЙ МЕТКИ
+  // DragAndDrop главной метки
 
   window.mainPin.addEventListener('mousedown', function (ee) {
     ee.preventDefault();

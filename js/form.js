@@ -1,7 +1,5 @@
 'use strict';
 
-// ВСЁ, ЧТО КАСАЕТСЯ ФОРМЫ
-
 (function () {
 
   // Переменные формы
@@ -55,7 +53,7 @@
     }
   });
 
-  // ВАЛИДАЦИЯ ОТПРАВКИ ВСЕЙ ФОРМЫ
+  // Валидация отправки формы
 
   // Функция поиска невалидных полей
   var findInvalidFields = function () {
@@ -82,7 +80,7 @@
     }
   };
 
-  // РЕСЕТ ДАННЫХ
+  // Ресет данных
 
   // Функция скрытия меток на карте при reset
   var hidePins = function () {
@@ -153,7 +151,7 @@
     }
   };
 
-  // Cброс данных формы
+  // Обработчик сброса данных
   var resetHandler = function () {
     // закрываем открытые объявления
     hideAds();
@@ -186,7 +184,7 @@
     window.utils.isEscEvent(evt, window.closeSuccess);
   };
 
-  // ОБРАБОТКА ОТПРАВКИ ФОРМЫ
+  // Обработка отправки формы
 
   // Обработка успешной отправки формы
   var successHandler = function () {
@@ -205,7 +203,7 @@
     });
   };
 
-  // ОБРАБОТЧИКИ СОБЫТИЙ
+  // Обработчики событий
 
   checkin.addEventListener('change', function () {
     checkout.selectedIndex = checkin.selectedIndex;
