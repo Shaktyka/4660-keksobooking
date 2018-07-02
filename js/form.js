@@ -5,7 +5,6 @@
 (function () {
 
   // Переменные формы
-  var INVALID_FIELD_STYLE = '2px solid #ff0000';
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
   var type = document.getElementById('type');
@@ -78,7 +77,7 @@
     if (invalidInputs) {
       for (var y = 0; y < invalidInputs.length; y++) {
         var input = invalidInputs[y];
-        input.style.outline = INVALID_FIELD_STYLE;
+        input.classList.add('error');
       }
     }
   };
@@ -118,7 +117,7 @@
     if (invalidInputs) {
       for (var x = 0; x < invalidInputs.length; x++) {
         var invalidInput = invalidInputs[x];
-        invalidInput.style.outline = '';
+        invalidInput.classList.remove('error');
       }
     }
   };
