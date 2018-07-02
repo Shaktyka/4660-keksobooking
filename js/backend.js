@@ -5,11 +5,13 @@
   var SAVE_URL = 'https://js.dump.academy/keksobooking';
   var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
 
-  var SUCCESS_CODE = 200;
-  var INVALID_REQUEST_CODE = 400;
-  var NOT_AUTHORIZED_CODE = 401;
-  var ERROR_NOT_FOUND_CODE = 404;
-  var SERVER_ERROR_CODE = 500;
+  var Code = {
+    SUCCESS: 200,
+    INVALID_REQUEST: 400,
+    NOT_AUTHORIZED: 401,
+    ERROR_NOT_FOUND: 404,
+    SERVER_ERROR: 500
+  };
 
   // Функция для отправки данных на сервер
   window.save = function (data, onLoad, onError) {
@@ -20,20 +22,20 @@
     xhr.addEventListener('load', function () {
       var error;
       switch (xhr.status) {
-        case SUCCESS_CODE:
+        case Code.SUCCESS:
           onLoad(xhr.response);
           break;
 
-        case INVALID_REQUEST_CODE:
+        case Code.INVALID_REQUEST:
           error = 'Неверный запрос';
           break;
-        case NOT_AUTHORIZED_CODE:
+        case Code.NOT_AUTHORIZED:
           error = 'Пользователь не авторизован';
           break;
-        case ERROR_NOT_FOUND_CODE:
+        case Code.ERROR_NOT_FOUND:
           error = 'Ничего не найдено';
           break;
-        case SERVER_ERROR_CODE:
+        case Code.SERVER_ERROR:
           error = 'Ошибка сервера';
           break;
 
@@ -66,20 +68,20 @@
     xhr.addEventListener('load', function () {
       var error;
       switch (xhr.status) {
-        case SUCCESS_CODE:
+        case Code.SUCCESS:
           onLoad(xhr.response);
           break;
 
-        case INVALID_REQUEST_CODE:
+        case Code.INVALID_REQUEST:
           error = 'Неверный запрос';
           break;
-        case NOT_AUTHORIZED_CODE:
+        case Code.NOT_AUTHORIZED:
           error = 'Пользователь не авторизован';
           break;
-        case ERROR_NOT_FOUND_CODE:
+        case Code.ERROR_NOT_FOUND:
           error = 'Ничего не найдено';
           break;
-        case SERVER_ERROR_CODE:
+        case Code.SERVER_ERROR:
           error = 'Ошибка сервера';
           break;
 
