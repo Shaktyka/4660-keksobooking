@@ -3,7 +3,7 @@
 (function () {
 
   // Переменные формы
-  var PRICE_VALUE = [0, 1000, 5000, 10000];
+  var MIN_PRICE = [0, 1000, 5000, 10000];
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
@@ -19,8 +19,8 @@
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
-    price.min = PRICE_VALUE[index];
-    price.placeholder = PRICE_VALUE[index];
+    price.min = MIN_PRICE[index];
+    price.placeholder = MIN_PRICE[index];
   });
 
   // Соответствие количества комнат количеству гостей

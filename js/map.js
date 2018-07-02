@@ -2,7 +2,7 @@
 
 (function () {
 
-  // высота кончика пина
+  // Высота кончика пина
   var TIP = 22;
 
   var MAIN_PIN_WIDTH = document.querySelector('.map').querySelector('.map__pin--main').offsetWidth;
@@ -29,7 +29,6 @@
 
   // Стартовые координаты главной метки
   window.getStartCoords = function (coord) {
-    // debugger;
     window.mainPin.style.left = coord.x + 'px';
     window.mainPin.style.top = coord.y + 'px';
   };
@@ -42,7 +41,6 @@
   window.putCoordsInAddress(window.mainPinCentered);
 
   // DragAndDrop главной метки
-
   window.mainPin.addEventListener('mousedown', function (ee) {
     ee.preventDefault();
 
@@ -85,7 +83,7 @@
       window.mainPin.style.left = newX + 'px';
       window.mainPin.style.top = newY + 'px';
 
-      // трансляция координат метки в поле address
+      // Трансляция координат метки в поле address
       var locationX = newX + Math.round(window.mainPin.offsetWidth / 2);
       var locationY = newY + window.mainPin.offsetHeight;
 
@@ -95,7 +93,7 @@
     var pinUpHandler = function (upEvt) {
       upEvt.preventDefault();
 
-      // обновление координат метки в поле address после отжатия мыши
+      // Обновление координат метки в поле address после отжатия мыши
       addressInput.value = (window.mainPin.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + MAIN_PIN_HEIGHT);
 
       document.removeEventListener('mousemove', pinMoveHandler);
