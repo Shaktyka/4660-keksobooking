@@ -111,6 +111,13 @@
     }
   };
 
+  // Функция сброса аватара
+  var resetAvatar = function () {
+    var preview = document.querySelector('.ad-form-header__preview img');
+    var defaultSrc = 'img/muffin-grey.svg';
+    preview.src = defaultSrc;
+  };
+
   // Reset введённых данных
   var resetInputs = function () {
     var titleInput = document.getElementById('title');
@@ -152,6 +159,8 @@
     window.getStartCoords(window.mainPinCentered);
     // устанавливаем координаты в поле address
     window.putCoordsInAddress(window.mainPinCentered);
+    // Сбрасываем аватар
+    resetAvatar();
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price
