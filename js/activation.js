@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var adverts = [];
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
@@ -16,6 +17,11 @@
     if (buttonsList.length === 0) {
       window.pinsContainer.appendChild(fragment);
     }
+  };
+
+  var successHandler = function (data) {
+    adverts = data;
+    createPins(adverts);
   };
 
   // Функция обработки неуспеха при выполнении запроса
@@ -53,7 +59,7 @@
       item.disabled = false;
     });
     // разблокируем генерацию массива меток и объявлений
-    window.load(createPins, window.errorHandler);
+    window.load(successHandler, window.errorHandler);
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);
