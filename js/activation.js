@@ -19,9 +19,43 @@
     }
   };
 
+  window.typeValue = 'flat';
+  window.priceValue = '';
+  window.roomsValue = '';
+  window.guestsValue = '';
+  window.featuresValues = [];
+
+  var updatePins = function () {
+    // debugger;
+
+    // по типу жилья
+    var sameTypePins = adverts.filter(function (it) {
+      return it.offer.type === window.typeValue;
+    });
+
+    // по цене
+    var samePricePins = adverts.filter(function (it) {
+      return it.offer.price === window.priceValue;
+    });
+
+    // по вместимости
+    var sameRoomsPins = adverts.filter(function (it) {
+      return it.offer.rooms === window.roomsValue;
+    });
+
+    // по кол-ву гостей
+    var sameGuestsPins = adverts.filter(function (it) {
+      return it.offer.guests === window.guestsValue;
+    });
+
+    // по набору фич
+
+    createPins(sameTypePins);
+  };
+
   var successHandler = function (data) {
     adverts = data;
-    createPins(adverts);
+    updatePins();
   };
 
   // Функция обработки неуспеха при выполнении запроса

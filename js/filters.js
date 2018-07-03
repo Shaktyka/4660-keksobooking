@@ -20,15 +20,29 @@
 
   // var housingGuests = [2, 1, 0];
 
-  // Функция для фильтрации
-  var functionName = function () {
-    // какая-то магия
-  };
+  // Функция для фильтрации?
+  // var functionName = function () {
+  // какая-то магия
+  // };
 
-  typeFilter.addEventListener('change', functionName);
-  priceFilter.addEventListener('change', functionName);
-  roomsFilter.addEventListener('change', functionName);
-  guestsFilter.addEventListener('change', functionName);
-  featuresFilter.addEventListener('change', functionName, true);
+  typeFilter.addEventListener('change', function () {
+    window.typeValue = typeFilter.value;
+  });
+
+  priceFilter.addEventListener('change', function () {
+    window.priceValue = priceFilter.value;
+  });
+
+  roomsFilter.addEventListener('change', function () {
+    window.roomsValue = roomsFilter.value;
+  });
+
+  guestsFilter.addEventListener('change', function () {
+    window.guestsValue = guestsFilter.value;
+  });
+
+  featuresFilter.addEventListener('change', function () {
+    window.featuresValues = []; // ммм, наверное проверяем, какие фичи были выбраны, и добавяем их в массив
+  }, true);
 
 })();
