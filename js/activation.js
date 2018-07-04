@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var adverts = [];
+  window.adverts = [];
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
@@ -19,51 +19,19 @@
     }
   };
 
-  window.typeValue = '';
-  window.priceValue = '';
-  window.roomsValue = '';
-  window.guestsValue = '';
-  window.featuresValues = [];
   // var PIN_LIMIT = 5;
 
   window.updatePins = function () {
-    // debugger;
 
-    // по типу жилья
-    var sameTypePins = adverts.filter(function (it) {
-      return it.offer.type === window.typeValue;
-    });
+    // какой-то код
 
-    // по цене
-    var samePricePins = adverts.filter(function (it) {
-      return it.offer.price === window.priceValue;
-    });
-
-    // по вместимости
-    var sameRoomsPins = adverts.filter(function (it) {
-      return it.offer.rooms === window.roomsValue;
-    });
-
-    // по кол-ву гостей
-    var sameGuestsPins = adverts.filter(function (it) {
-      return it.offer.guests === window.guestsValue;
-    });
-
-    // по набору фич
-
-    var filteredAdverts = sameTypePins.concat(samePricePins).concat(sameRoomsPins).concat(sameGuestsPins);
-
-    var uniqueAdwerts = filteredAdverts.filter(function (it, i) {
-      return filteredAdverts.indexOf(it) === i;
-    });
-
-    createPins(uniqueAdwerts);
+    createPins(window.adverts);
   };
 
   var successHandler = function (data) {
-    adverts = data;
+    window.adverts = data;
     // window.hidePins();
-    window.updatePins();
+    window.updatePins(window.adverts);
   };
 
   // Функция обработки неуспеха при выполнении запроса

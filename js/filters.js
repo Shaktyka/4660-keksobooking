@@ -11,25 +11,6 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var features = document.querySelectorAll('.map__checkbox');
 
-  var price = {
-    any: {
-      minPrice: 0,
-      maxPrice: Infinity
-    },
-    middle: {
-      minPrice: 10000,
-      maxPrice: 50000
-    },
-    low: {
-      minPrice: 0,
-      maxPrice: 10000
-    },
-    high: {
-      minPrice: 50000,
-      maxPrice: Infinity
-    },
-  };
-
   // Функция получения списка изменений фильтров
   var filterAdverts = window.debounce(function () {
     var filteredValues = [];
@@ -77,6 +58,13 @@
         }));
       }
     };
+
+    // adverts - копия массива объявлений, ролученного от сервера?
+    window.adverts.filter(function (ad) {
+      if (checkNumber(ad.offer.guests, guestsFilter) && (checkNumber(ad.offer.rooms, roomsFilter)) && (checkType(ad.offer.type, typeFilter)) && (checkFeatures(ad, features)) && checkPrice(ad, priceFilter)) {
+        filteredValues.push(ad);
+      }
+    });
 
   });
 
