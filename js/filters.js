@@ -9,8 +9,7 @@
   var priceFilter = document.querySelector('#housing-price');
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
-  var featuresFilter = document.querySelector('#housing-features');
-  // var featuresFilter = document.querySelectorAll('.map__checkbox');
+  var features = document.querySelectorAll('.map__checkbox');
 
   var price = {
     any: {
@@ -31,29 +30,59 @@
     },
   };
 
-  // Отлеживаем изменения
-  typeFilter.addEventListener('change', function () {
-    window.debounce(updateFunction);
+  // Функция получения списка изменений фильтров
+  var filterAdverts = window.debounce(function () {
+    var filteredValues = [];
+
+    var checkType = function (object, filter) {
+      if (filter.value !== 'any') {
+        return object === filter.value;
+      }
+      return true;
+    };
+
+    var checkPrice = function (object, filter) {
+      switch (filter.value) {
+        case 'middle':
+          return object.offer.price >= 10000 && object.offer.price <= 50000;
+        case 'low':
+          return object.offer.price < 10000;
+        case 'high':
+          return object.offer.price > 50000;
+      }
+      return true;
+    };
+
+    var checkNumber = function (object, filter) {
+      if (filter.value !== 'any') {
+        return object === +filter.value;
+      }
+      return true;
+    };
+
+    var checkFeatures = function (object, filter) {
+      var checkedFeatures = [];
+
+      for (var i = 0; i < filter.length; i++) {
+        if (filter[i].checked) {
+          checkedFeatures.push(filter[i].value);
+        }
+      }
+
+      if (checkedFeatures.length === 0) {
+        return true;
+      } else {
+        return (checkedFeatures.every(function (feature) {
+          return (object.offer.features.indexOf(feature) >= 0);
+        }));
+      }
+    };
+
   });
 
-  priceFilter.addEventListener('change', function () {
-    window.debounce(updateFunction);
+  // Отслеживаем изменения
+  filterForm.addEventListener('change', function () {
+    filterAdverts();
   });
-
-  roomsFilter.addEventListener('change', function () {
-    window.debounce(updateFunction);
-  });
-
-  guestsFilter.addEventListener('change', function () {
-    window.debounce(updateFunction);
-  });
-
-  featuresFilter.addEventListener('change', function () {
-    window.debounce(updateFunction);
-  });
-
-  var filters = {
-    // список функций для получения значений
-  };
 
 })();
