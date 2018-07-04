@@ -10,8 +10,6 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('#housing-features');
 
-  // var ANY_VALUE = 'any';
-
   // var housingType = ['palace', 'flat', 'house', 'bungalo'];
 
   // var housingPrice = ['middle', 'low', 'high'];
@@ -27,18 +25,26 @@
 
   typeFilter.addEventListener('change', function () {
     window.typeValue = typeFilter.value;
+    window.hidePins();
+    window.updatePins();
   });
 
   priceFilter.addEventListener('change', function () {
     window.priceValue = priceFilter.value;
+    window.hidePins();
+    window.updatePins();
   });
 
   roomsFilter.addEventListener('change', function () {
     window.roomsValue = roomsFilter.value;
+    window.hidePins();
+    window.updatePins();
   });
 
   guestsFilter.addEventListener('change', function () {
     window.guestsValue = guestsFilter.value;
+    window.hidePins();
+    window.updatePins();
   });
 
   featuresFilter.addEventListener('change', function () {

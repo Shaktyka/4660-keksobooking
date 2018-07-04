@@ -74,7 +74,7 @@
   // Ресет данных
 
   // Функция скрытия меток на карте при reset
-  var hidePins = function () {
+  window.hidePins = function () {
     var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
@@ -154,7 +154,7 @@
     // закрываем открытые объявления
     hideAds();
     // убираем все метки с карты
-    hidePins();
+    window.hidePins();
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
     // устанавливаем координаты в поле address

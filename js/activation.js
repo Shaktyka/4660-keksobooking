@@ -19,13 +19,14 @@
     }
   };
 
-  window.typeValue = 'flat';
+  window.typeValue = '';
   window.priceValue = '';
   window.roomsValue = '';
   window.guestsValue = '';
   window.featuresValues = [];
+  // var ANY_VALUE = 'any';
 
-  var updatePins = function () {
+  window.updatePins = function () {
     // debugger;
 
     // по типу жилья
@@ -50,12 +51,19 @@
 
     // по набору фич
 
-    createPins(sameTypePins.concat(samePricePins).concat(sameRoomsPins).concat(sameGuestsPins).concat(adverts));
+    var filteredAdverts = sameTypePins.concat(samePricePins).concat(sameRoomsPins).concat(sameGuestsPins);
+
+    var uniqueAdwerts = filteredAdverts.filter(function (it, i) {
+      return filteredAdverts.indexOf(it) === i;
+    });
+
+    createPins(uniqueAdwerts);
   };
 
   var successHandler = function (data) {
     adverts = data;
-    updatePins();
+    // window.hidePins();
+    window.updatePins();
   };
 
   // Функция обработки неуспеха при выполнении запроса
