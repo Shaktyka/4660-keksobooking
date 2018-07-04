@@ -24,7 +24,7 @@
   window.roomsValue = '';
   window.guestsValue = '';
   window.featuresValues = [];
-  // var ANY_VALUE = 'any';
+  // var PIN_LIMIT = 5;
 
   window.updatePins = function () {
     // debugger;

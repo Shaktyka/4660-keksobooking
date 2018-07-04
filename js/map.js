@@ -3,11 +3,11 @@
 (function () {
 
   // Высота кончика пина
-  var TIP = 22;
+  var MAIN_PIN_TIP = 22;
 
   var MAIN_PIN_WIDTH = document.querySelector('.map').querySelector('.map__pin--main').offsetWidth;
 
-  var MAIN_PIN_HEIGHT = document.querySelector('.map').querySelector('.map__pin--main').offsetHeight + TIP;
+  var MAIN_PIN_HEIGHT = document.querySelector('.map').querySelector('.map__pin--main').offsetHeight + MAIN_PIN_TIP;
 
   var MAIN_PIN_LEFT = 570;
   var MAIN_PIN_TOP = 375;

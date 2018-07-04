@@ -4,43 +4,56 @@
 
 (function () {
 
+  var filterForm = document.querySelector('.map__filters');
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('#housing-features');
+  // var featuresFilter = document.querySelectorAll('.map__checkbox');
 
-  // Функция для фильтрации?
-  // var functionName = function () {
-  // какая-то магия
-  // };
+  var price = {
+    any: {
+      minPrice: 0,
+      maxPrice: Infinity
+    },
+    middle: {
+      minPrice: 10000,
+      maxPrice: 50000
+    },
+    low: {
+      minPrice: 0,
+      maxPrice: 10000
+    },
+    high: {
+      minPrice: 50000,
+      maxPrice: Infinity
+    },
+  };
 
+  // Отлеживаем изменения
   typeFilter.addEventListener('change', function () {
-    window.typeValue = typeFilter.value;
-    window.hidePins();
-    window.updatePins();
+    window.debounce(updateFunction);
   });
 
   priceFilter.addEventListener('change', function () {
-    window.priceValue = priceFilter.value;
-    window.hidePins();
-    window.updatePins();
+    window.debounce(updateFunction);
   });
 
   roomsFilter.addEventListener('change', function () {
-    window.roomsValue = roomsFilter.value;
-    window.hidePins();
-    window.updatePins();
+    window.debounce(updateFunction);
   });
 
   guestsFilter.addEventListener('change', function () {
-    window.guestsValue = guestsFilter.value;
-    window.hidePins();
-    window.updatePins();
+    window.debounce(updateFunction);
   });
 
   featuresFilter.addEventListener('change', function () {
-    window.featuresValues = []; // ммм, наверное проверяем, какие фичи были выбраны, и добавяем их в массив
-  }, true);
+    window.debounce(updateFunction);
+  });
+
+  var filters = {
+    // список функций для получения значений
+  };
 
 })();
