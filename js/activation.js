@@ -50,7 +50,7 @@
 
     // по набору фич
 
-    createPins(sameTypePins.concat(samePricePins).concat(sameRoomsPins).concat(sameGuestsPins));
+    createPins(sameTypePins.concat(samePricePins).concat(sameRoomsPins).concat(sameGuestsPins).concat(adverts));
   };
 
   var successHandler = function (data) {

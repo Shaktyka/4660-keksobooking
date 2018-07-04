@@ -4,6 +4,7 @@
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var fileChooser = document.querySelector('.ad-form__input');
+  // var photoContainer = document.querySelector('.ad-form__photo-container');
   // var preview = document.querySelector('.ad-form__photo');
 
   fileChooser.addEventListener('change', function () {
