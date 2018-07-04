@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  // var PIN_LIMIT = 5;
+
   window.adverts = [];
 
   var form = document.querySelector('.ad-form');
@@ -19,9 +21,7 @@
     }
   };
 
-  // var PIN_LIMIT = 5;
-
-  window.updatePins = function () {
+  window.filterPins = function () {
 
     // какой-то код
 

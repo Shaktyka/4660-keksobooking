@@ -11,36 +11,43 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var features = document.querySelector('.map__features');
 
+  window.adverts = [];
   var typeValue = '';
   var priceValue = '';
   var roomsValue = '';
   var guestsValue = '';
   var featureValue = '';
 
+  var filterPins = function () {
+    var sortedArray = window.adverts.slice();
+
+  };
+
   // Отлеживаем изменения
   typeFilter.addEventListener('change', function () {
     typeValue = typeFilter.value;
-    // window.debounce(updateFunction);
+    filterPins();
   });
 
   priceFilter.addEventListener('change', function () {
     priceValue = priceFilter.value;
-    // window.debounce(updateFunction);
+    filterPins();
   });
 
   roomsFilter.addEventListener('change', function () {
     roomsValue = roomsFilter.value;
-    // window.debounce(updateFunction);
+    filterPins();
   });
 
   guestsFilter.addEventListener('change', function () {
     guestsValue = guestsFilter.value;
-    // window.debounce(updateFunction);
+    filterPins();
   });
 
   features.addEventListener('change', function (evt) {
     var checkedFeature = evt.target;
     featureValue = checkedFeature.value;
+    filterPins();
   }, true);
 
 })();
