@@ -10,7 +10,7 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('#housing-features');
 
-  // var ANY = 'any';
+  // var ANY_VALUE = 'any';
 
   // var housingType = ['palace', 'flat', 'house', 'bungalo'];
 
