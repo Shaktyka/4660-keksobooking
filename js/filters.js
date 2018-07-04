@@ -10,14 +10,6 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('#housing-features');
 
-  // var housingType = ['palace', 'flat', 'house', 'bungalo'];
-
-  // var housingPrice = ['middle', 'low', 'high'];
-
-  // var housingRooms = [1, 2, 3];
-
-  // var housingGuests = [2, 1, 0];
-
   // Функция для фильтрации?
   // var functionName = function () {
   // какая-то магия
