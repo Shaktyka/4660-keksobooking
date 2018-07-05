@@ -3,8 +3,6 @@
 (function () {
   // var PIN_LIMIT = 5;
 
-  window.adverts = [];
-
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
 
@@ -21,7 +19,7 @@
     }
   };
 
-  window.filterPins = function () {
+  window.updatePins = function () {
 
     // какой-то код
 

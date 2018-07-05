@@ -91,6 +91,35 @@
     }
   };
 
+  // Функция сброса выбранных фильтров
+  var resetFilters = function () {
+    // var filterForm = document.querySelector('.map__filters');
+    var typeFilter = document.querySelector('#housing-type');
+    var priceFilter = document.querySelector('#housing-price');
+    var roomsFilter = document.querySelector('#housing-rooms');
+    var guestsFilter = document.querySelector('#housing-guests');
+
+    if (typeFilter.selectedIndex !== 0) {
+      typeFilter.selectedIndex = 0;
+    }
+    if (priceFilter.selectedIndex !== 0) {
+      priceFilter.selectedIndex = 0;
+    }
+    if (roomsFilter.selectedIndex !== 0) {
+      roomsFilter.selectedIndex = 0;
+    }
+    if (guestsFilter.selectedIndex !== 0) {
+      guestsFilter.selectedIndex = 0;
+    }
+    var features = document.querySelector('.map__features').querySelectorAll('input:checked');
+    console.log(features);
+    if (features) {
+      for (var i = 0; i < features.length; i++) {
+        features[i].checked = false;
+      }
+    }
+  };
+
   // Функция сброса выделенных чекбоксов
   var resetCheckboxes = function () {
     var featuresList = form.querySelector('.features').querySelectorAll('input');
@@ -157,6 +186,7 @@
     window.hidePins();
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
+    resetFilters();
     // устанавливаем координаты в поле address
     window.putCoordsInAddress(window.mainPinCentered);
     // Сбрасываем аватар

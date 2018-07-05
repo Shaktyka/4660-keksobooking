@@ -4,7 +4,6 @@
 
 (function () {
 
-  // var filterForm = document.querySelector('.map__filters');
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
   var roomsFilter = document.querySelector('#housing-rooms');
@@ -21,6 +20,8 @@
   var filterPins = function () {
     var sortedArray = window.adverts.slice();
 
+    return sortedArray;
+    // вызов функции отрисовки пинов
   };
 
   // Отлеживаем изменения
