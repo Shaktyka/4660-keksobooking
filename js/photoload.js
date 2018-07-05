@@ -17,7 +17,7 @@
     return previewElement;
   };
 
-  fileChooser.addEventListener('change', function () {
+  var photoLoadChangeHandler = function () {
     var loadedFiles = fileChooser.files;
 
     for (var i = 0; i < loadedFiles.length; i++) {
@@ -42,5 +42,9 @@
         reader.readAsDataURL(file);
       }
     }
-  });
+  };
+
+  fileChooser.addEventListener('change', photoLoadChangeHandler);
+
+  fileChooser.addEventListener('click', photoLoadChangeHandler);
 })();
