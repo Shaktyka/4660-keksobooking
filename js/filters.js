@@ -23,11 +23,20 @@
   var features = document.querySelector('.map__features');
 
   window.adverts = [];
-  // var typeValue = '';
-  // var priceValue = '';
-  // var roomsValue = '';
-  // var guestsValue = '';
-  // var featureValue = '';
+
+  var typeValue = ANY_VALUE;
+  var priceValue = ANY_VALUE;
+  var roomsValue = ANY_VALUE;
+  var guestsValue = ANY_VALUE;
+  var featureValue = '';
+
+  var filter = {
+    onTypeChange: function (value) {},
+    onPriceChange: function (value) {},
+    onRoomsChange: function (value) {},
+    onGuestsChange: function (value) {},
+    onFeatureChange: function (value) {}
+  };
 
   window.filterPins = function () {
     var initArray = window.adverts.slice();
@@ -80,28 +89,28 @@
 
   // Отлеживаем изменения
   typeFilter.addEventListener('change', function () {
-    var typeValue = typeFilter.value;
+    typeValue = typeFilter.value;
     window.filterPins();
   });
 
   priceFilter.addEventListener('change', function () {
-    var priceValue = priceFilter.value;
+    priceValue = priceFilter.value;
     window.filterPins();
   });
 
   roomsFilter.addEventListener('change', function () {
-    var roomsValue = roomsFilter.value;
+    roomsValue = roomsFilter.value;
     window.filterPins();
   });
 
   guestsFilter.addEventListener('change', function () {
-    var guestsValue = guestsFilter.value;
+    guestsValue = guestsFilter.value;
     window.filterPins();
   });
 
   features.addEventListener('change', function (evt) {
     var checkedFeature = evt.target;
-    var featureValue = checkedFeature.value;
+    featureValue = checkedFeature.value;
     window.filterPins();
   }, true);
 

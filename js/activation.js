@@ -20,13 +20,15 @@
   };
 
   window.updatePins = function () {
-
-    // какой-то код
-
     // window.hideAds();
     // window.hidePins();
     createPins(window.sortedArray);
   };
+
+  //  filter.onTypeChange = function (value) {
+  //     = value;
+  //    updatePins();
+  //  }
 
   // После успешной загрузки данных выводим все метки
   var successHandler = function (data) {
