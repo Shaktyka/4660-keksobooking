@@ -74,7 +74,7 @@
   // Ресет данных
 
   // Функция скрытия меток на карте при reset
-  var hidePins = function () {
+  window.removePins = function () {
     var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
@@ -82,11 +82,40 @@
   };
 
   // Функция закрытия открытых объявлений при reset
-  var hideAds = function () {
+  window.hideAds = function () {
     var adsList = window.map.querySelectorAll('article.map__card');
     if (adsList) {
       for (var l = 0; l < adsList.length; l++) {
         adsList[l].classList.add('hidden');
+      }
+    }
+  };
+
+  // Функция сброса выбранных фильтров
+  var resetFilters = function () {
+    window.alreadyLoaded = false;
+
+    var typeFilter = document.querySelector('#housing-type');
+    var priceFilter = document.querySelector('#housing-price');
+    var roomsFilter = document.querySelector('#housing-rooms');
+    var guestsFilter = document.querySelector('#housing-guests');
+
+    if (typeFilter.selectedIndex !== 0) {
+      typeFilter.selectedIndex = 0;
+    }
+    if (priceFilter.selectedIndex !== 0) {
+      priceFilter.selectedIndex = 0;
+    }
+    if (roomsFilter.selectedIndex !== 0) {
+      roomsFilter.selectedIndex = 0;
+    }
+    if (guestsFilter.selectedIndex !== 0) {
+      guestsFilter.selectedIndex = 0;
+    }
+    var features = document.querySelector('.map__features').querySelectorAll('input:checked');
+    if (features) {
+      for (var i = 0; i < features.length; i++) {
+        features[i].checked = false;
       }
     }
   };
@@ -109,6 +138,13 @@
         invalidInput.classList.remove('error');
       }
     }
+  };
+
+  // Функция сброса аватара
+  var resetAvatar = function () {
+    var preview = document.querySelector('.ad-form-header__preview img');
+    var defaultSrc = 'img/muffin-grey.svg';
+    preview.src = defaultSrc;
   };
 
   // Reset введённых данных
@@ -145,13 +181,16 @@
   // Обработчик сброса данных
   var resetHandler = function () {
     // закрываем открытые объявления
-    hideAds();
+    window.hideAds();
     // убираем все метки с карты
-    hidePins();
+    window.removePins();
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
+    resetFilters();
     // устанавливаем координаты в поле address
     window.putCoordsInAddress(window.mainPinCentered);
+    // Сбрасываем аватар
+    resetAvatar();
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price
