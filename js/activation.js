@@ -21,15 +21,16 @@
 
   window.updatePins = function () {
 
+    // window.hidePins();
     // какой-то код
 
-    createPins(window.adverts);
+    createPins(window.sortedArray);
   };
 
+  // После успешной загрузки данных выводим все метки
   var successHandler = function (data) {
     window.adverts = data;
-    // window.hidePins();
-    window.updatePins(window.adverts);
+    createPins(window.adverts);
   };
 
   // Функция обработки неуспеха при выполнении запроса

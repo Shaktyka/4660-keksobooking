@@ -73,8 +73,9 @@
     };
 
     // Сортировка всех пинов
-    var sortedArray = initArray.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures);
-    return sortedArray;
+    window.sortedArray = initArray.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures);
+
+    return window.sortedArray;
   };
 
   // Отлеживаем изменения
