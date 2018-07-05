@@ -1,37 +1,18 @@
 'use strict';
+/* global debounce, updatePins, adverts */
 
 // Фильтрация объявлений
 
 (function () {
   var ANY_VALUE = 'any';
 
-  var prices = {
-    low: {
-      NUMBER: 10000,
-      VALUE: 'low'
-    },
-    high: {
-      NUMBER: 50000,
-      VALUE: 'high'
-    }
-  };
-
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
-  var features = document.querySelector('.map__features');
+  var featuresFilter = document.querySelector('.map__features');
 
-  window.adverts = [];
-
-  var typeValue = ANY_VALUE;
-  var priceValue = ANY_VALUE;
-  var roomsValue = ANY_VALUE;
-  var guestsValue = ANY_VALUE;
-  var featureValue = '';
-
-  window.filterPins = function () {
-    var initArray = window.adverts.slice();
+  var filterPins = function () {
 
     // Сортировка по типу
     var checkType = function (advert) {
@@ -42,14 +23,14 @@
     var checkPrice = function (advert) {
       switch (priceFilter.value) {
 
-        case prices.low.VALUE:
-          return advert.offer.price < prices.low.NUMBER;
+        case 'low':
+          return advert.offer.price < 10000;
 
-        case prices.middle.VALUE:
-          return advert.offer.price > prices.low.NUMBER && advert.offer.price < prices.high.NUMBER;
+        case 'middle':
+          return advert.offer.price > 10000 && advert.offer.price < 50000;
 
-        case prices.high.VALUE:
-          return advert.offer.price > prices.high.NUMBER;
+        case 'high':
+          return advert.offer.price > 50000;
 
         default:
           return true;
@@ -68,7 +49,7 @@
 
     // Сортировка по фичам
     var checkFeatures = function (advert) {
-      var checkedElements = features.querySelectorAll('input[type=checkbox]:checked');
+      var checkedElements = featuresFilter.querySelectorAll('input[type=checkbox]:checked');
       var selectedFeatures = [].map.call(checkedElements, function (item) {
         return item.value;
       });
@@ -78,36 +59,30 @@
     };
 
     // Сортировка всех пинов
-    window.sortedArray = initArray.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures);
+    var sortedArray = adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures);
 
-    return window.sortedArray;
+    updatePins(sortedArray);
   };
 
   // Отлеживаем изменения
-  typeFilter.addEventListener('change', function () {
-    typeValue = typeFilter.value;
-    window.filterPins();
-  });
+  typeFilter.addEventListener('change', debounce(function () {
+    filterPins();
+  }));
 
-  priceFilter.addEventListener('change', function () {
-    priceValue = priceFilter.value;
-    window.filterPins();
-  });
+  priceFilter.addEventListener('change', debounce(function () {
+    filterPins();
+  }));
 
-  roomsFilter.addEventListener('change', function () {
-    roomsValue = roomsFilter.value;
-    window.filterPins();
-  });
+  roomsFilter.addEventListener('change', debounce(function () {
+    filterPins();
+  }));
 
-  guestsFilter.addEventListener('change', function () {
-    guestsValue = guestsFilter.value;
-    window.filterPins();
-  });
+  guestsFilter.addEventListener('change', debounce(function () {
+    filterPins();
+  }));
 
-  features.addEventListener('change', function (evt) {
-    var checkedFeature = evt.target;
-    featureValue = checkedFeature.value;
-    window.filterPins();
-  }, true);
+  featuresFilter.addEventListener('change', debounce(function () {
+    filterPins();
+  }, true));
 
 })();

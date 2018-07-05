@@ -74,7 +74,7 @@
   // Ресет данных
 
   // Функция скрытия меток на карте при reset
-  window.hidePins = function () {
+  window.removePins = function () {
     var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
       pinsList[g].remove();
@@ -93,7 +93,8 @@
 
   // Функция сброса выбранных фильтров
   var resetFilters = function () {
-    // var filterForm = document.querySelector('.map__filters');
+    window.alreadyLoaded = false;
+
     var typeFilter = document.querySelector('#housing-type');
     var priceFilter = document.querySelector('#housing-price');
     var roomsFilter = document.querySelector('#housing-rooms');
@@ -182,7 +183,7 @@
     // закрываем открытые объявления
     window.hideAds();
     // убираем все метки с карты
-    window.hidePins();
+    window.removePins();
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
     resetFilters();

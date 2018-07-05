@@ -7,10 +7,10 @@
   var fieldsetList = form.querySelectorAll('fieldset');
 
   // Функция отрисовки меток и добавления в целевой блок
-  var createPins = function (data) {
+  var createPins = function (pins) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < data.length; i++) {
-      fragment.appendChild(window.renderPin(data[i]));
+    for (var i = 0; i < pins.length; i++) {
+      fragment.appendChild(window.renderPin(pins[i]));
     }
     // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
     var buttonsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
@@ -19,10 +19,10 @@
     }
   };
 
-  window.updatePins = function () {
-    // window.hideAds();
-    // window.hidePins();
-    createPins(window.sortedArray);
+  window.updatePins = function (pins) {
+    window.hideAds();
+    window.removePins();
+    createPins(pins);
   };
 
   // После успешной загрузки данных выводим все метки
@@ -55,8 +55,13 @@
   };
 
   // Обработчик активации страницы
-
+  window.alreadyLoaded = false;
   var pinMouseupHandler = function () {
+    if (!window.alreadyLoaded) {
+      window.alreadyLoaded = true;
+    } else {
+      return;
+    }
     // разблокируем карту
     window.map.classList.remove('map--faded');
     // разблокируем форму
