@@ -147,6 +147,20 @@
     preview.src = defaultSrc;
   };
 
+  // Функция сброса добавленных фотографий жилья
+  var resetPhotos = function () {
+    var photoBlock = document.querySelector('.ad-form__photo-container');
+    var template = photoBlock.querySelector('.ad-form__photo--template');
+    var photosList = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
+
+    if (photosList) {
+      for (var i = 0; i < photosList.length; i++) {
+        photosList[i].remove();
+      }
+    }
+    template.style.display = 'block';
+  };
+
   // Reset введённых данных
   var resetInputs = function () {
     var titleInput = document.getElementById('title');
@@ -191,6 +205,8 @@
     window.putCoordsInAddress(window.mainPinCentered);
     // Сбрасываем аватар
     resetAvatar();
+    // Сбрасываем загруженные фото жилья
+    resetPhotos();
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price

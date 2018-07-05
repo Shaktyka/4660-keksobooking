@@ -29,7 +29,9 @@
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        template.remove();
+        if (template) {
+          template.style.display = 'none';
+        }
         photoBlock.appendChild(renderPreview(reader.result));
       });
 
