@@ -112,7 +112,6 @@
       guestsFilter.selectedIndex = 0;
     }
     var features = document.querySelector('.map__features').querySelectorAll('input:checked');
-    console.log(features);
     if (features) {
       for (var i = 0; i < features.length; i++) {
         features[i].checked = false;
