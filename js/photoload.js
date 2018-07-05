@@ -46,5 +46,4 @@
 
   fileChooser.addEventListener('change', photoLoadChangeHandler);
 
-  fileChooser.addEventListener('click', photoLoadChangeHandler);
 })();
