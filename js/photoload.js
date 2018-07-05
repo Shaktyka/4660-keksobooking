@@ -12,7 +12,7 @@
   var renderPreview = function (link) {
     var previewElement = document.createElement('div');
     previewElement.classList.add('ad-form__photo');
-    previewElement.innerHTML = '<img src="" width="44" height="44" alt="Фотография жилья пользователя">';
+    previewElement.innerHTML = '<img src="" width="60" height="55" alt="Фотография жилья">';
     previewElement.querySelector('img').src = link;
     return previewElement;
   };
