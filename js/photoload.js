@@ -32,11 +32,11 @@
       if (matches) {
         var reader = new FileReader();
 
-        reader.addEventListener('load', function () {
+        reader.addEventListener('load', function (evt) {
           if (template) {
             template.style.display = 'none';
           }
-          photoBlock.appendChild(renderPreview(reader.result));
+          photoBlock.appendChild(renderPreview(evt.target.result));
         });
 
         reader.readAsDataURL(file);
