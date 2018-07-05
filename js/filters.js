@@ -30,14 +30,6 @@
   var guestsValue = ANY_VALUE;
   var featureValue = '';
 
-  var filter = {
-    onTypeChange: function (value) {},
-    onPriceChange: function (value) {},
-    onRoomsChange: function (value) {},
-    onGuestsChange: function (value) {},
-    onFeatureChange: function (value) {}
-  };
-
   window.filterPins = function () {
     var initArray = window.adverts.slice();
 
@@ -49,14 +41,18 @@
     // Сортировка по цене
     var checkPrice = function (advert) {
       switch (priceFilter.value) {
+
         case prices.low.VALUE:
           return advert.offer.price < prices.low.NUMBER;
+
+        case prices.middle.VALUE:
+          return advert.offer.price > prices.low.NUMBER && advert.offer.price < prices.high.NUMBER;
+
         case prices.high.VALUE:
           return advert.offer.price > prices.high.NUMBER;
-        case ANY_VALUE:
-          return true;
+
         default:
-          return advert.offer.price >= prices.low.NUMBER && advert.offer.price <= prices.high.NUMBER;
+          return true;
       }
     };
 

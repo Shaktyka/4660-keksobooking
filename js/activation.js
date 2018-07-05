@@ -25,11 +25,6 @@
     createPins(window.sortedArray);
   };
 
-  //  filter.onTypeChange = function (value) {
-  //     = value;
-  //    updatePins();
-  //  }
-
   // После успешной загрузки данных выводим все метки
   var successHandler = function (data) {
     window.adverts = data;
