@@ -75,4 +75,8 @@
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);
+
+  window.mainPin.addEventListener('keydown', function (evt) {
+    window.utils.isEnterEvent(evt, pinMouseupHandler);
+  });
 })();
