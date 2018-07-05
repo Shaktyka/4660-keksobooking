@@ -21,9 +21,10 @@
 
   window.updatePins = function () {
 
-    // window.hidePins();
     // какой-то код
 
+    // window.hideAds();
+    // window.hidePins();
     createPins(window.sortedArray);
   };
 

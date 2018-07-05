@@ -82,7 +82,7 @@
   };
 
   // Функция закрытия открытых объявлений при reset
-  var hideAds = function () {
+  window.hideAds = function () {
     var adsList = window.map.querySelectorAll('article.map__card');
     if (adsList) {
       for (var l = 0; l < adsList.length; l++) {
@@ -180,7 +180,7 @@
   // Обработчик сброса данных
   var resetHandler = function () {
     // закрываем открытые объявления
-    hideAds();
+    window.hideAds();
     // убираем все метки с карты
     window.hidePins();
     // ставим главную метку на исходную позицию
