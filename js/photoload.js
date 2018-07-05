@@ -18,24 +18,29 @@
   };
 
   fileChooser.addEventListener('change', function () {
-    var file = fileChooser.files[0];
-    var fileName = file.name.toLowerCase();
+    var loadedFiles = fileChooser.files;
 
-    var matches = FILE_TYPES.some(function (it) {
-      return fileName.endsWith(it);
-    });
+    for (var i = 0; i < loadedFiles.length; i++) {
 
-    if (matches) {
-      var reader = new FileReader();
+      var file = loadedFiles[i];
+      var fileName = file.name.toLowerCase();
 
-      reader.addEventListener('load', function () {
-        if (template) {
-          template.style.display = 'none';
-        }
-        photoBlock.appendChild(renderPreview(reader.result));
+      var matches = FILE_TYPES.some(function (it) {
+        return fileName.endsWith(it);
       });
 
-      reader.readAsDataURL(file);
+      if (matches) {
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function () {
+          if (template) {
+            template.style.display = 'none';
+          }
+          photoBlock.appendChild(renderPreview(reader.result));
+        });
+
+        reader.readAsDataURL(file);
+      }
     }
   });
 })();
