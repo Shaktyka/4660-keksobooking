@@ -22,7 +22,6 @@
     var loadedFiles = fileChooser.files;
 
     for (var i = 0; i < loadedFiles.length; i++) {
-
       var file = loadedFiles[i];
       var fileName = file.name.toLowerCase();
 
@@ -39,12 +38,10 @@
           }
           photoBlock.appendChild(renderPreview(evt.target.result));
         });
-
         reader.readAsDataURL(file);
       }
     }
   };
 
   fileChooser.addEventListener('change', photoLoadChangeHandler);
-
 })();

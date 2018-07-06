@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-
-  // Переменные формы
   var MIN_PRICE = [0, 1000, 5000, 10000];
 
   var form = document.querySelector('.ad-form');
@@ -44,9 +42,7 @@
     }
   });
 
-  // Валидация отправки формы
-
-  // Функция поиска невалидных полей
+  // Поиск невалидных полей
   var findInvalidFields = function () {
     var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
     var invalidFields = [];
@@ -60,7 +56,7 @@
     return invalidFields;
   };
 
-  // Функция навешивания красных рамок на невалидные поля
+  // Навешивание красных рамок на невалидные поля
   var submitClickHandler = function () {
     var invalidInputs = findInvalidFields();
     if (invalidInputs) {
@@ -73,7 +69,7 @@
 
   // Ресет данных
 
-  // Функция скрытия меток на карте при reset
+  // Скрытие меток на карте
   window.removePins = function () {
     var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     for (var g = 0; g < pinsList.length; g++) {
@@ -81,7 +77,7 @@
     }
   };
 
-  // Функция закрытия открытых объявлений при reset
+  // Закрытия открытых объявлений
   window.hideAds = function () {
     var adsList = window.map.querySelectorAll('article.map__card');
     if (adsList) {
@@ -91,7 +87,7 @@
     }
   };
 
-  // Функция сброса выбранных фильтров
+  // Ресет настроек фильтров
   var resetFilters = function () {
     window.alreadyLoaded = false;
 
@@ -120,7 +116,7 @@
     }
   };
 
-  // Функция сброса выделенных чекбоксов
+  // Ресет выделенных чекбоксов
   var resetCheckboxes = function () {
     var featuresList = form.querySelector('.features').querySelectorAll('input');
     if (featuresList) {
@@ -130,7 +126,7 @@
     }
   };
 
-  // Функция сброса красных рамок у невалидных полей
+  // Ресет красных рамок невалидных полей
   var resetInvalidDecor = function (invalidInputs) {
     if (invalidInputs) {
       for (var x = 0; x < invalidInputs.length; x++) {
@@ -140,14 +136,14 @@
     }
   };
 
-  // Функция сброса аватара
+  // Ресет аватара
   var resetAvatar = function () {
     var preview = document.querySelector('.ad-form-header__preview img');
     var defaultSrc = 'img/muffin-grey.svg';
     preview.src = defaultSrc;
   };
 
-  // Функция сброса добавленных фотографий жилья
+  // Ресет добавленных фотографий жилья
   var resetPhotos = function () {
     var photoBlock = document.querySelector('.ad-form__photo-container');
     var template = photoBlock.querySelector('.ad-form__photo--template');
@@ -161,7 +157,7 @@
     template.style.display = 'block';
   };
 
-  // Reset введённых данных
+  // Ресет введённых данных
   var resetInputs = function () {
     var titleInput = document.getElementById('title');
     var description = document.getElementById('description');
@@ -196,7 +192,7 @@
     price.placeholder = 5000;
   };
 
-  // Обработчик сброса данных
+  // Оющий обработчик ресета
   var resetHandler = function () {
     // закрываем открытые объявления
     window.hideAds();
@@ -205,27 +201,17 @@
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
     resetFilters();
-    // Сбрасываем аватар
     resetAvatar();
-    // Сбрасываем загруженные фото жилья
     resetPhotos();
-    // сбрасываем введённые данные, если были
     resetInputs();
-    // устанавливаем координаты в поле address
     window.putCoordsInAddress(window.mainPinCentered);
-    // устанавливаем default плейсхолдера селекта price
     setPricePlaceholder();
-    // убираем красные рамки invalid полей при наличии
     resetInvalidDecor(findInvalidFields());
-    // сбрасываем чекбоксы
     resetCheckboxes();
-    // затемняем карту
     window.map.classList.add('map--faded');
-    // блокируем филдсеты
     fieldsetList.forEach(function (item) {
       item.disabled = true;
     });
-    // затемняем форму
     form.classList.add('ad-form--disabled');
   };
 
@@ -233,7 +219,7 @@
     window.utils.isEscEvent(evt, window.closeSuccess);
   };
 
-  // Обработка отправки формы
+  // Отправка формы
 
   // Обработка успешной отправки формы
   var successHandler = function () {
@@ -252,8 +238,7 @@
     });
   };
 
-  // Обработчики событий
-
+  // Обработчики событий внутри формы
   checkin.addEventListener('change', function () {
     checkout.selectedIndex = checkin.selectedIndex;
   });
@@ -272,5 +257,4 @@
     window.save(formData, successHandler, window.errorHandler);
     resetHandler();
   });
-
 })();

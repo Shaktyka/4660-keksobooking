@@ -5,7 +5,6 @@
   var lastTimeout = null;
 
   window.debounce = function (func) {
-
     return function () {
       var args = arguments;
       if (lastTimeout) {

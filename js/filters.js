@@ -14,7 +14,6 @@
   var featuresFilter = document.querySelector('.map__features');
 
   var filterPins = function () {
-
     // Сортировка по типу
     var checkType = function (advert) {
       return (typeFilter.value === advert.offer.type) || (typeFilter.value === ANY_VALUE);
@@ -65,7 +64,7 @@
     updatePins(sortedArray);
   };
 
-  // Отлеживаем изменения
+  // Отлеживание изменений фильтров
   typeFilter.addEventListener('change', debounce(function () {
     filterPins();
   }));
@@ -85,5 +84,4 @@
   featuresFilter.addEventListener('change', debounce(function () {
     filterPins();
   }, true));
-
 })();

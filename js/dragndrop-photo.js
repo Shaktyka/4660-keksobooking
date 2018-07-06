@@ -28,5 +28,4 @@
   photoBlock.addEventListener('dragleave', function (evt) {
     evt.preventDefault();
   });
-
 })();
