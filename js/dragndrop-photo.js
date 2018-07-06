@@ -17,7 +17,7 @@
   });
 
   photoBlock.addEventListener('drop', function (evt) {
-    evt.target.style.backgroundColor = '';
+    evt.preventDefault();
     evt.target.appendChild(draggedItem);
   });
 
@@ -26,7 +26,6 @@
   });
 
   photoBlock.addEventListener('dragleave', function (evt) {
-    evt.target.style.backgroundColor = '';
     evt.preventDefault();
   });
 
