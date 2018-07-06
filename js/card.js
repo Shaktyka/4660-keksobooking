@@ -2,14 +2,14 @@
 
 (function () {
 
-  var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
-
   var HOUSE_TYPE = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
     'bungalo': 'Бунгало'
   };
+
+  var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
   // Функция для конвертации англоязычного типа жилья в русскоязычный
   var convertType = function (type) {
