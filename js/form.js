@@ -192,6 +192,10 @@
     }
   };
 
+  var setPricePlaceholder = function () {
+    price.placeholder = 5000;
+  };
+
   // Обработчик сброса данных
   var resetHandler = function () {
     // закрываем открытые объявления
@@ -210,7 +214,7 @@
     // сбрасываем введённые данные, если были
     resetInputs();
     // устанавливаем default плейсхолдера селекта price
-    price.placeholder = 5000;
+    setPricePlaceholder();
     // убираем красные рамки invalid полей при наличии
     resetInvalidDecor(findInvalidFields());
     // сбрасываем чекбоксы
