@@ -857,6 +857,10 @@ fieldset {
   cursor: move;
 }
 
+.ad-form__photo img {
+  pointer-events: none;
+}
+
 .ad-form__element--submit {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
