@@ -197,7 +197,8 @@
   };
 
   // Обработчик сброса данных
-  var resetHandler = function () {
+  var resetHandler = function (evt) {
+    evt.preventDefault();
     // закрываем открытые объявления
     window.hideAds();
     // убираем все метки с карты
