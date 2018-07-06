@@ -151,7 +151,7 @@
   var resetPhotos = function () {
     var photoBlock = document.querySelector('.ad-form__photo-container');
     // var template = photoBlock.querySelector('.ad-form__photo--template');
-    var photosList = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
+    var photosList = photoBlock.querySelectorAll('.ad-form__photo');
 
     if (photosList) {
       for (var i = 0; i < photosList.length; i++) {
