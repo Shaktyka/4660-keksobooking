@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  // var PIN_LIMIT = 5;
+  var PIN_LIMIT = 5;
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
@@ -28,7 +28,8 @@
   // После успешной загрузки данных выводим все метки
   var successHandler = function (data) {
     window.adverts = data;
-    createPins(window.adverts);
+    var slicedAdverts = window.adverts.slice(0, PIN_LIMIT);
+    createPins(slicedAdverts);
   };
 
   // Функция обработки неуспеха при выполнении запроса
