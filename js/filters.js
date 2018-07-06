@@ -1,7 +1,4 @@
 'use strict';
-/* global debounce, updatePins, adverts */
-
-// Фильтрация объявлений
 
 (function () {
   var ANY_VALUE = 'any';
@@ -59,29 +56,29 @@
     };
 
     // Сортировка всех пинов
-    var sortedArray = adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
+    var sortedArray = window.adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
 
-    updatePins(sortedArray);
+    window.updatePins(sortedArray);
   };
 
   // Отлеживание изменений фильтров
-  typeFilter.addEventListener('change', debounce(function () {
+  typeFilter.addEventListener('change', window.debounce(function () {
     filterPins();
   }));
 
-  priceFilter.addEventListener('change', debounce(function () {
+  priceFilter.addEventListener('change', window.debounce(function () {
     filterPins();
   }));
 
-  roomsFilter.addEventListener('change', debounce(function () {
+  roomsFilter.addEventListener('change', window.debounce(function () {
     filterPins();
   }));
 
-  guestsFilter.addEventListener('change', debounce(function () {
+  guestsFilter.addEventListener('change', window.debounce(function () {
     filterPins();
   }));
 
-  featuresFilter.addEventListener('change', debounce(function () {
+  featuresFilter.addEventListener('change', window.debounce(function () {
     filterPins();
   }, true));
 })();
