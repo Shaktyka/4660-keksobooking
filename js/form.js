@@ -205,14 +205,14 @@
     // ставим главную метку на исходную позицию
     window.getStartCoords(window.mainPinCentered);
     resetFilters();
-    // устанавливаем координаты в поле address
-    window.putCoordsInAddress(window.mainPinCentered);
     // Сбрасываем аватар
     resetAvatar();
     // Сбрасываем загруженные фото жилья
     resetPhotos();
     // сбрасываем введённые данные, если были
     resetInputs();
+    // устанавливаем координаты в поле address
+    window.putCoordsInAddress(window.mainPinCentered);
     // устанавливаем default плейсхолдера селекта price
     setPricePlaceholder();
     // убираем красные рамки invalid полей при наличии
