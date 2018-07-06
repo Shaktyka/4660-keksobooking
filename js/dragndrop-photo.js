@@ -5,7 +5,7 @@
   var draggedItem = null;
 
   photoBlock.addEventListener('dragstart', function (evt) {
-    if (evt.target.tagName.toLowerCase() === 'img') {
+    if (evt.target.tagName.toLowerCase() === 'div') {
       draggedItem = evt.target;
       evt.dataTransfer.setData('text/plain', evt.target.alt);
     }

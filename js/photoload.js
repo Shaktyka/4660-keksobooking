@@ -7,7 +7,7 @@
 
   var photoBlock = document.querySelector('.ad-form__photo-container');
 
-  // var template = photoBlock.querySelector('.ad-form__photo--template');
+  var template = photoBlock.querySelector('.ad-form__photo--template');
 
   var renderPreview = function (link) {
     var previewElement = document.createElement('div');
@@ -34,9 +34,9 @@
         var reader = new FileReader();
 
         reader.addEventListener('load', function (evt) {
-        // if (template) {
-        // template.style.display = 'none';
-        // }
+          if (template) {
+            template.style.display = 'none';
+          }
           photoBlock.appendChild(renderPreview(evt.target.result));
         });
 

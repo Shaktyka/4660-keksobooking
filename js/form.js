@@ -150,15 +150,15 @@
   // Функция сброса добавленных фотографий жилья
   var resetPhotos = function () {
     var photoBlock = document.querySelector('.ad-form__photo-container');
-    // var template = photoBlock.querySelector('.ad-form__photo--template');
-    var photosList = photoBlock.querySelectorAll('.ad-form__photo');
+    var template = photoBlock.querySelector('.ad-form__photo--template');
+    var photosList = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
 
     if (photosList) {
       for (var i = 0; i < photosList.length; i++) {
         photosList[i].remove();
       }
     }
-    // template.style.display = 'block';
+    template.style.display = 'block';
   };
 
   // Reset введённых данных
