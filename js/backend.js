@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var Code = {
     SUCCESS: 200,
     INVALID_REQUEST: 400,
@@ -10,7 +9,7 @@
     SERVER_ERROR: 500
   };
 
-  // Функция для отправки данных на сервер
+  // Отправка данных ирока на сервер
   window.save = function (data, onLoad, onError) {
     var urlSave = 'https://js.dump.academy/keksobooking';
 
@@ -36,7 +35,6 @@
         case Code.SERVER_ERROR:
           error = 'Ошибка сервера';
           break;
-
         default:
           error = 'Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText;
       }
@@ -57,10 +55,9 @@
     xhr.send(data);
   };
 
-  // Функция для загрузки объявлений с сервера
+  // Загрузка объявлений с сервера
   window.load = function (onLoad, onError) {
     var urlLoad = 'https://js.dump.academy/keksobooking/data';
-
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -103,5 +100,4 @@
     xhr.open('GET', urlLoad);
     xhr.send();
   };
-
 })();

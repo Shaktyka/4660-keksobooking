@@ -1,18 +1,18 @@
 'use strict';
 
 (function () {
-  // var PIN_LIMIT = 5;
+  var PIN_LIMIT = 5;
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
 
-  // Функция отрисовки меток и добавления в целевой блок
+  // Отрисовка меток и добавление их в целевой блок
   var createPins = function (pins) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < pins.length; i++) {
       fragment.appendChild(window.renderPin(pins[i]));
     }
-    // Проверяем, есть ли уже на карте метки. Если есть, то новые метки не генерируем.
+    // Если на карте есть уже метки, то новые не генерируем.
     var buttonsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
     if (buttonsList.length === 0) {
       window.pinsContainer.appendChild(fragment);
@@ -25,36 +25,36 @@
     createPins(pins);
   };
 
-  // После успешной загрузки данных выводим все метки
   var successHandler = function (data) {
     window.adverts = data;
-    createPins(window.adverts);
+    var slicedAdverts = window.adverts.slice(0, PIN_LIMIT);
+    createPins(slicedAdverts);
   };
 
-  // Функция обработки неуспеха при выполнении запроса
+  // Обработка неуспеха при выполнении запроса
   window.errorHandler = function (errorMessage) {
-    window.node = document.createElement('div');
-    window.node.classList.add('modal');
-    window.node.classList.add('modal--error');
-    window.node.tabIndex = 0;
+    var node = document.createElement('div');
+    node.classList.add('modal');
+    node.classList.add('modal--error');
+    node.tabIndex = 0;
 
-    window.node.textContent = errorMessage;
-    document.body.insertBefore(window.node, document.body.firstChild);
+    node.textContent = errorMessage;
+    document.body.insertBefore(node, document.body.firstChild);
 
-    window.closeError = function () {
-      window.node.classList.add('hidden');
+    var closeError = function () {
+      node.classList.add('hidden');
     };
 
-    window.node.addEventListener('click', function () {
-      window.closeError();
+    node.addEventListener('click', function () {
+      closeError();
     });
 
-    window.node.addEventListener('keydown', function (e) {
-      window.utils.isEnterEvent(e, window.closeError);
+    node.addEventListener('keydown', function (e) {
+      window.utils.isEnterEvent(e, closeError);
     });
   };
 
-  // Обработчик активации страницы
+  // Активация страницы
   window.alreadyLoaded = false;
   var pinMouseupHandler = function () {
     if (!window.alreadyLoaded) {
@@ -62,17 +62,20 @@
     } else {
       return;
     }
-    // разблокируем карту
+    // Разблокируем карту и форму
     window.map.classList.remove('map--faded');
-    // разблокируем форму
     form.classList.remove('ad-form--disabled');
-    // разблокируем филдсеты
+    // Разблокируем филдсеты
     fieldsetList.forEach(function (item) {
       item.disabled = false;
     });
-    // разблокируем генерацию массива меток и объявлений
+    // Разблокируем генерацию массива меток
     window.load(successHandler, window.errorHandler);
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);
+
+  window.mainPin.addEventListener('keydown', function (evt) {
+    window.utils.isEnterEvent(evt, pinMouseupHandler);
+  });
 })();

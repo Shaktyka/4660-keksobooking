@@ -5,6 +5,7 @@
 
 (function () {
   var ANY_VALUE = 'any';
+  var PIN_LIMIT = 5;
 
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
@@ -13,7 +14,6 @@
   var featuresFilter = document.querySelector('.map__features');
 
   var filterPins = function () {
-
     // Сортировка по типу
     var checkType = function (advert) {
       return (typeFilter.value === advert.offer.type) || (typeFilter.value === ANY_VALUE);
@@ -59,12 +59,12 @@
     };
 
     // Сортировка всех пинов
-    var sortedArray = adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures);
+    var sortedArray = adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
 
     updatePins(sortedArray);
   };
 
-  // Отлеживаем изменения
+  // Отлеживание изменений фильтров
   typeFilter.addEventListener('change', debounce(function () {
     filterPins();
   }));
@@ -84,5 +84,4 @@
   featuresFilter.addEventListener('change', debounce(function () {
     filterPins();
   }, true));
-
 })();

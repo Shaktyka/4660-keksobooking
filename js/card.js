@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-
-  var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
-
   var HOUSE_TYPE = {
     'palace': 'Дворец',
     'flat': 'Квартира',
@@ -11,13 +8,15 @@
     'bungalo': 'Бунгало'
   };
 
-  // Функция для конвертации англоязычного типа жилья в русскоязычный
+  var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
+
+  // Конвертация названий типа жилья
   var convertType = function (type) {
     var typeValue = HOUSE_TYPE[type];
     return typeValue;
   };
 
-  // Функция для сборки списка фичей для объявления
+  // Сборка списка фичей для объявления
   var getListFeatures = function (rawList) {
     var parsedList = '';
     for (var i = 0; i < rawList.length; i++) {
@@ -39,7 +38,6 @@
   };
 
   // Закрытие объявления
-
   window.escKeydownHandler = function (evt) {
     window.utils.isEscEvent(evt, window.closeCard);
   };
@@ -57,7 +55,7 @@
     }
   };
 
-  // Генерация объявления на основе шаблона
+  // Генерация карточки объявления на основе шаблона
   window.renderCard = function (card) {
     window.cardElement = cardTemplate.cloneNode(true);
     window.cardElement.querySelector('img').src = card.author.avatar;
@@ -82,7 +80,7 @@
       descriptionBlock.textContent = card.offer.description;
     }
 
-    // Функция для вставки фото жилья в объявление
+    // Вставка фото жилья в объявление
     var photoContainer = window.cardElement.querySelector('.popup__photos');
 
     var renderPhotos = function (photos) {
@@ -103,23 +101,18 @@
       renderPhotos(card.offer.photos);
     }
 
-    // Обработчики событий
-
+    // Обработчики событий для объявления
     var closeButton = window.cardElement.querySelector('.popup__close');
 
-    // Карточка объявления закрывается при клике на неё
     closeButton.addEventListener('click', function () {
       window.closeCard();
     });
 
-    // Карточка объявления закрывается при нажатии Enter
     closeButton.addEventListener('keydown', function (evt) {
       window.utils.isEnterEvent(evt, window.closeCard);
     });
 
-    // Вешаем прослушку на нажатие esc
     document.addEventListener('keydown', window.escKeydownHandler);
     return window.cardElement;
   };
-
 })();

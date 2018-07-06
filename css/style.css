@@ -845,8 +845,20 @@ fieldset {
   width: 70px;
   height: 70px;
 
+  display: flex;
+  justify-content: center;
+	-webkit-box-align: center;
+    -ms-flex-align: center;
+	align-items: center;
+
   background-color: #e4e4de;
   border-radius: 5px;
+
+  cursor: move;
+}
+
+.ad-form__photo img {
+  pointer-events: none;
 }
 
 .ad-form__element--submit {
