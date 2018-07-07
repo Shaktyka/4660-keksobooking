@@ -62,23 +62,23 @@
   };
 
   // Отлеживание изменений фильтров
-  typeFilter.addEventListener('change', window.debounce(function () {
+  typeFilter.addEventListener('change', window.removeDebounceHandler(function () {
     filterPins();
   }));
 
-  priceFilter.addEventListener('change', window.debounce(function () {
+  priceFilter.addEventListener('change', window.removeDebounceHandler(function () {
     filterPins();
   }));
 
-  roomsFilter.addEventListener('change', window.debounce(function () {
+  roomsFilter.addEventListener('change', window.removeDebounceHandler(function () {
     filterPins();
   }));
 
-  guestsFilter.addEventListener('change', window.debounce(function () {
+  guestsFilter.addEventListener('change', window.removeDebounceHandler(function () {
     filterPins();
   }));
 
-  featuresFilter.addEventListener('change', window.debounce(function () {
+  featuresFilter.addEventListener('change', window.removeDebounceHandler(function () {
     filterPins();
   }, true));
 })();
