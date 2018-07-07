@@ -36,12 +36,12 @@
 
     // Сортировка по кол-ву комнат
     var checkRooms = function (advert) {
-      return (roomsFilter.value === advert.offer.rooms.toString()) || (roomsFilter.value === ANY_VALUE);
+      return (roomsFilter.value === advert.offer.rooms) || (roomsFilter.value === ANY_VALUE);
     };
 
     // Сортировка по кол-ву гостей
     var checkGuests = function (advert) {
-      return (guestsFilter.value === advert.offer.guests.toString()) || (guestsFilter.value === ANY_VALUE);
+      return (guestsFilter.value === advert.offer.guests) || (guestsFilter.value === ANY_VALUE);
     };
 
     // Сортировка по фичам
