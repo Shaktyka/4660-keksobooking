@@ -8,8 +8,8 @@
   var fieldsets = form.querySelectorAll('fieldset');
   var type = document.getElementById('type');
   var price = document.getElementById('price');
-  var checkin = document.getElementById('timein');
-  var checkout = document.getElementById('timeout');
+  var checkIn = document.getElementById('timein');
+  var checkOut = document.getElementById('timeout');
   var rooms = document.getElementById('rooms');
   var guests = document.getElementById('capacity');
   var sendForm = document.querySelector('.ad-form__submit');
@@ -181,11 +181,11 @@
     if (guests.selectedIndex !== 0) {
       guests.selectedIndex = 0;
     }
-    if (checkin.selectedIndex !== 0) {
-      checkin.selectedIndex = 0;
+    if (checkIn.selectedIndex !== 0) {
+      checkIn.selectedIndex = 0;
     }
-    if (checkout.selectedIndex !== 0) {
-      checkout.selectedIndex = 0;
+    if (checkOut.selectedIndex !== 0) {
+      checkOut.selectedIndex = 0;
     }
   };
 
@@ -240,12 +240,12 @@
   };
 
   // Обработчики событий внутри формы
-  checkin.addEventListener('change', function () {
-    checkout.selectedIndex = checkin.selectedIndex;
+  checkIn.addEventListener('change', function () {
+    checkOut.selectedIndex = checkIn.selectedIndex;
   });
 
-  checkout.addEventListener('change', function () {
-    checkin.selectedIndex = checkout.selectedIndex;
+  checkOut.addEventListener('change', function () {
+    checkIn.selectedIndex = checkOut.selectedIndex;
   });
 
   sendForm.addEventListener('click', submitClickHandler);

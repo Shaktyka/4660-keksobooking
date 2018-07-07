@@ -64,7 +64,7 @@
     window.cardElement.querySelector('.popup__text--price').innerHTML = card.offer.price + '&#x20bd;<span>/ночь</span>';
     window.cardElement.querySelector('.popup__type').textContent = convertType(card.offer.type);
     window.cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
-    window.cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
+    window.cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkIn + ', выезд до ' + card.offer.checkOut;
 
     var featuresBlock = window.cardElement.querySelector('.popup__features');
     if (card.offer.features.length === 0) {
