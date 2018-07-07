@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var HOUSE_TYPE = {
+  var HouseType = {
     'palace': 'Дворец',
     'flat': 'Квартира',
     'house': 'Дом',
@@ -12,7 +12,7 @@
 
   // Конвертация названий типа жилья
   var convertType = function (type) {
-    var typeValue = HOUSE_TYPE[type];
+    var typeValue = HouseType[type];
     return typeValue;
   };
 
