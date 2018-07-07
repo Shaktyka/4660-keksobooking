@@ -104,16 +104,16 @@
     var roomsFilter = document.querySelector('#housing-rooms');
     var guestsFilter = document.querySelector('#housing-guests');
 
-    if (typeFilter.selectedIndex !== 0) {
+    if (typeFilter.selectedIndex) {
       typeFilter.selectedIndex = 0;
     }
-    if (priceFilter.selectedIndex !== 0) {
+    if (priceFilter.selectedIndex) {
       priceFilter.selectedIndex = 0;
     }
-    if (roomsFilter.selectedIndex !== 0) {
+    if (roomsFilter.selectedIndex) {
       roomsFilter.selectedIndex = 0;
     }
-    if (guestsFilter.selectedIndex !== 0) {
+    if (guestsFilter.selectedIndex) {
       guestsFilter.selectedIndex = 0;
     }
     var features = document.querySelector('.map__features').querySelectorAll('input:checked');
