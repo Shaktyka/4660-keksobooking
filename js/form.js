@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var MIN_PRICE = [0, 1000, 5000, 10000];
+  var MIN_PRICES = [0, 1000, 5000, 10000];
   var DEFAULT_PLACEHOLDER = 5000;
 
   var form = document.querySelector('.ad-form');
-  var fieldsetList = form.querySelectorAll('fieldset');
+  var fieldsets = form.querySelectorAll('fieldset');
   var type = document.getElementById('type');
   var price = document.getElementById('price');
   var checkin = document.getElementById('timein');
@@ -18,8 +18,8 @@
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
-    price.min = MIN_PRICE[index];
-    price.placeholder = MIN_PRICE[index];
+    price.min = MIN_PRICES[index];
+    price.placeholder = MIN_PRICES[index];
   });
 
   // Соответствие количества комнат количеству гостей
@@ -210,7 +210,7 @@
     resetInvalidDecor(findInvalidFields());
     resetCheckboxes();
     window.map.classList.add('map--faded');
-    fieldsetList.forEach(function (item) {
+    fieldsets.forEach(function (item) {
       item.disabled = true;
     });
     form.classList.add('ad-form--disabled');

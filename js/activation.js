@@ -4,7 +4,7 @@
   var PIN_LIMIT = 5;
 
   var form = document.querySelector('.ad-form');
-  var fieldsetList = form.querySelectorAll('fieldset');
+  var fieldsets = form.querySelectorAll('fieldset');
 
   // Отрисовка меток и добавление их в целевой блок
   var createPins = function (pins) {
@@ -13,8 +13,8 @@
       fragment.appendChild(window.renderPin(pins[i]));
     }
     // Если на карте есть уже метки, то новые не генерируем.
-    var buttonsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
-    if (buttonsList.length === 0) {
+    var buttons = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
+    if (buttons.length === 0) {
       window.pinsContainer.appendChild(fragment);
     }
   };
@@ -66,7 +66,7 @@
     window.map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
     // Разблокируем филдсеты
-    fieldsetList.forEach(function (item) {
+    fieldsets.forEach(function (item) {
       item.disabled = false;
     });
     // Разблокируем генерацию массива меток
