@@ -49,8 +49,8 @@
       closeError();
     });
 
-    node.addEventListener('keydown', function (e) {
-      window.utils.isEnterEvent(e, closeError);
+    node.addEventListener('keydown', function (evt) {
+      window.utils.isEnterEvent(evt, closeError);
     });
   };
 

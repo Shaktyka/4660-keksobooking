@@ -2,6 +2,7 @@
 
 (function () {
   var MIN_PRICE = [0, 1000, 5000, 10000];
+  var DEFAULT_PLACEHOLDER = 5000;
 
   var form = document.querySelector('.ad-form');
   var fieldsetList = form.querySelectorAll('fieldset');
@@ -189,7 +190,7 @@
   };
 
   var setPricePlaceholder = function () {
-    price.placeholder = 5000;
+    price.placeholder = DEFAULT_PLACEHOLDER;
   };
 
   // Оющий обработчик ресета
