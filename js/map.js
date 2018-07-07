@@ -40,12 +40,12 @@
   window.putCoordsInAddress(window.mainPinCentered);
 
   // Перетаскивание главной метки
-  window.mainPin.addEventListener('mousedown', function (ee) {
-    ee.preventDefault();
+  window.mainPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
 
     var startCoords = {
-      x: ee.clientX,
-      y: ee.clientY
+      x: evt.clientX,
+      y: evt.clientY
     };
 
     var pinMoveHandler = function (moveEvt) {

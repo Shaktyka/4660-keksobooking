@@ -25,17 +25,17 @@
   rooms.addEventListener('change', function () {
     var currentValue = rooms.value;
     if (currentValue === '0') {
-      for (var c = 0; c < guests.children.length; c++) {
-        guests.children[c].disabled = true;
+      for (var i = 0; i < guests.children.length; i++) {
+        guests.children[i].disabled = true;
       }
       guests.children[guests.children.length - 1].disabled = false;
       guests.children[guests.children.length - 1].selected = true;
     } else {
-      for (var d = 0; d < guests.children.length; d++) {
-        if (d < currentValue) {
-          guests.children[d].disabled = false;
+      for (var j = 0; j < guests.children.length; j++) {
+        if (j < currentValue) {
+          guests.children[j].disabled = false;
         } else {
-          guests.children[d].disabled = true;
+          guests.children[j].disabled = true;
         }
       }
       guests.children[0].selected = true;
@@ -47,9 +47,9 @@
     var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
     var invalidFields = [];
 
-    for (var h = 0; h < fields.length; h++) {
-      if (fields[h].checkValidity() === false) {
-        var field = fields[h];
+    for (var i = 0; i < fields.length; i++) {
+      if (fields[i].checkValidity() === false) {
+        var field = fields[i];
         invalidFields.push(field);
       }
     }
@@ -60,8 +60,8 @@
   var submitClickHandler = function () {
     var invalidInputs = findInvalidFields();
     if (invalidInputs) {
-      for (var y = 0; y < invalidInputs.length; y++) {
-        var input = invalidInputs[y];
+      for (var i = 0; i < invalidInputs.length; i++) {
+        var input = invalidInputs[i];
         input.classList.add('error');
       }
     }
@@ -72,8 +72,8 @@
   // Скрытие меток на карте
   window.removePins = function () {
     var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
-    for (var g = 0; g < pinsList.length; g++) {
-      pinsList[g].remove();
+    for (var i = 0; i < pinsList.length; i++) {
+      pinsList[i].remove();
     }
   };
 
@@ -81,8 +81,8 @@
   window.hideAds = function () {
     var adsList = window.map.querySelectorAll('article.map__card');
     if (adsList) {
-      for (var l = 0; l < adsList.length; l++) {
-        adsList[l].classList.add('hidden');
+      for (var i = 0; i < adsList.length; i++) {
+        adsList[i].classList.add('hidden');
       }
     }
   };
@@ -120,8 +120,8 @@
   var resetCheckboxes = function () {
     var featuresList = form.querySelector('.features').querySelectorAll('input');
     if (featuresList) {
-      for (var z = 0; z < featuresList.length; z++) {
-        featuresList[z].checked = false;
+      for (var i = 0; i < featuresList.length; i++) {
+        featuresList[i].checked = false;
       }
     }
   };
@@ -129,8 +129,8 @@
   // Ресет красных рамок невалидных полей
   var resetInvalidDecor = function (invalidInputs) {
     if (invalidInputs) {
-      for (var x = 0; x < invalidInputs.length; x++) {
-        var invalidInput = invalidInputs[x];
+      for (var i = 0; i < invalidInputs.length; i++) {
+        var invalidInput = invalidInputs[i];
         invalidInput.classList.remove('error');
       }
     }
