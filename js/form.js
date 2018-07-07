@@ -6,14 +6,14 @@
 
   var form = document.querySelector('.ad-form');
   var fieldsets = form.querySelectorAll('fieldset');
-  var type = document.getElementById('type');
-  var price = document.getElementById('price');
-  var checkIn = document.getElementById('timein');
-  var checkOut = document.getElementById('timeout');
-  var rooms = document.getElementById('rooms');
-  var guests = document.getElementById('capacity');
-  var sendForm = document.querySelector('.ad-form__submit');
-  var resetButton = document.querySelector('.ad-form__reset');
+  var type = form.querySelector('select[name="type"]');
+  var price = form.querySelector('input[name="price"]');
+  var checkIn = form.querySelector('select[name="timein"]');
+  var checkOut = form.querySelector('select[name="timeout"]');
+  var rooms = form.querySelector('select[name="rooms"]');
+  var guests = form.querySelector('select[name="capacity"]');
+  var sendForm = form.querySelector('.ad-form__submit');
+  var resetButton = form.querySelector('.ad-form__reset');
 
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
@@ -160,8 +160,8 @@
 
   // Ресет введённых данных
   var resetInputs = function () {
-    var titleInput = document.getElementById('title');
-    var description = document.getElementById('description');
+    var titleInput = form.querySelector('input[name="title"]');
+    var description = form.querySelector('textarea[name="description"]');
 
     if (titleInput.value) {
       titleInput.value = '';

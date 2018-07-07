@@ -15,7 +15,7 @@
 
   window.mainPin = window.map.querySelector('.map__pin--main');
 
-  var addressInput = document.getElementById('address');
+  var addressInput = document.querySelector('input[name="address"]');
 
   window.mainPinCentered = {
     x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
