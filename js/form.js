@@ -24,8 +24,15 @@
 
   // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
+    var RoomsValue = {
+      '100 комнат': '0',
+      '1 комната': '1',
+      '2 комнаты': '2',
+      '3 комнаты': '3'
+    };
+
     var currentValue = rooms.value;
-    if (currentValue === '0') {
+    if (currentValue === RoomsValue['100 комнат']) {
       for (var i = 0; i < guests.children.length; i++) {
         guests.children[i].disabled = true;
       }
