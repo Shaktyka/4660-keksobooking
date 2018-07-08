@@ -7,9 +7,16 @@
   var MAIN_PIN_LEFT = 570;
   var MAIN_PIN_TOP = 375;
 
+  window.mainPinCoords = {
+    x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
+    y: MAIN_PIN_TOP - MAIN_PIN_HEIGHT
+  };
+
   // Границы доступной области для перемещения метки
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
+
+  var MAP_MIN_X = 0;
 
   window.map = document.querySelector('.map');
 
@@ -17,23 +24,18 @@
 
   var addressInput = document.querySelector('input[name="address"]');
 
-  window.mainPinCentered = {
-    x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
-    y: MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2)
-  };
-
   // Стартовые координаты главной метки
-  window.getStartCoords = function (coord) {
-    window.mainPin.style.left = coord.x + 'px';
-    window.mainPin.style.top = coord.y + 'px';
+  window.getStartCoords = function (coords) {
+    window.mainPin.style.left = coords.x + 'px';
+    window.mainPin.style.top = coords.y + 'px';
   };
-  window.getStartCoords(window.mainPinCentered);
+  window.getStartCoords(window.mainPinCoords);
 
-  // Ставим координаты в поле address при неактивной странице
+  // Ставим начальные координаты в поле address
   window.putCoordsInAddress = function (coordinates) {
     addressInput.value = coordinates.x + ', ' + coordinates.y;
   };
-  window.putCoordsInAddress(window.mainPinCentered);
+  window.putCoordsInAddress(window.mainPinCoords);
 
   // Перетаскивание главной метки
   window.mainPin.addEventListener('mousedown', function (evt) {
@@ -60,8 +62,8 @@
       var newX = window.mainPin.offsetLeft + shift.x;
       var newY = window.mainPin.offsetTop + shift.y;
 
-      if (newX < 0) {
-        newX = 0;
+      if (newX < MAP_MIN_X) {
+        newX = MAP_MIN_X;
       }
 
       if (newX > window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth) {

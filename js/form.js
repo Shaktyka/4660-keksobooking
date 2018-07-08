@@ -14,6 +14,7 @@
   var guests = form.querySelector('select[name="capacity"]');
   var sendForm = form.querySelector('.ad-form__submit');
   var resetButton = form.querySelector('.ad-form__reset');
+  var success = document.querySelector('.success');
 
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
@@ -207,12 +208,12 @@
     // убираем все метки с карты
     window.removePins();
     // ставим главную метку на исходную позицию
-    window.getStartCoords(window.mainPinCentered);
+    window.getStartCoords(window.mainPinCoords);
     resetFilters();
     resetAvatar();
     resetPhotos();
     resetInputs();
-    window.putCoordsInAddress(window.mainPinCentered);
+    window.putCoordsInAddress(window.mainPinCoords);
     setPricePlaceholder();
     resetInvalidDecor(findInvalidFields());
     resetCheckboxes();
@@ -231,7 +232,6 @@
 
   // Обработка успешной отправки формы
   var successHandler = function () {
-    var success = document.querySelector('.success');
     success.classList.remove('hidden');
 
     document.addEventListener('keydown', window.escKeydownSuccessHandler);
