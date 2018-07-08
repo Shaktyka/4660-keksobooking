@@ -10,6 +10,11 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('.map__features');
 
+  var BorderPrice = {
+    maxlow: 10000,
+    maxmiddle: 50000
+  };
+
   var filterPins = function () {
     // Сортировка по типу
     var checkType = function (advert) {
@@ -21,13 +26,13 @@
       switch (priceFilter.value) {
 
         case 'low':
-          return advert.offer.price < 10000;
+          return advert.offer.price < BorderPrice.maxlow;
 
         case 'middle':
-          return advert.offer.price > 10000 && advert.offer.price < 50000;
+          return advert.offer.price > BorderPrice.maxlow && advert.offer.price < BorderPrice.maxmiddle;
 
         case 'high':
-          return advert.offer.price > 50000;
+          return advert.offer.price > BorderPrice.maxmiddle;
 
         default:
           return true;

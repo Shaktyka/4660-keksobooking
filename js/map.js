@@ -15,7 +15,6 @@
   // Границы доступной области для перемещения метки
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
-
   var MAP_MIN_X = 0;
 
   window.map = document.querySelector('.map');
