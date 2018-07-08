@@ -66,6 +66,7 @@
     window.cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     window.cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
 
+    // Если в объявлении нет фичей, то блок фичей скрываем
     var featuresBlock = window.cardElement.querySelector('.popup__features');
     if (card.offer.features.length === 0) {
       featuresBlock.classList.add('hidden');
@@ -73,6 +74,7 @@
       featuresBlock.innerHTML = getListFeatures(card.offer.features);
     }
 
+    // Если в объявлении нет описания, то блок скрываем
     var descriptionBlock = window.cardElement.querySelector('.popup__description');
     if (card.offer.description.length === 0) {
       descriptionBlock.classList.add('hidden');

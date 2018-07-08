@@ -10,11 +10,12 @@
   // Шаблон для генерации меток
   var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
+  // Перем-ные для вставки объявления
+  var cardsBeforeElement = window.map.querySelector('.map__filters-container');
+  var cardsParentElement = cardsBeforeElement.parentNode;
+
   // Отрисовка объявлений и добавление их в целевой блок
   var createCard = function (pin) {
-    var cardsBeforeElement = window.map.querySelector('.map__filters-container');
-
-    var cardsParentElement = cardsBeforeElement.parentNode;
     cardsParentElement.insertBefore(window.renderCard(pin), cardsBeforeElement);
   };
 
