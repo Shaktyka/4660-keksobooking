@@ -89,7 +89,7 @@
     var pinUpHandler = function (upEvt) {
       upEvt.preventDefault();
 
-      addressInput.value = (window.mainPin.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + MAIN_PIN_HEIGHT);
+      addressInput.value = window.mainPin.offsetLeft + ', ' + window.mainPin.offsetTop;
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);
     };
