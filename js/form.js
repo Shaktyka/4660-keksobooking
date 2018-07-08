@@ -14,7 +14,12 @@
   var guests = form.querySelector('select[name="capacity"]');
   var sendForm = form.querySelector('.ad-form__submit');
   var resetButton = form.querySelector('.ad-form__reset');
-  
+
+  var typeFilter = document.querySelector('#housing-type');
+  var priceFilter = document.querySelector('#housing-price');
+  var roomsFilter = document.querySelector('#housing-rooms');
+  var guestsFilter = document.querySelector('#housing-guests');
+
   var RoomsValue = {
     '100 комнат': '0',
     '1 комната': '1',
@@ -98,11 +103,6 @@
   // Ресет настроек фильтров
   var resetFilters = function () {
     window.alreadyLoaded = false;
-
-    var typeFilter = document.querySelector('#housing-type');
-    var priceFilter = document.querySelector('#housing-price');
-    var roomsFilter = document.querySelector('#housing-rooms');
-    var guestsFilter = document.querySelector('#housing-guests');
 
     if (typeFilter.selectedIndex) {
       typeFilter.selectedIndex = 0;
