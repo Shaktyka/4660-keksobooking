@@ -203,17 +203,16 @@
 
   // Оющий обработчик ресета
   var resetHandler = function () {
-    // закрываем открытые объявления
+    // Закрываем открытые объявления
     window.hideAds();
-    // убираем все метки с карты
+    // Убираем все метки с карты
     window.removePins();
-    // ставим главную метку на исходную позицию
-    window.getStartCoords(window.mainPinCoords);
+    // Ставим главную метку на исходную позицию
+    window.resetMainPinPosition();
     resetFilters();
     resetAvatar();
     resetPhotos();
     resetInputs();
-    window.putCoordsInAddress(window.mainPinCoords);
     setPricePlaceholder();
     resetInvalidDecor(findInvalidFields());
     resetCheckboxes();
