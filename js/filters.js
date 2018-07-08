@@ -66,24 +66,18 @@
     window.updatePins(sortedArray);
   };
 
+  var filterChangeHandler = window.debounce(function () {
+    filterPins();
+  });
+
   // Отлеживание изменений фильтров
-  typeFilter.addEventListener('change', window.removeDebounceHandler(function () {
-    filterPins();
-  }));
+  typeFilter.addEventListener('change', filterChangeHandler);
 
-  priceFilter.addEventListener('change', window.removeDebounceHandler(function () {
-    filterPins();
-  }));
+  priceFilter.addEventListener('change', filterChangeHandler);
 
-  roomsFilter.addEventListener('change', window.removeDebounceHandler(function () {
-    filterPins();
-  }));
+  roomsFilter.addEventListener('change', filterChangeHandler);
 
-  guestsFilter.addEventListener('change', window.removeDebounceHandler(function () {
-    filterPins();
-  }));
+  guestsFilter.addEventListener('change', filterChangeHandler);
 
-  featuresFilter.addEventListener('change', window.removeDebounceHandler(function () {
-    filterPins();
-  }, true));
+  featuresFilter.addEventListener('change', filterChangeHandler, true);
 })();

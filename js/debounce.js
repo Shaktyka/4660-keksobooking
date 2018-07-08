@@ -4,7 +4,7 @@
   var DEBOUNCE_INTERVAL = 500;
   var lastTimeout = null;
 
-  window.removeDebounceHandler = function (func) {
+  window.debounce = function (func) {
     return function () {
       var args = arguments;
       if (lastTimeout) {
