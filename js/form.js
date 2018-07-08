@@ -46,11 +46,7 @@
       guests.children[guests.children.length - 1].selected = true;
     } else {
       for (var j = 0; j < guests.children.length; j++) {
-        if (j < currentValue) {
-          guests.children[j].disabled = false;
-        } else {
-          guests.children[j].disabled = true;
-        }
+        guests.children[j].disabled = j >= currentValue;
       }
       guests.children[0].selected = true;
     }
