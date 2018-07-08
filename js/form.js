@@ -14,6 +14,13 @@
   var guests = form.querySelector('select[name="capacity"]');
   var sendForm = form.querySelector('.ad-form__submit');
   var resetButton = form.querySelector('.ad-form__reset');
+  
+  var RoomsValue = {
+    '100 комнат': '0',
+    '1 комната': '1',
+    '2 комнаты': '2',
+    '3 комнаты': '3'
+  };
 
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
@@ -24,13 +31,6 @@
 
   // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
-    var RoomsValue = {
-      '100 комнат': '0',
-      '1 комната': '1',
-      '2 комнаты': '2',
-      '3 комнаты': '3'
-    };
-
     var currentValue = rooms.value;
     if (currentValue === RoomsValue['100 комнат']) {
       for (var i = 0; i < guests.children.length; i++) {
