@@ -20,7 +20,7 @@
   };
 
   var update = function (pins) {
-    window.card.closeCard();
+    window.card.close();
     window.pins.removeAll();
     createPins(pins);
   };
@@ -62,7 +62,7 @@
       return;
     }
     // Разблокируем карту и форму
-    window.map.classList.remove('map--faded');
+    window.map.location.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
     // Разблокируем филдсеты
     fieldsets.forEach(function (item) {
@@ -72,9 +72,9 @@
     window.backend.load(successHandler, errorHandler);
   };
 
-  window.mainPin.addEventListener('mouseup', pinMouseupHandler);
+  window.map.mainPin.addEventListener('mouseup', pinMouseupHandler);
 
-  window.mainPin.addEventListener('keydown', function (evt) {
+  window.map.mainPin.addEventListener('keydown', function (evt) {
     window.utils.isEnterEvent(evt, pinMouseupHandler);
   });
 

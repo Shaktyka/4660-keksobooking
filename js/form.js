@@ -187,7 +187,7 @@
     // Убираем все метки с карты
     window.pins.removeAll();
     // Ставим главную метку на исходную позицию
-    window.resetMainPinPosition();
+    window.map.resetMainPinPosition();
     resetFilters();
     resetAvatar();
     resetPhotos();
@@ -195,15 +195,11 @@
     setPricePlaceholder();
     resetInvalidDecor(findInvalidFields());
     resetCheckboxes();
-    window.map.classList.add('map--faded');
+    window.map.location.classList.add('map--faded');
     fieldsets.forEach(function (item) {
       item.disabled = true;
     });
     form.classList.add('ad-form--disabled');
-  };
-
-  window.escKeydownSuccessHandler = function (evt) {
-    window.utils.isEscEvent(evt, window.closeSuccess);
   };
 
   // Отправка формы
@@ -212,16 +208,20 @@
   var successHandler = function () {
     success.classList.remove('hidden');
 
-    document.addEventListener('keydown', window.escKeydownSuccessHandler);
+    document.addEventListener('keydown', escKeydownSuccessHandler);
 
-    window.closeSuccess = function () {
+    var closeSuccess = function () {
       success.classList.add('hidden');
-      document.removeEventListener('keydown', window.escKeydownSuccessHandler);
+      document.removeEventListener('keydown', escKeydownSuccessHandler);
     };
 
     success.addEventListener('click', function () {
-      window.closeSuccess();
+      closeSuccess();
     });
+  };
+
+  var escKeydownSuccessHandler = function (evt) {
+    window.utils.isEscEvent(evt, closeSuccess);
   };
 
   // Обработчики событий внутри формы

@@ -17,16 +17,16 @@
     y: MAIN_PIN_TOP
   };
 
-  window.map = document.querySelector('.map');
+  var location = document.querySelector('.map');
 
-  window.mainPin = window.map.querySelector('.map__pin--main');
+  var mainPin = location.querySelector('.map__pin--main');
 
   var addressInput = document.querySelector('input[name="address"]');
 
   // Стартовые координаты главной метки
-  window.resetMainPinPosition = function () {
-    window.mainPin.style.left = mainPinPosition.x - MAIN_PIN_WIDTH_OFFSET + 'px';
-    window.mainPin.style.top = mainPinPosition.y - MAIN_PIN_HEIGHT_OFFSET + 'px';
+  var resetMainPinPosition = function () {
+    mainPin.style.left = mainPinPosition.x - MAIN_PIN_WIDTH_OFFSET + 'px';
+    mainPin.style.top = mainPinPosition.y - MAIN_PIN_HEIGHT_OFFSET + 'px';
     putMainPinPositionToAddress(mainPinPosition);
   };
 
@@ -36,7 +36,7 @@
   };
 
   // Перетаскивание главной метки
-  window.mainPin.addEventListener('mousedown', function (evt) {
+  mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -57,15 +57,15 @@
         y: moveEvt.clientY
       };
 
-      var newX = window.mainPin.offsetLeft + shift.x;
-      var newY = window.mainPin.offsetTop + shift.y;
+      var newX = mainPin.offsetLeft + shift.x;
+      var newY = mainPin.offsetTop + shift.y;
 
       if (newX < MAP_MIN_X - MAIN_PIN_WIDTH_OFFSET) {
         newX = MAP_MIN_X - MAIN_PIN_WIDTH_OFFSET;
       }
 
-      if (newX > window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth) {
-        newX = window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth;
+      if (newX > mainPin.parentElement.offsetWidth - mainPin.offsetWidth) {
+        newX = mainPin.parentElement.offsetWidth - mainPin.offsetWidth;
       }
 
       if (newY < MAP_MIN_Y - MAIN_PIN_HEIGHT_OFFSET) {
@@ -75,9 +75,8 @@
         newY = MAP_MAX_Y - MAIN_PIN_HEIGHT_OFFSET;
       }
 
-      // debugger;
-      window.mainPin.style.left = newX + 'px';
-      window.mainPin.style.top = newY + 'px';
+      mainPin.style.left = newX + 'px';
+      mainPin.style.top = newY + 'px';
 
       var position = {
         x: newX + MAIN_PIN_WIDTH_OFFSET,
@@ -97,5 +96,11 @@
     document.addEventListener('mouseup', pinUpHandler);
   });
 
-  window.resetMainPinPosition();
+  resetMainPinPosition();
+
+  window.map = {
+    location: location,
+    mainPin: mainPin,
+    resetMainPinPosition: resetMainPinPosition
+  };
 })();

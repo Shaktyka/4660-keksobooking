@@ -5,13 +5,13 @@
   var PIN_HEIGHT = 70;
 
   // Блок для новых меток
-  var container = window.map.querySelector('.map__pins');
+  var container = window.map.location.querySelector('.map__pins');
 
   // Шаблон для генерации меток
   var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
   // Перем-ные для вставки объявления
-  var cardsBeforeElement = window.map.querySelector('.map__filters-container');
+  var cardsBeforeElement = window.map.location.querySelector('.map__filters-container');
   var cardsParentElement = cardsBeforeElement.parentNode;
 
   // Отрисовка объявлений и добавление их в целевой блок
