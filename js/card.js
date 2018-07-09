@@ -27,10 +27,10 @@
         parsedList += '<li class="popup__feature popup__feature--' + rawList[i] + '">' + rawList[i] + '</li>';
       }
       featuresBlock.innerHTML = parsedList;
-      return featuresBlock.innerHTML;
+      return featuresBlock;
     }
     featuresBlock.innerHTML = featuresBlock.classList.add('hidden');
-    return featuresBlock.innerHTML;
+    return featuresBlock;
   };
 
   // Обработка описания объявления
@@ -38,9 +38,10 @@
     var descriptionBlock = cardElement.querySelector('.popup__description');
     if (description.length) {
       descriptionBlock.textContent = description;
-      return descriptionBlock.textContent;
+      return descriptionBlock;
     }
-    return descriptionBlock.classList.add('hidden');
+    descriptionBlock.classList.add('hidden');
+    return descriptionBlock;
   };
 
   // Обработка списка фотографий жилья
