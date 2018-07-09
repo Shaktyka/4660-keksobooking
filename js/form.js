@@ -62,11 +62,11 @@
   // Навешивание красных рамок на невалидные поля
   var submitClickHandler = function () {
     var invalidInputs = findInvalidFields();
+    console.log(invalidInputs);
     if (invalidInputs) {
-      for (var i = 0; i < invalidInputs.length; i++) {
-        var input = invalidInputs[i];
+      invalidInputs.forEach(function (input) {
         input.classList.add('error');
-      }
+      });
     }
   };
 
