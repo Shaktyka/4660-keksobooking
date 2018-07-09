@@ -91,7 +91,7 @@
 
   // Ресет настроек фильтров
   var resetFilters = function () {
-    window.alreadyLoaded = false;
+    window.activation.alreadyLoaded = false;
 
     if (typeFilter.selectedIndex) {
       typeFilter.selectedIndex = 0;
@@ -249,7 +249,7 @@
   form.addEventListener('submit', function (submitEvt) {
     submitEvt.preventDefault();
     var formData = new FormData(form);
-    window.backend.save(formData, successHandler, window.errorHandler);
+    window.backend.save(formData, successHandler, window.activation.errorHandler);
     resetHandler();
   });
 })();

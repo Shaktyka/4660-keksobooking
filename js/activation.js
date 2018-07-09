@@ -19,7 +19,7 @@
     }
   };
 
-  window.update = function (pins) {
+  var update = function (pins) {
     window.closeCard();
     window.removePins();
     createPins(pins);
@@ -32,7 +32,7 @@
   };
 
   // Обработка неуспеха при выполнении запроса
-  window.errorHandler = function (errorMessage) {
+  var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.classList.add('modal');
     node.classList.add('modal--error');
@@ -55,10 +55,10 @@
   };
 
   // Активация страницы
-  window.alreadyLoaded = false;
+  var alreadyLoaded = false;
   var pinMouseupHandler = function () {
-    if (!window.alreadyLoaded) {
-      window.alreadyLoaded = true;
+    if (!alreadyLoaded) {
+      alreadyLoaded = true;
     } else {
       return;
     }
@@ -70,7 +70,8 @@
       item.disabled = false;
     });
     // Разблокируем генерацию массива меток
-    window.backend.load(successHandler, window.errorHandler);
+    window.backend.load(successHandler, errorHandler);
+    window.backend.load(successHandler, errorHandler);
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);
@@ -78,4 +79,10 @@
   window.mainPin.addEventListener('keydown', function (evt) {
     window.utils.isEnterEvent(evt, pinMouseupHandler);
   });
+
+  window.activation = {
+    update: update,
+    errorHandler: errorHandler,
+    alreadyLoaded: alreadyLoaded
+  };
 })();

@@ -63,7 +63,7 @@
     // Сортировка всех пинов
     var sortedArray = window.adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
 
-    window.update(sortedArray);
+    window.activation.update(sortedArray);
   };
 
   var filterChangeHandler = window.debounce(function () {
