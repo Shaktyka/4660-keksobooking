@@ -70,7 +70,7 @@
       item.disabled = false;
     });
     // Разблокируем генерацию массива меток
-    window.load(successHandler, window.errorHandler);
+    window.backend.load(successHandler, window.errorHandler);
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);

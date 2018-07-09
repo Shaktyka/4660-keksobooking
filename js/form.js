@@ -249,7 +249,7 @@
   form.addEventListener('submit', function (submitEvt) {
     submitEvt.preventDefault();
     var formData = new FormData(form);
-    window.save(formData, successHandler, window.errorHandler);
+    window.backend.save(formData, successHandler, window.errorHandler);
     resetHandler();
   });
 })();

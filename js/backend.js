@@ -10,7 +10,7 @@
   };
 
   // Отправка данных ирока на сервер
-  window.save = function (data, loadHandler, errorHandler) {
+  var save = function (data, loadHandler, errorHandler) {
     var urlSave = 'https://js.dump.academy/keksobooking';
 
     var xhr = new XMLHttpRequest();
@@ -56,7 +56,7 @@
   };
 
   // Загрузка объявлений с сервера
-  window.load = function (loadHandler, errorHandler) {
+  var load = function (loadHandler, errorHandler) {
     var urlLoad = 'https://js.dump.academy/keksobooking/data';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -99,5 +99,10 @@
 
     xhr.open('GET', urlLoad);
     xhr.send();
+  };
+
+  window.backend = {
+    save: save,
+    load: load
   };
 })();
