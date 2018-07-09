@@ -66,15 +66,15 @@
 
   // Обработчик закрытия объявления при нажатии Enter
   var enterKeydownHandler = function (evt) {
-    window.utils.isEnterEvent(evt, window.closeCard);
+    window.utils.isEnterEvent(evt, closeCard);
   };
 
   // Закрытие объявления
   var escKeydownHandler = function (evt) {
-    window.utils.isEscEvent(evt, window.closeCard);
+    window.utils.isEscEvent(evt, closeCard);
   };
 
-  window.closeCard = function () {
+  var closeCard = function () {
     window.pins.deactivate();
     if (cardElement) {
       cardElement.remove();
@@ -84,7 +84,7 @@
   };
 
   // Генерация карточки объявления на основе шаблона
-  window.renderCard = function (card) {
+  var renderCard = function (card) {
     cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('img').src = card.author.avatar;
     cardElement.querySelector('.popup__title').textContent = card.offer.title;
@@ -101,11 +101,16 @@
     // Обработчики событий для объявления
     var closeButton = cardElement.querySelector('.popup__close');
     closeButton.addEventListener('click', function () {
-      window.closeCard(cardElement);
+      closeCard(cardElement);
     });
     closeButton.addEventListener('keydown', enterKeydownHandler);
 
     document.addEventListener('keydown', escKeydownHandler);
     return cardElement;
+  };
+
+  window.card = {
+    closeCard: closeCard,
+    renderCard: renderCard
   };
 })();

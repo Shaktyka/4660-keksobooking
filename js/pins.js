@@ -16,7 +16,7 @@
 
   // Отрисовка объявлений и добавление их в целевой блок
   var createCard = function (pin) {
-    cardsParentElement.insertBefore(window.renderCard(pin), cardsBeforeElement);
+    cardsParentElement.insertBefore(window.card.renderCard(pin), cardsBeforeElement);
   };
 
   // Деактивация пина
@@ -38,7 +38,7 @@
     // Добавление пину обработки клика
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
-      window.closeCard();
+      window.card.closeCard();
       pinElement.classList.add('map__pin--active');
       createCard(pin);
     });

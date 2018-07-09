@@ -20,7 +20,7 @@
   };
 
   var update = function (pins) {
-    window.closeCard();
+    window.card.closeCard();
     window.removePins();
     createPins(pins);
   };

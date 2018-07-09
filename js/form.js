@@ -192,7 +192,7 @@
   // Оющий обработчик ресета
   var resetHandler = function () {
     // Закрываем открытые объявления
-    window.closeCard();
+    window.card.closeCard();
     // Убираем все метки с карты
     window.removePins();
     // Ставим главную метку на исходную позицию
