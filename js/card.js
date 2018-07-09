@@ -19,7 +19,7 @@
   };
 
   // Сборка списка фичей для объявления
-  var getListFeatures = function (rawList) {
+  var getFeatures = function (rawList) {
     var featuresBlock = cardElement.querySelector('.popup__features');
     var parsedList = '';
     if (rawList.length) {
@@ -62,7 +62,7 @@
     cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
 
-    getListFeatures(card.offer.features);
+    getFeatures(card.offer.features);
 
     // Если в объявлении нет описания, то блок скрываем
     var descriptionBlock = cardElement.querySelector('.popup__description');
