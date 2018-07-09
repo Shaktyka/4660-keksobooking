@@ -43,6 +43,27 @@
     return descriptionBlock.classList.add('hidden');
   };
 
+  // Обработка списка фотографий жилья
+  var getPhotos = function (photos) {
+    var photoContainer = cardElement.querySelector('.popup__photos');
+    var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
+    cardElement.querySelector('.popup__photos');
+
+    if (photos.length) {
+      photoContainer.innerHTML = '';
+      for (var i = 0; i < photos.length; i++) {
+        var photoElement = photoTemplateElement.cloneNode(true);
+        photoElement.src = photos[i];
+        photoContainer.appendChild(photoElement);
+      }
+      return photoContainer;
+    }
+    photoContainer.innerHTML = '';
+    photoContainer.classList.add('hidden');
+    return photoContainer;
+  };
+
+  // Обработчик закрытия объявления при нажатии Enter
   var enterKeydownHandler = function (evt) {
     window.utils.isEnterEvent(evt, window.closeCard);
   };
@@ -74,35 +95,13 @@
 
     getFeatures(card.offer.features);
     getDescription(card.offer.description);
-
-    // Вставка фото жилья в объявление
-    var photoContainer = cardElement.querySelector('.popup__photos');
-
-    var renderPhotos = function (photos) {
-      var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
-
-      photoContainer.innerHTML = '';
-      for (var i = 0; i < photos.length; i++) {
-        var photoElement = photoTemplateElement.cloneNode(true);
-        photoElement.src = photos[i];
-        photoContainer.appendChild(photoElement);
-      }
-    };
-
-    if (card.offer.photos.length === 0) {
-      photoContainer.innerHTML = '';
-      photoContainer.classList.add('hidden');
-    } else {
-      renderPhotos(card.offer.photos);
-    }
+    getPhotos(card.offer.photos);
 
     // Обработчики событий для объявления
     var closeButton = cardElement.querySelector('.popup__close');
-
     closeButton.addEventListener('click', function () {
       window.closeCard(cardElement);
     });
-
     closeButton.addEventListener('keydown', enterKeydownHandler);
 
     document.addEventListener('keydown', escKeydownHandler);
