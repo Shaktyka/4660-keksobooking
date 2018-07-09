@@ -20,11 +20,17 @@
 
   // Сборка списка фичей для объявления
   var getListFeatures = function (rawList) {
+    var featuresBlock = cardElement.querySelector('.popup__features');
     var parsedList = '';
-    for (var i = 0; i < rawList.length; i++) {
-      parsedList += '<li class="popup__feature popup__feature--' + rawList[i] + '">' + rawList[i] + '</li>';
+    if (rawList.length) {
+      for (var i = 0; i < rawList.length; i++) {
+        parsedList += '<li class="popup__feature popup__feature--' + rawList[i] + '">' + rawList[i] + '</li>';
+      }
+      featuresBlock.innerHTML = parsedList;
+      return featuresBlock.innerHTML;
     }
-    return parsedList;
+    featuresBlock.innerHTML = featuresBlock.classList.add('hidden');
+    return featuresBlock.innerHTML;
   };
 
   var enterKeydownHandler = function (evt) {
@@ -56,13 +62,7 @@
     cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
 
-    // Если в объявлении нет фичей, то блок фичей скрываем
-    var featuresBlock = cardElement.querySelector('.popup__features');
-    if (card.offer.features.length === 0) {
-      featuresBlock.classList.add('hidden');
-    } else {
-      featuresBlock.innerHTML = getListFeatures(card.offer.features);
-    }
+    getListFeatures(card.offer.features);
 
     // Если в объявлении нет описания, то блок скрываем
     var descriptionBlock = cardElement.querySelector('.popup__description');
