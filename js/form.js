@@ -81,18 +81,8 @@
 
   // Ресет данных
 
-  // Скрытие меток на карте
-  window.removePins = function () {
-    var pinsList = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
-    for (var i = 0; i < pinsList.length; i++) {
-      pinsList[i].remove();
-    }
-  };
-
   // Ресет настроек фильтров
   var resetFilters = function () {
-    window.activation.alreadyLoaded = false;
-
     if (typeFilter.selectedIndex) {
       typeFilter.selectedIndex = 0;
     }
@@ -191,10 +181,11 @@
 
   // Оющий обработчик ресета
   var resetHandler = function () {
+    window.activation.alreadyLoaded = false;
     // Закрываем открытые объявления
-    window.card.closeCard();
+    window.card.close();
     // Убираем все метки с карты
-    window.removePins();
+    window.pins.removeAll();
     // Ставим главную метку на исходную позицию
     window.resetMainPinPosition();
     resetFilters();

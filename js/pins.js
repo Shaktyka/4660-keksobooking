@@ -16,7 +16,7 @@
 
   // Отрисовка объявлений и добавление их в целевой блок
   var createCard = function (pin) {
-    cardsParentElement.insertBefore(window.card.renderCard(pin), cardsBeforeElement);
+    cardsParentElement.insertBefore(window.card.render(pin), cardsBeforeElement);
   };
 
   // Деактивация пина
@@ -24,6 +24,14 @@
     var activePin = container.querySelector('.map__pin--active');
     if (activePin) {
       activePin.classList.remove('map__pin--active');
+    }
+  };
+
+  // Скрытие меток на карте
+  var removeAll = function () {
+    var pinsList = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
+    for (var i = 0; i < pinsList.length; i++) {
+      pinsList[i].remove();
     }
   };
 
@@ -38,7 +46,7 @@
     // Добавление пину обработки клика
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
-      window.card.closeCard();
+      window.card.close();
       pinElement.classList.add('map__pin--active');
       createCard(pin);
     });
@@ -48,6 +56,7 @@
   window.pins = {
     container: container,
     deactivate: deactivate,
-    render: render
+    render: render,
+    removeAll: removeAll
   };
 })();

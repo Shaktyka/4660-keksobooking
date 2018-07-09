@@ -21,7 +21,7 @@
 
   var update = function (pins) {
     window.card.closeCard();
-    window.removePins();
+    window.pins.removeAll();
     createPins(pins);
   };
 
@@ -55,10 +55,9 @@
   };
 
   // Активация страницы
-  var alreadyLoaded = false;
   var pinMouseupHandler = function () {
-    if (!alreadyLoaded) {
-      alreadyLoaded = true;
+    if (!window.activation.alreadyLoaded) {
+      window.activation.alreadyLoaded = true;
     } else {
       return;
     }
@@ -71,7 +70,6 @@
     });
     // Разблокируем генерацию массива меток
     window.backend.load(successHandler, errorHandler);
-    window.backend.load(successHandler, errorHandler);
   };
 
   window.mainPin.addEventListener('mouseup', pinMouseupHandler);
@@ -83,6 +81,6 @@
   window.activation = {
     update: update,
     errorHandler: errorHandler,
-    alreadyLoaded: alreadyLoaded
+    alreadyLoaded: false
   };
 })();

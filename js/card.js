@@ -18,7 +18,7 @@
     return typeValue;
   };
 
-  // Сборка списка фичей для объявления
+  // Рендеринг списка фичей для объявления
   var getFeatures = function (features) {
     if (!features.length) {
       return;
@@ -33,7 +33,7 @@
     cardElement.appendChild(featuresContainer);
   };
 
-  // Обработка описания объявления
+  // Рендеринг описания объявления
   var getDescription = function (description) {
     var descriptionBlock = cardElement.querySelector('.popup__description');
     if (description.length) {
@@ -41,7 +41,7 @@
     }
   };
 
-  // Обработка списка фотографий жилья
+  // Рендеринг списка фотографий жилья
   var getPhotos = function (photos) {
     if (!photos.length) {
       return;
@@ -61,15 +61,15 @@
 
   // Обработчик закрытия объявления при нажатии Enter
   var enterKeydownHandler = function (evt) {
-    window.utils.isEnterEvent(evt, closeCard);
+    window.utils.isEnterEvent(evt, close);
   };
 
   // Закрытие объявления
   var escKeydownHandler = function (evt) {
-    window.utils.isEscEvent(evt, closeCard);
+    window.utils.isEscEvent(evt, close);
   };
 
-  var closeCard = function () {
+  var close = function () {
     window.pins.deactivate();
     if (cardElement) {
       cardElement.remove();
@@ -79,7 +79,7 @@
   };
 
   // Генерация карточки объявления на основе шаблона
-  var renderCard = function (card) {
+  var render = function (card) {
     cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('img').src = card.author.avatar;
     cardElement.querySelector('.popup__title').textContent = card.offer.title;
@@ -96,7 +96,7 @@
     // Обработчики событий для объявления
     var closeButton = cardElement.querySelector('.popup__close');
     closeButton.addEventListener('click', function () {
-      closeCard(cardElement);
+      close(cardElement);
     });
     closeButton.addEventListener('keydown', enterKeydownHandler);
 
@@ -105,7 +105,7 @@
   };
 
   window.card = {
-    closeCard: closeCard,
-    renderCard: renderCard
+    close: close,
+    render: render
   };
 })();
