@@ -19,18 +19,18 @@
   };
 
   // Сборка списка фичей для объявления
-  var getFeatures = function (rawList) {
-    var featuresBlock = cardElement.querySelector('.popup__features');
-    var parsedList = '';
-    if (rawList.length) {
-      for (var i = 0; i < rawList.length; i++) {
-        parsedList += '<li class="popup__feature popup__feature--' + rawList[i] + '">' + rawList[i] + '</li>';
-      }
-      featuresBlock.innerHTML = parsedList;
-      return featuresBlock;
+  var getFeatures = function (features) {
+    if (!features.length) {
+      return;
     }
-    featuresBlock.innerHTML = featuresBlock.classList.add('hidden');
-    return featuresBlock;
+    var featuresContainer = document.createElement('ul');
+    featuresContainer.classList.add('popup__features');
+    for (var i = 0; i < features.length; i++) {
+      var featureElement = document.createElement('li');
+      featureElement.classList.add('popup__feature', 'popup__feature--' + features[i]);
+      featuresContainer.appendChild(featureElement);
+    }
+    cardElement.appendChild(featuresContainer);
   };
 
   // Обработка описания объявления
@@ -38,30 +38,25 @@
     var descriptionBlock = cardElement.querySelector('.popup__description');
     if (description.length) {
       descriptionBlock.textContent = description;
-      return descriptionBlock;
     }
-    descriptionBlock.classList.add('hidden');
-    return descriptionBlock;
   };
 
   // Обработка списка фотографий жилья
   var getPhotos = function (photos) {
-    var photoContainer = cardElement.querySelector('.popup__photos');
-    var photoTemplateElement = document.querySelector('template').content.querySelector('.popup__photo');
-    cardElement.querySelector('.popup__photos');
-
-    if (photos.length) {
-      photoContainer.innerHTML = '';
-      for (var i = 0; i < photos.length; i++) {
-        var photoElement = photoTemplateElement.cloneNode(true);
-        photoElement.src = photos[i];
-        photoContainer.appendChild(photoElement);
-      }
-      return photoContainer;
+    if (!photos.length) {
+      return;
     }
-    photoContainer.innerHTML = '';
-    photoContainer.classList.add('hidden');
-    return photoContainer;
+    var photosContainer = document.createElement('div');
+    photosContainer.classList.add('popup__photos');
+
+    for (var i = 0; i < photos.length; i++) {
+      var photoElement = document.createElement('img');
+      photoElement.classList.add('popup__photo');
+      photoElement.alt = 'Фотография жилья';
+      photoElement.src = photos[i];
+      photosContainer.appendChild(photoElement);
+    }
+    cardElement.appendChild(photosContainer);
   };
 
   // Обработчик закрытия объявления при нажатии Enter
