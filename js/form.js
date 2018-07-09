@@ -105,10 +105,10 @@
 
   // Ресет выделенных чекбоксов
   var resetCheckboxes = function () {
-    var featuresList = form.querySelector('.features').querySelectorAll('input');
-    if (featuresList) {
-      for (var i = 0; i < featuresList.length; i++) {
-        featuresList[i].checked = false;
+    var features = form.querySelector('.features').querySelectorAll('input');
+    if (features) {
+      for (var i = 0; i < features.length; i++) {
+        features[i].checked = false;
       }
     }
   };
@@ -134,11 +134,11 @@
   var resetPhotos = function () {
     var photoBlock = document.querySelector('.ad-form__photo-container');
     var template = photoBlock.querySelector('.ad-form__photo--template');
-    var photosList = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
+    var photos = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
 
-    if (photosList) {
-      for (var i = 0; i < photosList.length; i++) {
-        photosList[i].remove();
+    if (photos) {
+      for (var i = 0; i < photos.length; i++) {
+        photos[i].remove();
       }
     }
     template.style.display = 'block';
