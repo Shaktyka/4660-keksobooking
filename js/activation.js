@@ -12,11 +12,7 @@
     for (var i = 0; i < pins.length; i++) {
       fragment.appendChild(window.pins.render(pins[i]));
     }
-    // Если на карте есть уже метки, то новые не генерируем.
-    var buttons = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
-    if (buttons.length === 0) {
-      window.pins.container.appendChild(fragment);
-    }
+    window.pins.container.appendChild(fragment);
   };
 
   var update = function (pins) {
