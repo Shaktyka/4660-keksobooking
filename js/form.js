@@ -4,6 +4,7 @@
   var MIN_PRICES = [0, 1000, 5000, 10000];
   var DEFAULT_PLACEHOLDER = 5000;
   var ROOMS_COUNT_100 = 0;
+  var TYPE_BUNGALO = 0;
 
   var form = document.querySelector('.ad-form');
   var fieldsets = form.querySelectorAll('fieldset');
@@ -21,6 +22,13 @@
   var priceFilter = document.querySelector('#housing-price');
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
+
+  var setBungaloMinPrice = function () {
+    if (type.selectedIndex === TYPE_BUNGALO) {
+      price.min = 0;
+    }
+  };
+  setBungaloMinPrice();
 
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
