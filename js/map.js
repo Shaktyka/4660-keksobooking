@@ -5,7 +5,7 @@
   var MAIN_PIN_HEIGHT_OFFSET = 87; // Высота главной метки
 
   var MAIN_PIN_LEFT = 600;
-  var MAIN_PIN_TOP = 352;
+  var MAIN_PIN_TOP = 439;
 
   // Границы доступной области для перемещения метки
   var MAP_MIN_Y = 130;
