@@ -210,18 +210,18 @@
 
     document.addEventListener('keydown', escKeydownSuccessHandler);
 
-    var closeSuccess = function () {
+    window.closeSuccess = function () {
       success.classList.add('hidden');
       document.removeEventListener('keydown', escKeydownSuccessHandler);
     };
 
     success.addEventListener('click', function () {
-      closeSuccess();
+      window.closeSuccess();
     });
   };
 
   var escKeydownSuccessHandler = function (evt) {
-    window.utils.isEscEvent(evt, closeSuccess);
+    window.utils.isEscEvent(evt, window.closeSuccess);
   };
 
   // Обработчики событий внутри формы
