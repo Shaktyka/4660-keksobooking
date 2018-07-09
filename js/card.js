@@ -33,6 +33,16 @@
     return featuresBlock.innerHTML;
   };
 
+  // Обработка описания объявления
+  var getDescription = function (description) {
+    var descriptionBlock = cardElement.querySelector('.popup__description');
+    if (description.length) {
+      descriptionBlock.textContent = description;
+      return descriptionBlock.textContent;
+    }
+    return descriptionBlock.classList.add('hidden');
+  };
+
   var enterKeydownHandler = function (evt) {
     window.utils.isEnterEvent(evt, window.closeCard);
   };
@@ -63,14 +73,7 @@
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
 
     getFeatures(card.offer.features);
-
-    // Если в объявлении нет описания, то блок скрываем
-    var descriptionBlock = cardElement.querySelector('.popup__description');
-    if (card.offer.description.length === 0) {
-      descriptionBlock.classList.add('hidden');
-    } else {
-      descriptionBlock.textContent = card.offer.description;
-    }
+    getDescription(card.offer.description);
 
     // Вставка фото жилья в объявление
     var photoContainer = cardElement.querySelector('.popup__photos');
