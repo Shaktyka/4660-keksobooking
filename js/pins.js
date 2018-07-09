@@ -30,9 +30,9 @@
   // Скрытие меток на карте
   var removeAll = function () {
     var pins = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
-    for (var i = 0; i < pins.length; i++) {
-      pins[i].remove();
-    }
+    pins.forEach(function (pin) {
+      pin.remove();
+    });
   };
 
   // Генерация пина на основе шаблона
