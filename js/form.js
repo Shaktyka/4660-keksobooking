@@ -7,7 +7,6 @@
   var TYPE_BUNGALO = 0;
 
   var form = document.querySelector('.ad-form');
-  var fieldsets = form.querySelectorAll('fieldset');
   var type = form.querySelector('select[name="type"]');
   var price = form.querySelector('input[name="price"]');
   var checkIn = form.querySelector('select[name="timein"]');
@@ -196,7 +195,7 @@
     resetInvalidDecor(findInvalidFields());
     resetCheckboxes();
     window.map.location.classList.add('map--faded');
-    fieldsets.forEach(function (item) {
+    window.activation.fieldsets.forEach(function (item) {
       item.disabled = true;
     });
     form.classList.add('ad-form--disabled');

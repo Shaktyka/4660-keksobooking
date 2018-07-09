@@ -81,6 +81,7 @@
   window.activation = {
     update: update,
     errorHandler: errorHandler,
-    alreadyLoaded: false
+    alreadyLoaded: false,
+    fieldsets: fieldsets
   };
 })();
