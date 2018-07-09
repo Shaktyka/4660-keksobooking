@@ -5,7 +5,7 @@
   var PIN_HEIGHT = 70;
 
   // Блок для новых меток
-  window.pinsContainer = window.map.querySelector('.map__pins');
+  var container = window.map.querySelector('.map__pins');
 
   // Шаблон для генерации меток
   var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
@@ -20,15 +20,15 @@
   };
 
   // Деактивация пина
-  window.deactivatePin = function () {
-    var activePin = window.pinsContainer.querySelector('.map__pin--active');
+  var deactivate = function () {
+    var activePin = container.querySelector('.map__pin--active');
     if (activePin) {
       activePin.classList.remove('map__pin--active');
     }
   };
 
   // Генерация пина на основе шаблона
-  window.renderPin = function (pin) {
+  var render = function (pin) {
     var pinElement = pinTemplate.cloneNode(true);
     pinElement.style.left = pin.location.x - PIN_HALFWIDTH + 'px';
     pinElement.style.top = pin.location.y - PIN_HEIGHT + 'px';
@@ -38,11 +38,16 @@
     // Добавление пину обработки клика
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
-      window.deactivatePin();
+      window.closeCard();
       pinElement.classList.add('map__pin--active');
-      window.hideOpenedCard();
       createCard(pin);
     });
     return pinElement;
+  };
+
+  window.pins = {
+    container: container,
+    deactivate: deactivate,
+    render: render
   };
 })();

@@ -51,8 +51,8 @@
 
     // Сортировка по фичам
     var checkFeatures = function (advert) {
-      var checkedElements = featuresFilter.querySelectorAll('input[type=checkbox]:checked');
-      var selectedFeatures = [].map.call(checkedElements, function (item) {
+      var checkedElements = Array.from(featuresFilter.querySelectorAll('input[type=checkbox]:checked'));
+      var selectedFeatures = checkedElements.map(function (item) {
         return item.value;
       });
       return selectedFeatures.every(function (currentFeature) {
@@ -63,7 +63,7 @@
     // Сортировка всех пинов
     var sortedArray = window.adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
 
-    window.updatePins(sortedArray);
+    window.update(sortedArray);
   };
 
   var filterChangeHandler = window.debounce(function () {

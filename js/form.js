@@ -3,6 +3,7 @@
 (function () {
   var MIN_PRICES = [0, 1000, 5000, 10000];
   var DEFAULT_PLACEHOLDER = 5000;
+  var ROOMS_COUNT_100 = 0;
 
   var form = document.querySelector('.ad-form');
   var fieldsets = form.querySelectorAll('fieldset');
@@ -21,13 +22,6 @@
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
 
-  var RoomsValue = {
-    '100 комнат': '0',
-    '1 комната': '1',
-    '2 комнаты': '2',
-    '3 комнаты': '3'
-  };
-
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
@@ -37,8 +31,8 @@
 
   // Соответствие количества комнат количеству гостей
   rooms.addEventListener('change', function () {
-    var currentValue = rooms.value;
-    if (currentValue === RoomsValue['100 комнат']) {
+    var currentValue = +rooms.value;
+    if (currentValue === ROOMS_COUNT_100) {
       for (var i = 0; i < guests.children.length; i++) {
         guests.children[i].disabled = true;
       }
@@ -81,19 +75,9 @@
 
   // Скрытие меток на карте
   window.removePins = function () {
-    var pinsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
+    var pinsList = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
     for (var i = 0; i < pinsList.length; i++) {
       pinsList[i].remove();
-    }
-  };
-
-  // Закрытия открытых объявлений
-  window.hideAds = function () {
-    var adsList = window.map.querySelectorAll('article.map__card');
-    if (adsList) {
-      for (var i = 0; i < adsList.length; i++) {
-        adsList[i].classList.add('hidden');
-      }
     }
   };
 
@@ -200,7 +184,7 @@
   // Оющий обработчик ресета
   var resetHandler = function () {
     // Закрываем открытые объявления
-    window.hideAds();
+    window.closeCard();
     // Убираем все метки с карты
     window.removePins();
     // Ставим главную метку на исходную позицию

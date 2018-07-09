@@ -10,17 +10,17 @@
   var createPins = function (pins) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.renderPin(pins[i]));
+      fragment.appendChild(window.pins.render(pins[i]));
     }
     // Если на карте есть уже метки, то новые не генерируем.
-    var buttons = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
+    var buttons = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
     if (buttons.length === 0) {
-      window.pinsContainer.appendChild(fragment);
+      window.pins.container.appendChild(fragment);
     }
   };
 
-  window.updatePins = function (pins) {
-    window.hideAds();
+  window.update = function (pins) {
+    window.closeCard();
     window.removePins();
     createPins(pins);
   };
