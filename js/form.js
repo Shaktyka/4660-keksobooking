@@ -3,7 +3,7 @@
 (function () {
   var MIN_PRICES = [0, 1000, 5000, 10000];
   var DEFAULT_PLACEHOLDER = 5000;
-  var ROOMS_COUNT_100 = 0;
+  var ROOMS_COUNT_100 = 100;
 
   var form = document.querySelector('.ad-form');
   var type = form.querySelector('select[name="type"]');
