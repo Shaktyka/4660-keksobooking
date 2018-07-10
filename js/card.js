@@ -11,6 +11,7 @@
   var cardTemplate = document.querySelector('template').content.querySelector('.map__card');
 
   var cardElement = null;
+  var closeButton = null;
 
   // Конвертация названий типа жилья
   var convertType = function (type) {
@@ -59,14 +60,19 @@
     cardElement.appendChild(photosContainer);
   };
 
-  // Обработчик закрытия объявления при нажатии Enter
+  // Закрытие объявления при нажатии Enter
   var enterKeydownHandler = function (evt) {
     window.utils.isEnterEvent(evt, close);
   };
 
-  // Закрытие объявления
+  // Закрытие объявления при нажатии Esc
   var escKeydownHandler = function (evt) {
     window.utils.isEscEvent(evt, close);
+  };
+
+  // Закрытие объявления при клике
+  var closeButtonClickHandler = function () {
+    close(cardElement);
   };
 
   var close = function () {
@@ -75,6 +81,8 @@
       cardElement.remove();
       cardElement = null;
       document.removeEventListener('keydown', escKeydownHandler);
+      closeButton.removeEventListener('keydown', enterKeydownHandler);
+      closeButton.removeEventListener('click', closeButtonClickHandler);
     }
   };
 
@@ -94,12 +102,9 @@
     getPhotos(card.offer.photos);
 
     // Обработчики событий для объявления
-    var closeButton = cardElement.querySelector('.popup__close');
-    closeButton.addEventListener('click', function () {
-      close(cardElement);
-    });
+    closeButton = cardElement.querySelector('.popup__close');
+    closeButton.addEventListener('click', closeButtonClickHandler);
     closeButton.addEventListener('keydown', enterKeydownHandler);
-
     document.addEventListener('keydown', escKeydownHandler);
     return cardElement;
   };
