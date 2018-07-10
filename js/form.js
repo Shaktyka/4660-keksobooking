@@ -15,6 +15,7 @@
   var sendForm = form.querySelector('.ad-form__submit');
   var resetButton = form.querySelector('.ad-form__reset');
   var success = document.querySelector('.success');
+  var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
 
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
@@ -47,9 +48,7 @@
 
   // Поиск невалидных полей
   var findInvalidFields = function () {
-    var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
     var invalidFields = [];
-
     for (var i = 0; i < fields.length; i++) {
       if (fields[i].checkValidity() === false) {
         var field = fields[i];
