@@ -125,11 +125,10 @@
     var photoBlock = document.querySelector('.ad-form__photo-container');
     var template = photoBlock.querySelector('.ad-form__photo--template');
     var photos = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
-
     if (photos) {
-      for (var i = 0; i < photos.length; i++) {
-        photos[i].remove();
-      }
+      photos.forEach(function (photo) {
+        photo.remove();
+      });
     }
     template.style.display = 'block';
   };
