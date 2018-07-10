@@ -87,9 +87,9 @@
     }
     var features = document.querySelector('.map__features').querySelectorAll('input:checked');
     if (features) {
-      for (var i = 0; i < features.length; i++) {
-        features[i].checked = false;
-      }
+      features.forEach(function (feature) {
+        feature.checked = false;
+      });
     }
   };
 
@@ -97,9 +97,9 @@
   var resetCheckboxes = function () {
     var features = form.querySelector('.features').querySelectorAll('input');
     if (features) {
-      for (var i = 0; i < features.length; i++) {
-        features[i].checked = false;
-      }
+      features.forEach(function (feature) {
+        feature.checked = false;
+      });
     }
   };
 
