@@ -106,10 +106,9 @@
   // Ресет красных рамок невалидных полей
   var resetInvalidDecor = function (invalidInputs) {
     if (invalidInputs) {
-      for (var i = 0; i < invalidInputs.length; i++) {
-        var invalidInput = invalidInputs[i];
+      invalidInputs.forEach(function (invalidInput) {
         invalidInput.classList.remove('error');
-      }
+      });
     }
   };
 
