@@ -10,6 +10,11 @@
   var guestsFilter = document.querySelector('#housing-guests');
   var featuresFilter = document.querySelector('.map__features');
 
+  var BorderPrice = {
+    maxlow: 10000,
+    maxmiddle: 50000
+  };
+
   var filterPins = function () {
     // Сортировка по типу
     var checkType = function (advert) {
@@ -21,13 +26,13 @@
       switch (priceFilter.value) {
 
         case 'low':
-          return advert.offer.price < 10000;
+          return advert.offer.price < BorderPrice.maxlow;
 
         case 'middle':
-          return advert.offer.price > 10000 && advert.offer.price < 50000;
+          return advert.offer.price > BorderPrice.maxlow && advert.offer.price < BorderPrice.maxmiddle;
 
         case 'high':
-          return advert.offer.price > 50000;
+          return advert.offer.price > BorderPrice.maxmiddle;
 
         default:
           return true;
@@ -36,18 +41,18 @@
 
     // Сортировка по кол-ву комнат
     var checkRooms = function (advert) {
-      return (roomsFilter.value === advert.offer.rooms.toString()) || (roomsFilter.value === ANY_VALUE);
+      return (+roomsFilter.value === advert.offer.rooms) || (roomsFilter.value === ANY_VALUE);
     };
 
     // Сортировка по кол-ву гостей
     var checkGuests = function (advert) {
-      return (guestsFilter.value === advert.offer.guests.toString()) || (guestsFilter.value === ANY_VALUE);
+      return (+guestsFilter.value === advert.offer.guests) || (guestsFilter.value === ANY_VALUE);
     };
 
     // Сортировка по фичам
     var checkFeatures = function (advert) {
-      var checkedElements = featuresFilter.querySelectorAll('input[type=checkbox]:checked');
-      var selectedFeatures = [].map.call(checkedElements, function (item) {
+      var checkedElements = Array.from(featuresFilter.querySelectorAll('input[type=checkbox]:checked'));
+      var selectedFeatures = checkedElements.map(function (item) {
         return item.value;
       });
       return selectedFeatures.every(function (currentFeature) {
@@ -58,27 +63,21 @@
     // Сортировка всех пинов
     var sortedArray = window.adverts.filter(checkType).filter(checkPrice).filter(checkRooms).filter(checkGuests).filter(checkFeatures).slice(0, PIN_LIMIT);
 
-    window.updatePins(sortedArray);
+    window.activation.update(sortedArray);
   };
 
+  var filterChangeHandler = window.debounce(function () {
+    filterPins();
+  });
+
   // Отлеживание изменений фильтров
-  typeFilter.addEventListener('change', window.debounce(function () {
-    filterPins();
-  }));
+  typeFilter.addEventListener('change', filterChangeHandler);
 
-  priceFilter.addEventListener('change', window.debounce(function () {
-    filterPins();
-  }));
+  priceFilter.addEventListener('change', filterChangeHandler);
 
-  roomsFilter.addEventListener('change', window.debounce(function () {
-    filterPins();
-  }));
+  roomsFilter.addEventListener('change', filterChangeHandler);
 
-  guestsFilter.addEventListener('change', window.debounce(function () {
-    filterPins();
-  }));
+  guestsFilter.addEventListener('change', filterChangeHandler);
 
-  featuresFilter.addEventListener('change', window.debounce(function () {
-    filterPins();
-  }, true));
+  featuresFilter.addEventListener('change', filterChangeHandler, true);
 })();

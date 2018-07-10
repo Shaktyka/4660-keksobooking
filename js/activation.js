@@ -4,24 +4,20 @@
   var PIN_LIMIT = 5;
 
   var form = document.querySelector('.ad-form');
-  var fieldsetList = form.querySelectorAll('fieldset');
+  var fieldsets = form.querySelectorAll('fieldset');
 
   // Отрисовка меток и добавление их в целевой блок
   var createPins = function (pins) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.renderPin(pins[i]));
+      fragment.appendChild(window.pins.render(pins[i]));
     }
-    // Если на карте есть уже метки, то новые не генерируем.
-    var buttonsList = window.pinsContainer.querySelectorAll('button:not(.map__pin--main)');
-    if (buttonsList.length === 0) {
-      window.pinsContainer.appendChild(fragment);
-    }
+    window.pins.container.appendChild(fragment);
   };
 
-  window.updatePins = function (pins) {
-    window.hideAds();
-    window.removePins();
+  var update = function (pins) {
+    window.card.close();
+    window.pins.removeAll();
     createPins(pins);
   };
 
@@ -32,7 +28,7 @@
   };
 
   // Обработка неуспеха при выполнении запроса
-  window.errorHandler = function (errorMessage) {
+  var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.classList.add('modal');
     node.classList.add('modal--error');
@@ -49,33 +45,39 @@
       closeError();
     });
 
-    node.addEventListener('keydown', function (e) {
-      window.utils.isEnterEvent(e, closeError);
+    node.addEventListener('keydown', function (evt) {
+      window.utils.isEnterEvent(evt, closeError);
     });
   };
 
   // Активация страницы
-  window.alreadyLoaded = false;
   var pinMouseupHandler = function () {
-    if (!window.alreadyLoaded) {
-      window.alreadyLoaded = true;
+    if (!window.activation.alreadyLoaded) {
+      window.activation.alreadyLoaded = true;
     } else {
       return;
     }
     // Разблокируем карту и форму
-    window.map.classList.remove('map--faded');
+    window.map.location.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
     // Разблокируем филдсеты
-    fieldsetList.forEach(function (item) {
+    fieldsets.forEach(function (item) {
       item.disabled = false;
     });
     // Разблокируем генерацию массива меток
-    window.load(successHandler, window.errorHandler);
+    window.backend.load(successHandler, errorHandler);
   };
 
-  window.mainPin.addEventListener('mouseup', pinMouseupHandler);
+  window.map.mainPin.addEventListener('mouseup', pinMouseupHandler);
 
-  window.mainPin.addEventListener('keydown', function (evt) {
+  window.map.mainPin.addEventListener('keydown', function (evt) {
     window.utils.isEnterEvent(evt, pinMouseupHandler);
   });
+
+  window.activation = {
+    update: update,
+    errorHandler: errorHandler,
+    alreadyLoaded: false,
+    fieldsets: fieldsets
+  };
 })();

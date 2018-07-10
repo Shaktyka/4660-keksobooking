@@ -10,7 +10,7 @@
   };
 
   // Отправка данных ирока на сервер
-  window.save = function (data, onLoad, onError) {
+  var save = function (data, loadHandler, errorHandler) {
     var urlSave = 'https://js.dump.academy/keksobooking';
 
     var xhr = new XMLHttpRequest();
@@ -20,7 +20,7 @@
       var error;
       switch (xhr.status) {
         case Code.SUCCESS:
-          onLoad(xhr.response);
+          loadHandler(xhr.response);
           break;
 
         case Code.INVALID_REQUEST:
@@ -39,16 +39,16 @@
           error = 'Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText;
       }
       if (error) {
-        onError(error);
+        errorHandler(error);
       }
     });
 
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      errorHandler('Произошла ошибка соединения');
     });
 
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      errorHandler('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
     xhr.open('POST', urlSave);
@@ -56,7 +56,7 @@
   };
 
   // Загрузка объявлений с сервера
-  window.load = function (onLoad, onError) {
+  var load = function (loadHandler, errorHandler) {
     var urlLoad = 'https://js.dump.academy/keksobooking/data';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -65,7 +65,7 @@
       var error;
       switch (xhr.status) {
         case Code.SUCCESS:
-          onLoad(xhr.response);
+          loadHandler(xhr.response);
           break;
 
         case Code.INVALID_REQUEST:
@@ -85,19 +85,24 @@
           error = 'Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText;
       }
       if (error) {
-        onError(error);
+        errorHandler(error);
       }
     });
 
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      errorHandler('Произошла ошибка соединения');
     });
 
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      errorHandler('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
     xhr.open('GET', urlLoad);
     xhr.send();
+  };
+
+  window.backend = {
+    save: save,
+    load: load
   };
 })();

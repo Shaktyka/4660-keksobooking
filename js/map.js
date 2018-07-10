@@ -1,51 +1,47 @@
 'use strict';
 
 (function () {
-  // Кончик пина
-  var MAIN_PIN_TIP = 22;
+  var MAIN_PIN_WIDTH_OFFSET = 33; // Половина ширины главной метки
+  var MAIN_PIN_HEIGHT_OFFSET = 87; // Высота главной метки
 
-  var MAIN_PIN_WIDTH = document.querySelector('.map').querySelector('.map__pin--main').offsetWidth;
-
-  var MAIN_PIN_HEIGHT = document.querySelector('.map').querySelector('.map__pin--main').offsetHeight + MAIN_PIN_TIP;
-
-  var MAIN_PIN_LEFT = 570;
-  var MAIN_PIN_TOP = 375;
+  var MAIN_PIN_LEFT = 600;
+  var MAIN_PIN_TOP = 439;
 
   // Границы доступной области для перемещения метки
   var MAP_MIN_Y = 130;
   var MAP_MAX_Y = 630;
+  var MAP_MIN_X = 33;
 
-  window.map = document.querySelector('.map');
-
-  window.mainPin = window.map.querySelector('.map__pin--main');
-
-  var addressInput = document.getElementById('address');
-
-  window.mainPinCentered = {
-    x: MAIN_PIN_LEFT - Math.round(MAIN_PIN_WIDTH / 2),
-    y: MAIN_PIN_TOP - Math.round(MAIN_PIN_HEIGHT / 2)
+  var mainPinPosition = {
+    x: MAIN_PIN_LEFT,
+    y: MAIN_PIN_TOP
   };
+
+  var location = document.querySelector('.map');
+
+  var mainPin = location.querySelector('.map__pin--main');
+
+  var addressInput = document.querySelector('input[name="address"]');
 
   // Стартовые координаты главной метки
-  window.getStartCoords = function (coord) {
-    window.mainPin.style.left = coord.x + 'px';
-    window.mainPin.style.top = coord.y + 'px';
+  var resetMainPinPosition = function () {
+    mainPin.style.left = mainPinPosition.x - MAIN_PIN_WIDTH_OFFSET + 'px';
+    mainPin.style.top = mainPinPosition.y - MAIN_PIN_HEIGHT_OFFSET + 'px';
+    putMainPinPositionToAddress(mainPinPosition);
   };
-  window.getStartCoords(window.mainPinCentered);
 
-  // Ставим координаты в поле address при неактивной странице
-  window.putCoordsInAddress = function (coordinates) {
+  // Ставим начальные координаты в поле address
+  var putMainPinPositionToAddress = function (coordinates) {
     addressInput.value = coordinates.x + ', ' + coordinates.y;
   };
-  window.putCoordsInAddress(window.mainPinCentered);
 
   // Перетаскивание главной метки
-  window.mainPin.addEventListener('mousedown', function (ee) {
-    ee.preventDefault();
+  mainPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
 
     var startCoords = {
-      x: ee.clientX,
-      y: ee.clientY
+      x: evt.clientX,
+      y: evt.clientY
     };
 
     var pinMoveHandler = function (moveEvt) {
@@ -61,37 +57,37 @@
         y: moveEvt.clientY
       };
 
-      var newX = window.mainPin.offsetLeft + shift.x;
-      var newY = window.mainPin.offsetTop + shift.y;
+      var newX = mainPin.offsetLeft + shift.x;
+      var newY = mainPin.offsetTop + shift.y;
 
-      if (newX < 0) {
-        newX = 0;
+      if (newX < MAP_MIN_X - MAIN_PIN_WIDTH_OFFSET) {
+        newX = MAP_MIN_X - MAIN_PIN_WIDTH_OFFSET;
       }
 
-      if (newX > window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth) {
-        newX = window.mainPin.parentElement.offsetWidth - window.mainPin.offsetWidth;
+      if (newX > mainPin.parentElement.offsetWidth - mainPin.offsetWidth) {
+        newX = mainPin.parentElement.offsetWidth - mainPin.offsetWidth;
       }
 
-      if (newY < MAP_MIN_Y) {
-        newY = MAP_MIN_Y;
+      if (newY < MAP_MIN_Y - MAIN_PIN_HEIGHT_OFFSET) {
+        newY = MAP_MIN_Y - MAIN_PIN_HEIGHT_OFFSET;
       }
-      if (newY > MAP_MAX_Y) {
-        newY = MAP_MAX_Y;
+      if (newY > MAP_MAX_Y - MAIN_PIN_HEIGHT_OFFSET) {
+        newY = MAP_MAX_Y - MAIN_PIN_HEIGHT_OFFSET;
       }
 
-      window.mainPin.style.left = newX + 'px';
-      window.mainPin.style.top = newY + 'px';
+      mainPin.style.left = newX + 'px';
+      mainPin.style.top = newY + 'px';
 
-      var locationX = newX + Math.round(window.mainPin.offsetWidth / 2);
-      var locationY = newY + window.mainPin.offsetHeight;
+      var position = {
+        x: newX + MAIN_PIN_WIDTH_OFFSET,
+        y: newY + MAIN_PIN_HEIGHT_OFFSET
+      };
 
-      addressInput.value = locationX + ', ' + locationY;
+      putMainPinPositionToAddress(position);
     };
 
     var pinUpHandler = function (upEvt) {
       upEvt.preventDefault();
-
-      addressInput.value = (window.mainPin.offsetLeft - Math.round(MAIN_PIN_WIDTH / 2)) + ', ' + (window.mainPin.offsetTop + MAIN_PIN_HEIGHT);
       document.removeEventListener('mousemove', pinMoveHandler);
       document.removeEventListener('mouseup', pinUpHandler);
     };
@@ -99,4 +95,12 @@
     document.addEventListener('mousemove', pinMoveHandler);
     document.addEventListener('mouseup', pinUpHandler);
   });
+
+  resetMainPinPosition();
+
+  window.map = {
+    location: location,
+    mainPin: mainPin,
+    resetMainPinPosition: resetMainPinPosition
+  };
 })();
