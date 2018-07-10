@@ -3,7 +3,7 @@
 (function () {
   var MIN_PRICES = [0, 1000, 5000, 10000];
   var DEFAULT_PLACEHOLDER = 5000;
-  var ROOMS_COUNT_100 = 0;
+  var ROOMS_COUNT_100 = 100;
 
   var form = document.querySelector('.ad-form');
   var type = form.querySelector('select[name="type"]');
@@ -15,6 +15,7 @@
   var sendForm = form.querySelector('.ad-form__submit');
   var resetButton = form.querySelector('.ad-form__reset');
   var success = document.querySelector('.success');
+  var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
 
   var typeFilter = document.querySelector('#housing-type');
   var priceFilter = document.querySelector('#housing-price');
@@ -47,9 +48,7 @@
 
   // Поиск невалидных полей
   var findInvalidFields = function () {
-    var fields = form.querySelectorAll('input:not(.visually-hidden):not([type="checkbox"])');
     var invalidFields = [];
-
     for (var i = 0; i < fields.length; i++) {
       if (fields[i].checkValidity() === false) {
         var field = fields[i];
@@ -87,9 +86,9 @@
     }
     var features = document.querySelector('.map__features').querySelectorAll('input:checked');
     if (features) {
-      for (var i = 0; i < features.length; i++) {
-        features[i].checked = false;
-      }
+      features.forEach(function (feature) {
+        feature.checked = false;
+      });
     }
   };
 
@@ -97,19 +96,18 @@
   var resetCheckboxes = function () {
     var features = form.querySelector('.features').querySelectorAll('input');
     if (features) {
-      for (var i = 0; i < features.length; i++) {
-        features[i].checked = false;
-      }
+      features.forEach(function (feature) {
+        feature.checked = false;
+      });
     }
   };
 
   // Ресет красных рамок невалидных полей
   var resetInvalidDecor = function (invalidInputs) {
     if (invalidInputs) {
-      for (var i = 0; i < invalidInputs.length; i++) {
-        var invalidInput = invalidInputs[i];
+      invalidInputs.forEach(function (invalidInput) {
         invalidInput.classList.remove('error');
-      }
+      });
     }
   };
 
@@ -125,11 +123,10 @@
     var photoBlock = document.querySelector('.ad-form__photo-container');
     var template = photoBlock.querySelector('.ad-form__photo--template');
     var photos = photoBlock.querySelectorAll('.ad-form__photo:not(.ad-form__photo--template)');
-
     if (photos) {
-      for (var i = 0; i < photos.length; i++) {
-        photos[i].remove();
-      }
+      photos.forEach(function (photo) {
+        photo.remove();
+      });
     }
     template.style.display = 'block';
   };
@@ -169,7 +166,7 @@
     price.placeholder = DEFAULT_PLACEHOLDER;
   };
 
-  // Оющий обработчик ресета
+  // Общий обработчик ресета
   var resetHandler = function () {
     window.activation.alreadyLoaded = false;
     // Закрываем открытые объявления

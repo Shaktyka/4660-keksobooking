@@ -9,7 +9,7 @@
     SERVER_ERROR: 500
   };
 
-  // Отправка данных ирока на сервер
+  // Отправка данных на сервер
   var save = function (data, loadHandler, errorHandler) {
     var urlSave = 'https://js.dump.academy/keksobooking';
 
