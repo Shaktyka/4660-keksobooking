@@ -62,7 +62,6 @@
   // Навешивание красных рамок на невалидные поля
   var submitClickHandler = function () {
     var invalidInputs = findInvalidFields();
-    console.log(invalidInputs);
     if (invalidInputs) {
       invalidInputs.forEach(function (input) {
         input.classList.add('error');
