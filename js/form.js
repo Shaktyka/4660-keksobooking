@@ -169,7 +169,7 @@
     price.placeholder = DEFAULT_PLACEHOLDER;
   };
 
-  // Оющий обработчик ресета
+  // Общий обработчик ресета
   var resetHandler = function () {
     window.activation.alreadyLoaded = false;
     // Закрываем открытые объявления
