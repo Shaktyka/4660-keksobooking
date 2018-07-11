@@ -54,8 +54,6 @@
   var pinMouseupHandler = function () {
     if (!window.activation.alreadyLoaded) {
       window.activation.alreadyLoaded = true;
-    } else {
-      return;
     }
     // Разблокируем карту и форму
     window.map.location.classList.remove('map--faded');
