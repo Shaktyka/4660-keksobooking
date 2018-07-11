@@ -6,6 +6,8 @@
 
   // Блок для новых меток
   var container = window.map.location.querySelector('.map__pins');
+  // Активная метка
+  var activePin = null;
 
   // Шаблон для генерации меток
   var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
@@ -21,8 +23,8 @@
 
   // Деактивация пина
   var deactivate = function () {
-    if (window.activePin) {
-      window.activePin.classList.remove('map__pin--active');
+    if (activePin) {
+      activePin.classList.remove('map__pin--active');
     }
   };
 
@@ -46,8 +48,8 @@
       evt.preventDefault();
       window.card.close();
       pinElement.classList.add('map__pin--active');
+      activePin = container.querySelector('.map__pin--active');
       createCard(pin);
-      window.activePin = container.querySelector('.map__pin--active');
     });
     return pinElement;
   };
