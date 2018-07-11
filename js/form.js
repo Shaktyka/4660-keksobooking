@@ -49,12 +49,11 @@
   // Поиск невалидных полей
   var findInvalidFields = function () {
     var invalidFields = [];
-    for (var i = 0; i < fields.length; i++) {
-      if (fields[i].checkValidity() === false) {
-        var field = fields[i];
+    fields.forEach(function (field) {
+      if (field.checkValidity() === false) {
         invalidFields.push(field);
       }
-    }
+    });
     return invalidFields;
   };
 
