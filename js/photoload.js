@@ -20,9 +20,9 @@
 
   var photoLoadChangeHandler = function () {
     var loadedFiles = fileChooser.files;
+    loadedFiles = Array.prototype.slice.call(loadedFiles, 0);
 
-    for (var i = 0; i < loadedFiles.length; i++) {
-      var file = loadedFiles[i];
+    loadedFiles.forEach(function (file) {
       var fileName = file.name.toLowerCase();
 
       var matches = FILE_TYPES.some(function (it) {
@@ -40,7 +40,7 @@
         });
         reader.readAsDataURL(file);
       }
-    }
+    });
   };
 
   fileChooser.addEventListener('change', photoLoadChangeHandler);
