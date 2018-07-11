@@ -9,9 +9,9 @@
   // Отрисовка меток и добавление их в целевой блок
   var createPins = function (pins) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.pins.render(pins[i]));
-    }
+    pins.forEach(function (pin) {
+      fragment.appendChild(window.pins.render(pin));
+    });
     window.pins.container.appendChild(fragment);
   };
 
