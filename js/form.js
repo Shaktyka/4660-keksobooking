@@ -22,6 +22,9 @@
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
 
+  var capacityOptions = guests.children;
+  capacityOptions = Array.prototype.slice.call(capacityOptions, 0);
+
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
@@ -33,16 +36,16 @@
   rooms.addEventListener('change', function () {
     var currentValue = +rooms.value;
     if (currentValue === ROOMS_COUNT_100) {
-      for (var i = 0; i < guests.children.length; i++) {
-        guests.children[i].disabled = true;
-      }
-      guests.children[guests.children.length - 1].disabled = false;
-      guests.children[guests.children.length - 1].selected = true;
+      capacityOptions.forEach(function (option) {
+        option.disabled = true;
+      });
+      capacityOptions[capacityOptions.length - 1].disabled = false;
+      capacityOptions[capacityOptions.length - 1].selected = true;
     } else {
-      for (var j = 0; j < guests.children.length; j++) {
-        guests.children[j].disabled = j >= currentValue;
-      }
-      guests.children[0].selected = true;
+      capacityOptions.forEach(function (option, i) {
+        option.disabled = i >= currentValue;
+      });
+      capacityOptions[0].selected = true;
     }
   });
 
