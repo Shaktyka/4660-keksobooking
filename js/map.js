@@ -12,7 +12,7 @@
   var MAP_MAX_Y = 630;
   var MAP_MIN_X = 33;
 
-  var mainPinPosition = {
+  var MainPinPosition = {
     x: MAIN_PIN_LEFT,
     y: MAIN_PIN_TOP
   };
@@ -25,9 +25,9 @@
 
   // Стартовые координаты главной метки
   var resetMainPinPosition = function () {
-    mainPin.style.left = mainPinPosition.x - MAIN_PIN_WIDTH_OFFSET + 'px';
-    mainPin.style.top = mainPinPosition.y - MAIN_PIN_HEIGHT_OFFSET + 'px';
-    putMainPinPositionToAddress(mainPinPosition);
+    mainPin.style.left = MainPinPosition.x - MAIN_PIN_WIDTH_OFFSET + 'px';
+    mainPin.style.top = MainPinPosition.y - MAIN_PIN_HEIGHT_OFFSET + 'px';
+    putMainPinPositionToAddress(MainPinPosition);
   };
 
   // Ставим начальные координаты в поле address
