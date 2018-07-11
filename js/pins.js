@@ -21,16 +21,14 @@
 
   // Деактивация пина
   var deactivate = function () {
-    var activePin = container.querySelector('.map__pin--active');
-    if (activePin) {
-      activePin.classList.remove('map__pin--active');
+    if (window.activePin) {
+      window.activePin.classList.remove('map__pin--active');
     }
   };
 
   // Скрытие меток на карте
   var removeAll = function () {
-    var pins = window.pins.container.querySelectorAll('button:not(.map__pin--main)');
-    pins.forEach(function (pin) {
+    window.activation.currentPins.forEach(function (pin) {
       pin.remove();
     });
   };
@@ -43,12 +41,13 @@
     pinElement.querySelector('img').src = pin.author.avatar;
     pinElement.querySelector('img').alt = pin.offer.title;
 
-    // Добавление пину обработки клика
+    // Пину добавляем обработку клика
     pinElement.addEventListener('click', function (evt) {
       evt.preventDefault();
       window.card.close();
       pinElement.classList.add('map__pin--active');
       createCard(pin);
+      window.activePin = container.querySelector('.map__pin--active');
     });
     return pinElement;
   };
