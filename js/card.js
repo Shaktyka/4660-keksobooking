@@ -60,11 +60,6 @@
     cardElement.appendChild(photosContainer);
   };
 
-  // Закрытие объявления при нажатии Enter
-  var enterKeydownHandler = function (evt) {
-    window.utils.isEnterEvent(evt, close);
-  };
-
   // Закрытие объявления при нажатии Esc
   var escKeydownHandler = function (evt) {
     window.utils.isEscEvent(evt, close);
@@ -81,8 +76,6 @@
       cardElement.remove();
       cardElement = null;
       document.removeEventListener('keydown', escKeydownHandler);
-      closeButton.removeEventListener('keydown', enterKeydownHandler);
-      closeButton.removeEventListener('click', closeButtonClickHandler);
     }
   };
 
@@ -104,7 +97,6 @@
     // Обработчики событий для объявления
     closeButton = cardElement.querySelector('.popup__close');
     closeButton.addEventListener('click', closeButtonClickHandler);
-    closeButton.addEventListener('keydown', enterKeydownHandler);
     document.addEventListener('keydown', escKeydownHandler);
     return cardElement;
   };
