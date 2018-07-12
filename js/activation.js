@@ -53,7 +53,7 @@
     });
     window.map.mainPin.removeEventListener('mouseup', pinMouseupHandler);
     window.map.mainPin.removeEventListener('keydown', pinKeydownHandler);
-    // Разблокируем генерацию массива меток
+
     window.backend.load(successHandler, errorHandler);
   };
 
