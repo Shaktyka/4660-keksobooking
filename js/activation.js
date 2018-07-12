@@ -6,30 +6,11 @@
   var form = document.querySelector('.ad-form');
   var fieldsets = form.querySelectorAll('fieldset');
 
-  // Массив пинов на карте
-  var currentPins = [];
-  var currentPin = null;
-
-  // Отрисовка меток и добавление их в целевой блок
-  var createPins = function (pins) {
-    var fragment = document.createDocumentFragment();
-    pins.forEach(function (pin) {
-      currentPin = window.pins.render(pin); fragment.appendChild(currentPin);
-      currentPins.push(currentPin);
-    });
-    window.pins.container.appendChild(fragment);
-  };
-
-  var update = function (pins) {
-    window.card.close();
-    window.pins.removeAll();
-    createPins(pins);
-  };
-
   var successHandler = function (data) {
     window.adverts = data;
     var slicedAdverts = window.adverts.slice(0, PIN_LIMIT);
-    createPins(slicedAdverts);
+    window.pins.create(slicedAdverts);
+    window.pins.filtersContainer.classList.remove('hidden');
   };
 
   // Обработка неуспеха при выполнении запроса
@@ -78,10 +59,8 @@
   });
 
   window.activation = {
-    update: update,
     errorHandler: errorHandler,
     alreadyLoaded: false,
-    fieldsets: fieldsets,
-    currentPins: currentPins
+    fieldsets: fieldsets
   };
 })();

@@ -8,17 +8,18 @@
   var container = window.map.location.querySelector('.map__pins');
   // Активная метка
   var activePin = null;
+  // Массив пинов на карте
+  var currentPins = [];
 
   // Шаблон для генерации меток
   var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
   // Перем-ные для вставки объявления
-  var cardsBeforeElement = window.map.location.querySelector('.map__filters-container');
-  var cardsParentElement = cardsBeforeElement.parentNode;
+  var filtersContainer = window.map.location.querySelector('.map__filters-container');
 
   // Отрисовка объявлений и добавление их в целевой блок
   var createCard = function (pin) {
-    cardsParentElement.insertBefore(window.card.render(pin), cardsBeforeElement);
+    filtersContainer.parentNode.insertBefore(window.card.render(pin), filtersContainer);
   };
 
   // Деактивация пина
@@ -30,7 +31,7 @@
 
   // Скрытие меток на карте
   var removeAll = function () {
-    window.activation.currentPins.forEach(function (pin) {
+    currentPins.forEach(function (pin) {
       pin.remove();
     });
   };
@@ -54,10 +55,23 @@
     return pinElement;
   };
 
+  // Отрисовка меток и добавление их в целевой блок
+  var create = function (pins) {
+    var fragment = document.createDocumentFragment();
+    pins.forEach(function (pin) {
+      var currentPin = window.pins.render(pin);
+      fragment.appendChild(currentPin);
+      currentPins.push(currentPin);
+    });
+    window.pins.container.appendChild(fragment);
+  };
+
   window.pins = {
     container: container,
     deactivate: deactivate,
     render: render,
-    removeAll: removeAll
+    removeAll: removeAll,
+    create: create,
+    filtersContainer: filtersContainer
   };
 })();

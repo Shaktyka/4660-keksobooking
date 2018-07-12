@@ -177,6 +177,7 @@
     window.pins.removeAll();
     // Ставим главную метку на исходную позицию
     window.map.resetMainPinPosition();
+    window.pins.filtersContainer.classList.add('hidden');
     resetFilters();
     resetAvatar();
     resetPhotos();
