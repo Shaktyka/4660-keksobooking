@@ -22,6 +22,9 @@
   var roomsFilter = document.querySelector('#housing-rooms');
   var guestsFilter = document.querySelector('#housing-guests');
 
+  var capacityOptions = guests.children;
+  capacityOptions = Array.prototype.slice.call(capacityOptions, 0);
+
   // Соответствие типа жилья и цены
   type.addEventListener('change', function () {
     var index = type.selectedIndex;
@@ -33,28 +36,27 @@
   rooms.addEventListener('change', function () {
     var currentValue = +rooms.value;
     if (currentValue === ROOMS_COUNT_100) {
-      for (var i = 0; i < guests.children.length; i++) {
-        guests.children[i].disabled = true;
-      }
-      guests.children[guests.children.length - 1].disabled = false;
-      guests.children[guests.children.length - 1].selected = true;
+      capacityOptions.forEach(function (option) {
+        option.disabled = true;
+      });
+      capacityOptions[capacityOptions.length - 1].disabled = false;
+      capacityOptions[capacityOptions.length - 1].selected = true;
     } else {
-      for (var j = 0; j < guests.children.length; j++) {
-        guests.children[j].disabled = j >= currentValue;
-      }
-      guests.children[0].selected = true;
+      capacityOptions.forEach(function (option, i) {
+        option.disabled = i >= currentValue;
+      });
+      capacityOptions[0].selected = true;
     }
   });
 
   // Поиск невалидных полей
   var findInvalidFields = function () {
     var invalidFields = [];
-    for (var i = 0; i < fields.length; i++) {
-      if (fields[i].checkValidity() === false) {
-        var field = fields[i];
+    fields.forEach(function (field) {
+      if (field.checkValidity() === false) {
         invalidFields.push(field);
       }
-    }
+    });
     return invalidFields;
   };
 
@@ -168,13 +170,15 @@
 
   // Общий обработчик ресета
   var resetHandler = function () {
-    window.activation.alreadyLoaded = false;
     // Закрываем открытые объявления
     window.card.close();
     // Убираем все метки с карты
     window.pins.removeAll();
     // Ставим главную метку на исходную позицию
     window.map.resetMainPinPosition();
+
+    window.activation.initialize();
+    window.pins.filtersContainer.classList.add('hidden');
     resetFilters();
     resetAvatar();
     resetPhotos();
@@ -197,18 +201,17 @@
 
     document.addEventListener('keydown', escKeydownSuccessHandler);
 
-    window.closeSuccess = function () {
-      success.classList.add('hidden');
-      document.removeEventListener('keydown', escKeydownSuccessHandler);
-    };
+    success.addEventListener('click', successClickHandler);
+  };
 
-    success.addEventListener('click', function () {
-      window.closeSuccess();
-    });
+  var successClickHandler = function () {
+    success.classList.add('hidden');
+    document.removeEventListener('keydown', escKeydownSuccessHandler);
+    success.removeEventListener('click', successClickHandler);
   };
 
   var escKeydownSuccessHandler = function (evt) {
-    window.utils.isEscEvent(evt, window.closeSuccess);
+    window.utils.isEscEvent(evt, successClickHandler);
   };
 
   // Обработчики событий внутри формы

@@ -26,11 +26,11 @@
     }
     var featuresContainer = document.createElement('ul');
     featuresContainer.classList.add('popup__features');
-    for (var i = 0; i < features.length; i++) {
+    features.forEach(function (feature) {
       var featureElement = document.createElement('li');
-      featureElement.classList.add('popup__feature', 'popup__feature--' + features[i]);
+      featureElement.classList.add('popup__feature', 'popup__feature--' + feature);
       featuresContainer.appendChild(featureElement);
-    }
+    });
     cardElement.appendChild(featuresContainer);
   };
 
@@ -49,20 +49,14 @@
     }
     var photosContainer = document.createElement('div');
     photosContainer.classList.add('popup__photos');
-
-    for (var i = 0; i < photos.length; i++) {
+    photos.forEach(function (photo) {
       var photoElement = document.createElement('img');
       photoElement.classList.add('popup__photo');
       photoElement.alt = 'Фотография жилья';
-      photoElement.src = photos[i];
+      photoElement.src = photo;
       photosContainer.appendChild(photoElement);
-    }
+    });
     cardElement.appendChild(photosContainer);
-  };
-
-  // Закрытие объявления при нажатии Enter
-  var enterKeydownHandler = function (evt) {
-    window.utils.isEnterEvent(evt, close);
   };
 
   // Закрытие объявления при нажатии Esc
@@ -81,8 +75,6 @@
       cardElement.remove();
       cardElement = null;
       document.removeEventListener('keydown', escKeydownHandler);
-      closeButton.removeEventListener('keydown', enterKeydownHandler);
-      closeButton.removeEventListener('click', closeButtonClickHandler);
     }
   };
 
@@ -104,7 +96,6 @@
     // Обработчики событий для объявления
     closeButton = cardElement.querySelector('.popup__close');
     closeButton.addEventListener('click', closeButtonClickHandler);
-    closeButton.addEventListener('keydown', enterKeydownHandler);
     document.addEventListener('keydown', escKeydownHandler);
     return cardElement;
   };
