@@ -2,6 +2,7 @@
 
 (function () {
   var photoBlock = document.querySelector('.ad-form__photo-container');
+  var dropZone = document.querySelector('.ad-form__drop-zone');
   var draggedItem = null;
 
   photoBlock.addEventListener('dragstart', function (evt) {
@@ -18,7 +19,9 @@
 
   photoBlock.addEventListener('drop', function (evt) {
     evt.preventDefault();
-    evt.target.appendChild(draggedItem);
+    if (dropZone !== evt.target) {
+      evt.target.appendChild(draggedItem);
+    }
   });
 
   photoBlock.addEventListener('dragenter', function (evt) {

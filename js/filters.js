@@ -68,9 +68,7 @@
     window.pins.create(sortedArray);
   };
 
-  var filterChangeHandler = window.debounce(function () {
-    filterPins();
-  });
+  var filterChangeHandler = window.debounce(filterPins);
 
   // Отлеживание изменений фильтров
   typeFilter.addEventListener('change', filterChangeHandler);
