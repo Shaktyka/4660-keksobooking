@@ -36,11 +36,14 @@
     });
   };
 
+  var initialize = function () {
+    window.map.mainPin.addEventListener('mouseup', pinMouseupHandler);
+    window.map.mainPin.addEventListener('keydown', pinKeydownHandler);
+    window.map.mainPin.focus();
+  };
+
   // Активация страницы
   var pinMouseupHandler = function () {
-    if (!window.activation.alreadyLoaded) {
-      window.activation.alreadyLoaded = true;
-    }
     // Разблокируем карту и форму
     window.map.location.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
@@ -48,19 +51,21 @@
     fieldsets.forEach(function (item) {
       item.disabled = false;
     });
+    window.map.mainPin.removeEventListener('mouseup', pinMouseupHandler);
+    window.map.mainPin.removeEventListener('keydown', pinKeydownHandler);
     // Разблокируем генерацию массива меток
     window.backend.load(successHandler, errorHandler);
   };
 
-  window.map.mainPin.addEventListener('mouseup', pinMouseupHandler);
-
-  window.map.mainPin.addEventListener('keydown', function (evt) {
+  var pinKeydownHandler = function (evt) {
     window.utils.isEnterEvent(evt, pinMouseupHandler);
-  });
+  };
+
+  initialize();
 
   window.activation = {
     errorHandler: errorHandler,
-    alreadyLoaded: false,
-    fieldsets: fieldsets
+    fieldsets: fieldsets,
+    initialize: initialize
   };
 })();

@@ -49,7 +49,7 @@
       evt.preventDefault();
       window.card.close();
       pinElement.classList.add('map__pin--active');
-      activePin = container.querySelector('.map__pin--active');
+      activePin = pinElement;
       createCard(pin);
     });
     return pinElement;

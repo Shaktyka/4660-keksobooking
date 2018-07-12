@@ -170,13 +170,14 @@
 
   // Общий обработчик ресета
   var resetHandler = function () {
-    window.activation.alreadyLoaded = false;
     // Закрываем открытые объявления
     window.card.close();
     // Убираем все метки с карты
     window.pins.removeAll();
     // Ставим главную метку на исходную позицию
     window.map.resetMainPinPosition();
+
+    window.activation.initialize();
     window.pins.filtersContainer.classList.add('hidden');
     resetFilters();
     resetAvatar();
@@ -200,18 +201,17 @@
 
     document.addEventListener('keydown', escKeydownSuccessHandler);
 
-    window.closeSuccess = function () {
-      success.classList.add('hidden');
-      document.removeEventListener('keydown', escKeydownSuccessHandler);
-    };
+    success.addEventListener('click', successClickHandler);
+  };
 
-    success.addEventListener('click', function () {
-      window.closeSuccess();
-    });
+  var successClickHandler = function () {
+    success.classList.add('hidden');
+    document.removeEventListener('keydown', escKeydownSuccessHandler);
+    success.removeEventListener('click', successClickHandler);
   };
 
   var escKeydownSuccessHandler = function (evt) {
-    window.utils.isEscEvent(evt, window.closeSuccess);
+    window.utils.isEscEvent(evt, successClickHandler);
   };
 
   // Обработчики событий внутри формы
